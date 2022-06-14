@@ -1,7 +1,7 @@
 {
   "projectType": "application",
   "sourceRoot": "apps/documentation/src",
-  "prefix": "blizz",
+  "prefix": "doc",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
