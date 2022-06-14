@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@blizz/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@blizz/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@blizz/cdk": ["libs/cdk/src/index.ts"],
+      "@blizz/my-lib": ["libs/my-lib/src/index.ts"],
+      "@blizz/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -4,7 +4,10 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "cdk": "libs/cdk",
     "documentation": "apps/documentation",
-    "documentation-e2e": "apps/documentation-e2e"
+    "documentation-e2e": "apps/documentation-e2e",
+    "my-lib": "libs/my-lib",
+    "ui": "libs/ui"
   }
 }
