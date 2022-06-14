@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BlizzButtonModule } from "@blizz/ui";
+import { DocAppComponent } from "./app.component";
+import { HttpClientModule } from "@angular/common/http";
+import { DocAppRoutingModule } from "./app-routing.module";
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, BlizzButtonModule],
+  declarations: [DocAppComponent],
+  imports: [BrowserModule, HttpClientModule, DocAppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [DocAppComponent],
 })
-export class AppModule {}
+export class DocAppModule {}

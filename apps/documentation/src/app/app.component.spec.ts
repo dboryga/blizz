@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
+import { async, TestBed } from "@angular/core/testing";
+import { HttpClientModule } from "@angular/common/http";
+import { DocAppComponent } from "./app.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [DocAppComponent],
       imports: [HttpClientModule],
     }).compileComponents();
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(DocAppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
