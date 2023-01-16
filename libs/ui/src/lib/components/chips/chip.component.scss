@@ -1,0 +1,13 @@
+:host {
+  display: inline-block;
+  line-height: var(--bzz-chips_line-height);
+  padding: var(--bzz-chips_padding);
+
+  border-style: var(--bzz-chips_border-style);
+  border-width: var(--bzz-chips_border-width);
+  border-radius: var(--bzz-chips_border-radius);
+  border-color: var(--bzz-theme_primary);
+
+  color: var(--bzz-theme_white);
+  background-color: var(--bzz-theme_primary);
+}

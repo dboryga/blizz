@@ -1,0 +1,18 @@
+<aside
+  *ngIf="links?.length"
+  class="w-48 h-full scrollable-y scrollbar-sm"
+  [ngClass]="left ? 'border-l' : 'border-r'"
+>
+  <nav class="h-full relative py-8">
+    <ul>
+      <li *ngFor="let link of links">
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="active"
+        >
+          {{link.label}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

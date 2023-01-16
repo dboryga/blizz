@@ -1,0 +1,9 @@
+.btn-primary {
+  @apply
+    inline-flex items-center gap-2 px-6 py-2
+    text-cyan-500 font-bold uppercase tracking-wide
+    border-2 border-cyan-500
+    cursor-pointer
+    transition duration-150 ease-out
+    hover:text-white hover:bg-cyan-500 hover:ease-in;
+}

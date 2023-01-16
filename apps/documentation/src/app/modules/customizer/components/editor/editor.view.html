@@ -1,0 +1,29 @@
+<div class="relative flex h-full w-full">
+
+  <aside class="flex">
+    <nav class="group-sidenav">
+      <a
+        *ngFor="let link of groupLinks"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        class="group-link"
+      >
+        <doc-icon>{{ link.icon }}</doc-icon>
+        <span>{{ link.label }}</span>
+      </a>
+      <div class="flex-grow border-r"></div>
+    </nav>
+
+    <div class="props-sidenav">
+    </div>
+  </aside>
+
+
+  <main class="grow h-full bg-gray-100">
+    <div class="h-full grid place-items-center">
+      <ng-content></ng-content>
+    </div>
+  </main>
+
+</div>
+

@@ -1,0 +1,14 @@
+doc-icon {
+  display: flex;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  font-style: normal;
+
+  .material-icons-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-style: inherit;
+    line-height: inherit;
+    font-size: inherit;
+  }
+}

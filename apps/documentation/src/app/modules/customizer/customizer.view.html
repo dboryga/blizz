@@ -1,0 +1,7 @@
+<h2 class="hidden">Customizer</h2>
+
+<ng-container [ngSwitch]="component">
+  <doc-customizer-editor *ngSwitchCase="'chips'">
+    <bzz-chip>Test</bzz-chip>
+  </doc-customizer-editor>
+</ng-container>

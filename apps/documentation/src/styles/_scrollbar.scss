@@ -1,0 +1,69 @@
+$scrollbar-width-default: 1rem;
+$scrollbar-width-sm: 0.25rem;
+
+.scrollable { overflow: auto; }
+.scrollable-y { overflow-y: auto; }
+.scrollable-x { overflow-x: auto; }
+
+.scrollbar-sm {
+  @supports (scrollbar-width: $scrollbar-width-sm) {
+    scrollbar-width: $scrollbar-width-sm;
+  }
+
+  @supports (scrollbar-width: thin) {
+    scrollbar-width: thin;
+  }
+
+  &::-webkit-scrollbar {
+    width: $scrollbar-width-sm;
+
+    &-track {
+      @apply bg-transparent;
+    }
+
+    &-thumb {
+      @apply bg-slate-100;
+    }
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-track {
+      @apply bg-slate-100;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-slate-300;
+    }
+  }
+}
+
+@supports (overflow: overlay) {
+  .scrollable {
+    overflow: overlay;
+    padding-right: $scrollbar-width-default;
+    padding-bottom: $scrollbar-width-default;
+
+    &.scrollbar-sm {
+      padding-right: $scrollbar-width-sm;
+      padding-bottom: $scrollbar-width-sm;
+    }
+  }
+
+  .scrollable-y {
+    overflow-y: overlay;
+    padding-right: $scrollbar-width-default;
+
+    &.scrollbar-sm {
+      padding-right: $scrollbar-width-sm;
+    }
+  }
+
+  .scrollable-x {
+    overflow-x: overlay;
+    padding-bottom: $scrollbar-width-default;
+
+    &.scrollbar-sm {
+      padding-bottom: $scrollbar-width-sm;
+    }
+  }
+}

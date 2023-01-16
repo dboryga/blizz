@@ -1,0 +1,48 @@
+:host {
+  @apply block h-full w-full overflow-y-hidden;
+}
+
+.group-sidenav {
+  @apply flex flex-col w-[7rem] h-full overflow-hidden;
+
+  .group-link {
+    @apply
+      flex flex-col items-center justify-center
+      text-gray-400 py-5 bg-transparent
+      border-r
+      transition duration-150 ease-out;
+
+    &:hover,
+    &.active {
+      @apply text-cyan-600 ease-in;
+
+      span {
+        @apply text-cyan-700;
+      }
+    }
+
+    &.active {
+      box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1),
+        0 -1px 3px 0 rgb(0 0 0 / 0.1),
+        0 -1px 2px -1px rgb(0 0 0 / 0.1);
+
+      @apply
+        border-transparent;
+    }
+
+    doc-icon {
+      @apply text-5xl font-extralight;
+    }
+
+    span {
+      @apply text-sm mt-1 text-gray-500;
+    }
+  }
+}
+
+.props-sidenav {
+  @apply
+    flex flex-col w-96 h-full border-r bg-white;
+}

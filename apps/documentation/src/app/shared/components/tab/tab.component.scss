@@ -1,0 +1,23 @@
+:host {
+  @apply
+    relative py-4 px-6 min-w-[6.25rem]
+    inline-flex items-center justify-center
+    transition duration-100 ease-out
+    hover:text-cyan-600 hover:ease-in;
+
+  &::after {
+    content: '';
+    @apply
+      absolute left-0 right-0 bottom-0 h-1
+      bg-cyan-400 scale-x-0
+      transition duration-200 ease-out;
+  }
+
+  &.active {
+    @apply text-cyan-600;
+
+    &::after {
+      @apply scale-x-100 ease-in;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "name": "documentation",
   "projectType": "application",
   "sourceRoot": "apps/documentation/src",
   "prefix": "doc",

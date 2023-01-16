@@ -1,0 +1,9 @@
+<main>
+  <a *ngFor="let component of components" [routerLink]="component.path">
+    <doc-component-card
+      [label]="component.label"
+      [iconSrc]="component.iconSrc"
+    ></doc-component-card>
+  </a>
+</main>
+

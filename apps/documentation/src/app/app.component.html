@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<h1 class="hidden">Documentation</h1>
+<div class="relative flex flex-col overflow-y-hidden h-full w-full">
+
+  <doc-header></doc-header>
+
+  <div class="grow overflow-y-hidden">
+    <div class="stack-container overflow-y-hidden h-full" [@routerFade]="outlet.activatedRouteData">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </div>
+</div>

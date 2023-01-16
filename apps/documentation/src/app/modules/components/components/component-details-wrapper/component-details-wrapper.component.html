@@ -1,0 +1,26 @@
+<h3 class="pb-2">{{ title }}</h3>
+
+<nav class="flex align-baseline border-b mb-6">
+  <a [routerLink]="pages.OVERVIEW" routerLinkActive #overviewRla="routerLinkActive">
+    <doc-tab [active]="overviewRla.isActive">Overview</doc-tab>
+  </a>
+  <a [routerLink]="pages.API" routerLinkActive #apiRla="routerLinkActive">
+    <doc-tab [active]="apiRla.isActive">API</doc-tab>
+  </a>
+  <a [routerLink]="pages.EXAMPLES" routerLinkActive #examplesRla="routerLinkActive">
+    <doc-tab [active]="examplesRla.isActive">Examples</doc-tab>
+  </a>
+
+  <div class="flex-grow"></div>
+
+  <div>
+    <a class="btn-primary" [routerLink]="[customizerPath, componentData.path]">
+      Customize
+      <doc-icon>construction</doc-icon>
+    </a>
+  </div>
+</nav>
+
+<div class="flex flex-col grow">
+  <ng-content></ng-content>
+</div>

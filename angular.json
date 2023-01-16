@@ -4,7 +4,7 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
-    "cdk": "libs/cdk",
+    "core": "libs/core",
     "documentation": "apps/documentation",
     "documentation-e2e": "apps/documentation-e2e",
     "ui": "libs/ui"
