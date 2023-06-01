@@ -2,7 +2,7 @@ import { ElementRef, inject, Injectable } from '@angular/core';
 import { BLIZZ_CONFIG } from './config';
 import { DOCUMENT } from '@angular/common';
 import { flattenObject } from './utils';
-import { BlizzConfigValue } from './models';
+import { BlizzComponentsConfig, BlizzConfigValue, BlizzTheme } from './models';
 import { camelToKebabCase } from '@blizz/core';
 
 @Injectable()
@@ -10,34 +10,65 @@ export class BlizzService {
   readonly config = inject(BLIZZ_CONFIG);
   protected readonly document = inject(DOCUMENT);
 
-  getCssVariables(config: BlizzConfigValue): string {
-    const themeVariables = flattenObject(config.theme, ['_', '-'], '--bzz-theme');
-    const compVariables = flattenObject(config.components, ['-', '_', '-'], '--bzz');
-    const variables = { ...themeVariables, ...compVariables };
-
-    return Object.entries(variables)
+  static getCssString(object: { [k: string]: string }): string {
+    return Object.entries(object)
       .map(([key, value]) => `${camelToKebabCase(key)}: ${value};`)
-      .join('\n');
+      .join();
   }
 
-  createStyleElement(selector: string, variables: string): HTMLStyleElement {
+  static getThemeCssVariable(colorName: string): string {
+    return `--bzz-theme_${camelToKebabCase(colorName)}`;
+  }
+
+  static getThemeCssVariables(theme: BlizzTheme): string {
+    return BlizzService.getCssString(flattenObject(theme, ['_', '-'], '--bzz-theme'));
+  }
+
+  static getComponentCssVariable(componentName: string, propertyName: string): string {
+    return `--bzz-${componentName}_${camelToKebabCase(propertyName)}`;
+  }
+
+  static getComponentsCssVariables(componentsConfig: BlizzComponentsConfig): string {
+    console.log(componentsConfig);
+    return BlizzService.getCssString(flattenObject(componentsConfig, ['-', '_', '-'], '--bzz'));
+  }
+
+  static getCssVariables(config: BlizzConfigValue): string {
+    const themeVariables = BlizzService.getThemeCssVariables(config.theme);
+    const compVariables = BlizzService.getComponentsCssVariables(config.components);
+    return themeVariables + compVariables;
+  }
+
+  static createStyleElement(
+    document: Document,
+    selector: string,
+    variables: string,
+  ): HTMLStyleElement {
     const css = `${selector} {\n${variables}\n}`;
-    const style = this.document.createElement('style');
-    style.appendChild(this.document.createTextNode(css));
+    const style = document.createElement('style');
+    style.appendChild(document.createTextNode(css));
     return style;
   }
 
+  static createLocalCss(elementRef: ElementRef, config: Readonly<BlizzConfigValue>) {
+    const variables = BlizzService.getCssVariables(config);
+    const nativeElement: HTMLElement = elementRef.nativeElement;
+    const currentStyle = nativeElement.getAttribute('style') ?? '';
+    nativeElement.setAttribute('style', `${currentStyle}${variables}`);
+  }
+
+  createStyleElement(selector: string, variables: string): HTMLStyleElement {
+    return BlizzService.createStyleElement(this.document, selector, variables);
+  }
+
   createGlobalCss() {
-    const variables = this.getCssVariables(this.config);
+    const variables = BlizzService.getCssVariables(this.config);
     const styleElement = this.createStyleElement(':root', variables);
     const headElement = this.document.getElementsByTagName('head')[0];
     headElement.appendChild(styleElement);
   }
 
   createLocalCss(elementRef: ElementRef) {
-    const variables = this.getCssVariables(this.config);
-    const nativeElement: HTMLElement = elementRef.nativeElement;
-    const currentStyle = nativeElement.getAttribute('style') ?? '';
-    nativeElement.setAttribute('style', `${currentStyle}${variables}`);
+    BlizzService.createLocalCss(elementRef, this.config);
   }
 }

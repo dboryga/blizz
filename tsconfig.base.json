@@ -14,9 +14,6 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "plugins": [
-      { "transform": "ts-transformer-interface/transformer" }
-    ],
     "paths": {
       "@blizz/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@blizz/core": ["libs/core/src/index.ts"],

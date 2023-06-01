@@ -15,9 +15,9 @@
     </nav>
 
     <div class="props-sidenav">
-      <div class="prop-container" *ngFor="let prop of selectedGroupProps">
+      <div class="prop-container mb-4" *ngFor="let prop of selectedGroupData">
         {{ prop.displayName }}
-        {{ prop.type }}
+        {{ prop.value }}
       </div>
     </div>
   </aside>

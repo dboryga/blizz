@@ -10,7 +10,7 @@ import { PREDEFINED_CONFIGS } from './configs';
 import { PREDEFINED_THEMES } from './themes/themes';
 import * as _ from 'lodash';
 
-export const DEFAULT_BLIZZ_CONFIG: BlizzConfig = {
+export const DEFAULT_BLIZZ_CONFIG: Readonly<BlizzConfig> = {
   base: BlizzPredefinedConfig.Blizz,
   theme: BlizzPredefinedTheme.Crystal,
 };

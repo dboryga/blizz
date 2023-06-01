@@ -1,3 +1,9 @@
 import { BlizzConfig } from '@blizz/ui';
 
-export const blizzConfig: BlizzConfig = {};
+export const blizzConfig: BlizzConfig = {
+  components: {
+    chips: {
+      padding: '2rem',
+    },
+  },
+};

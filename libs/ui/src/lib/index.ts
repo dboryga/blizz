@@ -4,4 +4,4 @@ export * from './models';
 export * from './themes';
 export * from './blizz.module';
 export * from './blizz.service';
-export * from './config';
+export * as blizzConfigHelpers from './config';

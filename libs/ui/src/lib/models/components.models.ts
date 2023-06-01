@@ -5,5 +5,5 @@ export enum BlizzComponentConfigName {
 }
 
 export interface BlizzComponentsConfig {
-  [BlizzComponentConfigName.Chips]: BlizzChipsConfig;
+  chips: BlizzChipsConfig;
 }
