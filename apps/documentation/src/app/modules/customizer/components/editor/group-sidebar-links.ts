@@ -13,14 +13,19 @@ export const GroupSidebarLinksData: GroupSidebarLink[] = [
     label: 'General',
   },
   {
-    path: CustomizerSettingsGroups.Colors,
-    icon: 'palette',
-    label: 'Colors',
-  },
-  {
     path: CustomizerSettingsGroups.Sizing,
     icon: 'zoom_out_map',
     label: 'Sizing',
+  },
+  {
+    path: CustomizerSettingsGroups.Text,
+    icon: 'format_size',
+    label: 'Text',
+  },
+  {
+    path: CustomizerSettingsGroups.Colors,
+    icon: 'palette',
+    label: 'Colors',
   },
   {
     path: CustomizerSettingsGroups.Interactions,

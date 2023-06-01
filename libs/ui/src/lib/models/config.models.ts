@@ -1,8 +1,4 @@
-import {
-  BlizzPredefinedTheme,
-  BlizzTheme,
-  BlizzThemeConfig,
-} from './theme.models';
+import { BlizzPredefinedTheme, BlizzTheme, BlizzThemeConfig } from './theme.models';
 import { BlizzComponentsConfig } from './components.models';
 
 export interface BlizzConfig {

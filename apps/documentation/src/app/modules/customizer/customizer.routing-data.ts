@@ -5,8 +5,9 @@ export enum CustomizerParams {
 
 export enum CustomizerSettingsGroups {
   General = 'general',
-  Colors = 'colors',
   Sizing = 'sizing',
+  Text = 'text',
+  Colors = 'colors',
   Interactions = 'interactions',
   Animations = 'animations',
   Config = 'config',

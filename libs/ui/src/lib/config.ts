@@ -28,22 +28,17 @@ export const setupConfig = (config?: BlizzConfig): BlizzConfigValue => {
   return { theme, components };
 };
 
-export const BLIZZ_CONFIG = new InjectionToken<Readonly<BlizzConfigValue>>(
-  'blizz-config',
-  {
-    providedIn: 'root',
-    factory: () => setupConfig(),
-  },
-);
+export const BLIZZ_CONFIG = new InjectionToken<Readonly<BlizzConfigValue>>('blizz-config', {
+  providedIn: 'root',
+  factory: () => setupConfig(),
+});
 
 export const injectThemeConfig = () => {
   const config = inject(BLIZZ_CONFIG);
   return config?.theme;
 };
 
-export const injectComponentConfig = (
-  componentName: BlizzComponentConfigName,
-) => {
+export const injectComponentConfig = (componentName: BlizzComponentConfigName) => {
   const config = inject(BLIZZ_CONFIG);
   return config.components[componentName];
 };

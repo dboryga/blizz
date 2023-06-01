@@ -1,34 +1,47 @@
-import { inject, Injectable } from '@angular/core';
+import { ElementRef, inject, Injectable, Optional } from '@angular/core';
 import { BLIZZ_CONFIG } from './config';
 import { DOCUMENT } from '@angular/common';
-import { camelToKebabCase, flattenObject } from './utils';
+import { flattenObject } from './utils';
+import { BlizzConfigValue } from './models';
+import { camelToKebabCase } from '@blizz/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class BlizzService {
   protected readonly config = inject(BLIZZ_CONFIG);
   protected readonly document = inject(DOCUMENT);
 
-  init() {
-    this.createCssVariables();
-  }
+  constructor(@Optional() public elementRef: ElementRef) {}
 
-  protected createCssVariables() {
-    const { theme, components } = this.config;
-
-    const themeVariables = flattenObject(theme, ['_', '-'], '--bzz-theme');
-    const compVariables = flattenObject(components, ['-', '_', '-'], '--bzz');
-
+  getCssVariables(config: BlizzConfigValue): string {
+    const themeVariables = flattenObject(config.theme, ['_', '-'], '--bzz-theme');
+    const compVariables = flattenObject(config.components, ['-', '_', '-'], '--bzz');
     const variables = { ...themeVariables, ...compVariables };
-    console.log(variables);
 
-    const variablesString = Object.entries(variables)
+    return Object.entries(variables)
       .map(([key, value]) => `${camelToKebabCase(key)}: ${value};`)
       .join('\n');
+  }
 
-    const css = `:root {\n${variablesString}\n}`;
-    const head = this.document.getElementsByTagName('head')[0];
+  createStyleElement(selector: string, variables: string): HTMLStyleElement {
+    const css = `${selector} {\n${variables}\n}`;
     const style = this.document.createElement('style');
     style.appendChild(this.document.createTextNode(css));
-    head.appendChild(style);
+    return style;
+  }
+
+  createGlobalCss() {
+    const variables = this.getCssVariables(this.config);
+    const styleElement = this.createStyleElement(':root', variables);
+    const headElement = this.document.getElementsByTagName('head')[0];
+    headElement.appendChild(styleElement);
+  }
+
+  createLocalCss() {
+    if (!this.elementRef) {
+      throw 'ERROR BlizzService: Could not create local css. elementRef is undefined.';
+    }
+
+    const variables = this.getCssVariables(this.config);
+    (this.elementRef.nativeElement as HTMLElement).setAttribute('style', variables);
   }
 }

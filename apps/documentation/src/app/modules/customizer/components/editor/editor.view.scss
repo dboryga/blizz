@@ -44,5 +44,6 @@
 
 .props-sidenav {
   @apply
-    flex flex-col w-96 h-full border-r bg-white;
+    flex flex-col w-96 h-full px-7 p-5
+    bg-white border-r;
 }

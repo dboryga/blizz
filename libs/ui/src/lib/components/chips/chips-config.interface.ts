@@ -1,7 +1,7 @@
-import { Border } from '../../models';
+import { Props } from '../../models';
 
 export interface BlizzChipsConfig {
   padding?: string;
-  border?: Border;
+  border?: Props.Border;
   lineHeight?: string;
 }

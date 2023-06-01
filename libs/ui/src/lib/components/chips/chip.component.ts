@@ -13,7 +13,4 @@ import { BlizzComponentConfigName } from '../../models';
 })
 export class BlizzChipComponent {
   readonly config = injectComponentConfig(BlizzComponentConfigName.Chips);
-
-  constructor() {
-  }
 }

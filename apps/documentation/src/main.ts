@@ -1,5 +1,4 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
-
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { DocAppComponent } from './app/app.component';
@@ -15,10 +14,7 @@ if (environment.production) {
 
 bootstrapApplication(DocAppComponent, {
   providers: [
-    importProvidersFrom(
-      RouterModule.forRoot(APP_ROUTING),
-      BlizzModule.forRoot(blizzConfig),
-    ),
+    importProvidersFrom(RouterModule.forRoot(APP_ROUTING), BlizzModule.forRoot(blizzConfig)),
     provideAnimations(),
   ],
 }).catch((err) => console.error(err));

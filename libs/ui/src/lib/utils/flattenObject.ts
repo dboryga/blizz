@@ -1,8 +1,4 @@
-export const flattenObject = (
-  obj: any,
-  separators: string | string[] = '.',
-  prefix = '',
-): any => {
+export const flattenObject = (obj: any, separators: string | string[] = '.', prefix = ''): any => {
   if (!obj) return {};
   let flatten = {};
   const separator = Array.isArray(separators) ? separators.shift() : separators;

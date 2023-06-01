@@ -23,6 +23,6 @@ export class BlizzModule {
   }
 
   constructor(blizzService: BlizzService) {
-    blizzService.init();
+    blizzService.createGlobalCss();
   }
 }

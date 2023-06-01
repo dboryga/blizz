@@ -1,9 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocIconComponent } from '../../../../shared';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { slideSidenavAnimation } from '../../animations/slide-sidenav.animation';
 import { GroupSidebarLinksData } from './group-sidebar-links';
+import { CustomizerParams, CustomizerSettingsGroups } from '../../customizer.routing-data';
+import {
+  ComponentConfigSchema,
+  getComponentConfig,
+  NestedProperty,
+} from '../../utils/get-component-config';
 
 @Component({
   selector: 'doc-customizer-editor',
@@ -14,6 +20,27 @@ import { GroupSidebarLinksData } from './group-sidebar-links';
   imports: [CommonModule, RouterModule, DocIconComponent],
   animations: [slideSidenavAnimation],
 })
-export class DocCustomizerEditorView {
+export class DocCustomizerEditorView implements OnInit {
   readonly groupLinks = GroupSidebarLinksData;
+
+  get componentName() {
+    return this.route.snapshot.paramMap.get(CustomizerParams.Component);
+  }
+
+  get selectedSettingsGroup() {
+    return this.route.snapshot.firstChild?.paramMap.get(CustomizerParams.SettingsGroup);
+  }
+
+  config: ComponentConfigSchema | null = null;
+
+  get selectedGroupProps(): NestedProperty[] {
+    if (!this.config || !this.selectedSettingsGroup) return [];
+    return this.config[this.selectedSettingsGroup as CustomizerSettingsGroups];
+  }
+
+  constructor(protected readonly route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.config = getComponentConfig(this.componentName);
+  }
 }

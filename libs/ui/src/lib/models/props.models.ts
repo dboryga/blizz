@@ -1,13 +1,13 @@
-export interface SquareDimensions<T = string> {
-  top?: T;
-  left?: T;
-  bottom?: T;
-  right?: T;
+export interface SquareDimensions {
+  top?: string;
+  left?: string;
+  bottom?: string;
+  right?: string;
 }
 
-export interface XY<T = string> {
-  x?: T;
-  y?: T;
+export interface XY {
+  x?: string;
+  y?: string;
 }
 
 export interface Border {

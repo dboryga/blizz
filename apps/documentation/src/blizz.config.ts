@@ -1,4 +1,3 @@
 import { BlizzConfig } from '@blizz/ui';
 
-export const blizzConfig: BlizzConfig = {
-};
+export const blizzConfig: BlizzConfig = {};

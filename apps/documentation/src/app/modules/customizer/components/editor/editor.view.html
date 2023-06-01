@@ -15,6 +15,10 @@
     </nav>
 
     <div class="props-sidenav">
+      <div class="prop-container" *ngFor="let prop of selectedGroupProps">
+        {{ prop.displayName }}
+        {{ prop.type }}
+      </div>
     </div>
   </aside>
 
