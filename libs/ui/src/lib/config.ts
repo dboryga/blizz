@@ -19,11 +19,14 @@ export const setupConfig = (config?: BlizzConfig): BlizzConfigValue => {
   const themeConfig = config?.theme ?? DEFAULT_BLIZZ_CONFIG.theme!;
   const theme =
     typeof themeConfig === 'string'
-      ? PREDEFINED_THEMES[themeConfig]
-      : _.merge(PREDEFINED_THEMES[themeConfig.base], themeConfig);
+      ? structuredClone(PREDEFINED_THEMES[themeConfig])
+      : _.merge(structuredClone(PREDEFINED_THEMES[themeConfig.base]), structuredClone(themeConfig));
 
   const base = config?.base ?? DEFAULT_BLIZZ_CONFIG.base!;
-  const components = _.merge(PREDEFINED_CONFIGS[base], config?.components);
+  const components = _.merge(
+    structuredClone(PREDEFINED_CONFIGS[base]),
+    structuredClone(config?.components),
+  );
 
   return { theme, components };
 };

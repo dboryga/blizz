@@ -9,7 +9,6 @@ import {
   BlizzComponentsConfig,
   BlizzConfig,
   blizzConfigHelpers,
-  BlizzService,
   BlizzThemeConfig,
 } from '@blizz/ui';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -41,8 +40,6 @@ export class DocCustomizerEditorView implements OnInit {
     return this.route.snapshot.firstChild?.paramMap.get(CustomizerParams.SettingsGroup);
   }
 
-  // config: ComponentConfigSchema | null = null;
-
   set config(v: Readonly<Required<BlizzConfig>>) {
     if (v === this._config) return;
     this._config = v;
@@ -63,11 +60,7 @@ export class DocCustomizerEditorView implements OnInit {
     return this.sidebarData.get(this.selectedSettingsGroup as CustomizerSettingsGroups);
   }
 
-  constructor(
-    protected readonly route: ActivatedRoute,
-    protected readonly router: Router,
-    protected readonly blizzService: BlizzService,
-  ) {}
+  constructor(protected readonly route: ActivatedRoute, protected readonly router: Router) {}
 
   ngOnInit() {
     this.getCustomizerConfig();
@@ -77,7 +70,7 @@ export class DocCustomizerEditorView implements OnInit {
     const localStorageConfig = localStorage.getItem(CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN);
     if (!localStorageConfig) {
       const defaultConfig = blizzConfigHelpers.DEFAULT_BLIZZ_CONFIG;
-      const configValue = blizzConfigHelpers.setupConfig(defaultConfig);
+      const configValue = blizzConfigHelpers.setupConfig();
       const newConfig: Readonly<Required<BlizzConfig>> = {
         base: defaultConfig.base!,
         components: configValue.components,
@@ -92,17 +85,5 @@ export class DocCustomizerEditorView implements OnInit {
     }
 
     this.config = JSON.parse(localStorageConfig);
-  }
-
-  listenForGroupChange() {
-    // this.route.firstChild?.paramMap
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     map((params) => params.get(CustomizerParams.SettingsGroup)),
-    //     filter((group): group is string => !!group),
-    //   )
-    //   .subscribe((group) => {
-    //     this.selectedGroupProps?.filter()
-    //   });
   }
 }

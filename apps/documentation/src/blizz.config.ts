@@ -3,7 +3,7 @@ import { BlizzConfig } from '@blizz/ui';
 export const blizzConfig: BlizzConfig = {
   components: {
     chips: {
-      padding: '2rem',
+      padding: '8rem',
     },
   },
 };

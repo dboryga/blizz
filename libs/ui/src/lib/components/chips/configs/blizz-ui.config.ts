@@ -1,6 +1,6 @@
 import { BlizzChipsConfig } from '../chips-config.interface';
 
-export const CHIPS_BLIZZ_UI_CONFIG: BlizzChipsConfig = {
+export const CHIPS_BLIZZ_UI_CONFIG: Readonly<BlizzChipsConfig> = {
   padding: '0.7rem 2.4rem',
   border: {
     style: 'solid',

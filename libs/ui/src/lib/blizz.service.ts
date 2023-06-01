@@ -29,7 +29,6 @@ export class BlizzService {
   }
 
   static getComponentsCssVariables(componentsConfig: BlizzComponentsConfig): string {
-    console.log(componentsConfig);
     return BlizzService.getCssString(flattenObject(componentsConfig, ['-', '_', '-'], '--bzz'));
   }
 
