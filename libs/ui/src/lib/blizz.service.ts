@@ -1,4 +1,4 @@
-import { ElementRef, inject, Injectable, Optional } from '@angular/core';
+import { ElementRef, inject, Injectable } from '@angular/core';
 import { BLIZZ_CONFIG } from './config';
 import { DOCUMENT } from '@angular/common';
 import { flattenObject } from './utils';
@@ -7,10 +7,8 @@ import { camelToKebabCase } from '@blizz/core';
 
 @Injectable()
 export class BlizzService {
-  protected readonly config = inject(BLIZZ_CONFIG);
+  readonly config = inject(BLIZZ_CONFIG);
   protected readonly document = inject(DOCUMENT);
-
-  constructor(@Optional() public elementRef: ElementRef) {}
 
   getCssVariables(config: BlizzConfigValue): string {
     const themeVariables = flattenObject(config.theme, ['_', '-'], '--bzz-theme');
@@ -36,12 +34,10 @@ export class BlizzService {
     headElement.appendChild(styleElement);
   }
 
-  createLocalCss() {
-    if (!this.elementRef) {
-      throw 'ERROR BlizzService: Could not create local css. elementRef is undefined.';
-    }
-
+  createLocalCss(elementRef: ElementRef) {
     const variables = this.getCssVariables(this.config);
-    (this.elementRef.nativeElement as HTMLElement).setAttribute('style', variables);
+    const nativeElement: HTMLElement = elementRef.nativeElement;
+    const currentStyle = nativeElement.getAttribute('style') ?? '';
+    nativeElement.setAttribute('style', `${currentStyle}${variables}`);
   }
 }

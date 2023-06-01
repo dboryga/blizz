@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocIconComponent } from '../../../../shared';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -10,6 +10,7 @@ import {
   getComponentConfig,
   NestedProperty,
 } from '../../utils/get-component-config';
+import { BlizzService } from '@blizz/ui';
 
 @Component({
   selector: 'doc-customizer-editor',
@@ -21,6 +22,8 @@ import {
   animations: [slideSidenavAnimation],
 })
 export class DocCustomizerEditorView implements OnInit {
+  @ViewChild('preview', { static: true }) protected previewElement!: ElementRef<HTMLDivElement>;
+
   readonly groupLinks = GroupSidebarLinksData;
 
   get componentName() {
@@ -38,7 +41,10 @@ export class DocCustomizerEditorView implements OnInit {
     return this.config[this.selectedSettingsGroup as CustomizerSettingsGroups];
   }
 
-  constructor(protected readonly route: ActivatedRoute) {}
+  constructor(
+    protected readonly route: ActivatedRoute,
+    protected readonly blizzService: BlizzService,
+  ) {}
 
   ngOnInit() {
     this.config = getComponentConfig(this.componentName);
