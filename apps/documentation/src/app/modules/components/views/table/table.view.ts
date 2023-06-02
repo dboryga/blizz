@@ -17,5 +17,4 @@ import { routerFadeAnimation } from '../../../../shared/animations/fade.animatio
   imports: [CommonModule, RouterModule, DocComponentDetailsWrapperComponent],
   animations: [routerFadeAnimation],
 })
-export class DocTableView {
-}
+export class DocTableView {}

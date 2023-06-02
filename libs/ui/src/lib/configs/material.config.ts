@@ -1,6 +1,8 @@
+import { BlizzComponentsConfig } from '../models';
 import { CHIPS_MATERIAL_CONFIG } from '../components/chips';
-import { BlizzComponentConfigName, BlizzComponentsConfig } from '../models';
+import { INPUT_MATERIAL_CONFIG } from '../components/input';
 
 export const MATERIAL_CONFIG: Readonly<BlizzComponentsConfig> = {
-  [BlizzComponentConfigName.Chips]: CHIPS_MATERIAL_CONFIG,
+  chips: CHIPS_MATERIAL_CONFIG,
+  input: INPUT_MATERIAL_CONFIG,
 };

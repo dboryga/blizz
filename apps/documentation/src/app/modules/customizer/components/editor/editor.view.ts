@@ -23,7 +23,6 @@ import {
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Dictionary } from '@blizz/core';
 import { createSidebarData, SidebarData } from '../../utils/sidebar-data';
-import { set } from 'lodash';
 
 export const CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN = 'customizerConfig';
 
@@ -56,7 +55,7 @@ export class DocCustomizerEditorView implements OnInit {
     this._config = v;
     this.configValue = blizzConfigHelpers.setupConfig(this.config);
     this.extendedConfig = {
-      base: this.config.base!,
+      base: this.config.base,
       components: this.configValue.components,
       theme: {
         base: typeof this.config.theme === 'object' ? this.config.theme.base : this.config.theme,

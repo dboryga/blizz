@@ -1,1 +1,1 @@
-export type Dictionary<V = any> = { [key: string]: V };
+export type Dictionary<V = any> = Record<string, V>;

@@ -3,6 +3,7 @@ export const flattenObject = (
   separators: string | string[] = '.',
   prefix = '',
 ): { [k: string]: string } => {
+  console.log(obj);
   if (!obj) return {};
   let flatten = {};
   const separator = Array.isArray(separators) ? separators.shift() : separators;

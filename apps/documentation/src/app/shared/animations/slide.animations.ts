@@ -1,69 +1,44 @@
-import {
-  animate,
-  AnimationMetadata,
-  group,
-  query,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { animate, AnimationMetadata, style, transition, trigger } from '@angular/animations';
 
 export const DefaultSlideAnimationTimings = '200ms ease-in';
 
 // META
 // Left
-export const slideFromLeftMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideFromLeftMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   style({ transform: 'translateX(-100%)' }),
   animate(timings),
 ];
 
-export const slideToLeftMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideToLeftMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   animate(timings, style({ transform: 'translateX(-100%)' })),
 ];
 
 // Right
-export const slideFromRightMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideFromRightMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   style({ transform: 'translateX(100%)' }),
   animate(timings),
 ];
 
-export const slideToRightMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideToRightMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   animate(timings, style({ transform: 'translateX(100%)' })),
 ];
 
 // Top
-export const slideFromTopMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideFromTopMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   style({ transform: 'translateY(-100%)' }),
   animate(timings),
 ];
 
-export const slideToTopMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideToTopMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   animate(timings, style({ transform: 'translateY(-100%)' })),
 ];
 
 // Bottom
 export const slideFromBottomMeta = (
   timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
-  style({ transform: 'translateY(100%)' }),
-  animate(timings),
-];
+): AnimationMetadata[] => [style({ transform: 'translateY(100%)' }), animate(timings)];
 
-export const slideToBottomMeta = (
-  timings = DefaultSlideAnimationTimings,
-): AnimationMetadata[] => [
+export const slideToBottomMeta = (timings = DefaultSlideAnimationTimings): AnimationMetadata[] => [
   animate(timings, style({ transform: 'translateY(100%)' })),
 ];
 

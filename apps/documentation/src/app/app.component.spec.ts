@@ -1,6 +1,6 @@
-import { async, TestBed } from "@angular/core/testing";
-import { HttpClientModule } from "@angular/common/http";
-import { DocAppComponent } from "./app.component";
+import { async, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { DocAppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

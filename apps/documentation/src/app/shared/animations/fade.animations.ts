@@ -9,23 +9,14 @@ import {
 } from '@angular/animations';
 
 // META
-export const fadeInMeta: AnimationMetadata[] = [
-  style({ opacity: 0 }),
-  animate('200ms ease-in'),
-];
+export const fadeInMeta: AnimationMetadata[] = [style({ opacity: 0 }), animate('200ms ease-in')];
 
-export const fadeOutMeta: AnimationMetadata[] = [
-  animate('200ms ease-out', style({ opacity: 0 })),
-];
+export const fadeOutMeta: AnimationMetadata[] = [animate('200ms ease-out', style({ opacity: 0 }))];
 
 // ANIMATIONS
-export const fadeInAnimation = trigger('fadeIn', [
-  transition(':enter', fadeInMeta),
-]);
+export const fadeInAnimation = trigger('fadeIn', [transition(':enter', fadeInMeta)]);
 
-export const fadeOutAnimation = trigger('fadeOut', [
-  transition(':leave', fadeOutMeta),
-]);
+export const fadeOutAnimation = trigger('fadeOut', [transition(':leave', fadeOutMeta)]);
 
 export const fadeInOutAnimation = trigger('fadeInOut', [
   transition(':enter', fadeInMeta),

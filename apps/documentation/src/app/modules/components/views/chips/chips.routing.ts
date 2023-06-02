@@ -1,7 +1,4 @@
-import {
-  ComponentPages,
-  DefaultComponentPage,
-} from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
 import { DocChipsOverviewView } from './overview/chips-overview.view';
 import { DocChipsApiView } from './api/chips-api.view';
 import { DocChipsExamplesView } from './examples/chips-examples.view';

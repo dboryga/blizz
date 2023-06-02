@@ -1,7 +1,4 @@
-import {
-  ComponentPages,
-  DefaultComponentPage,
-} from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
 import { DocTableOverviewView } from './overview/table-overview.view';
 import { DocTableApiView } from './api/table-api.view';
 import { DocTableExamplesView } from './examples/table-examples.view';

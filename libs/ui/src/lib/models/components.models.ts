@@ -1,10 +1,6 @@
-import { BlizzChipsConfig } from '../components';
-import { Dictionary } from '@blizz/core';
+import { BlizzChipsConfig, BlizzInputConfig } from '../components';
 
-export enum BlizzComponentConfigName {
-  Chips = 'chips',
-}
-
-export interface BlizzComponentsConfig extends Dictionary<Dictionary> {
+export interface BlizzComponentsConfig {
   chips: BlizzChipsConfig;
+  input: BlizzInputConfig;
 }

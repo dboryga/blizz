@@ -7,10 +7,7 @@ import { routerFadeAnimation } from '../../../../shared/animations/fade.animatio
 @Component({
   template: `
     <doc-component-details-wrapper>
-      <div
-        class="stack-container"
-        [@routerFade]="outlet.activatedRouteData"
-      >
+      <div class="stack-container" [@routerFade]="outlet.activatedRouteData">
         <router-outlet #outlet="outlet"></router-outlet>
       </div>
     </doc-component-details-wrapper>

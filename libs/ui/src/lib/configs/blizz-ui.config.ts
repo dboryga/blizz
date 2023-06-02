@@ -1,6 +1,8 @@
+import { BlizzComponentsConfig } from '../models';
 import { CHIPS_BLIZZ_UI_CONFIG } from '../components/chips';
-import { BlizzComponentConfigName, BlizzComponentsConfig } from '../models';
+import { INPUT_BLIZZ_UI_CONFIG } from '../components/input';
 
 export const BLIZZ_UI_CONFIG: Readonly<BlizzComponentsConfig> = {
-  [BlizzComponentConfigName.Chips]: CHIPS_BLIZZ_UI_CONFIG,
+  chips: CHIPS_BLIZZ_UI_CONFIG,
+  input: INPUT_BLIZZ_UI_CONFIG,
 };

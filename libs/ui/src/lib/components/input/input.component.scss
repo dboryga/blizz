@@ -1,0 +1,13 @@
+:host {
+  display: inline-block;
+  line-height: var(--bzz-input_line-height);
+  padding: var(--bzz-input_padding);
+
+  border-style: var(--bzz-input_border-style);
+  border-width: var(--bzz-input_border-width);
+  border-radius: var(--bzz-input_border-radius);
+  border-color: var(--bzz-input_border-color);
+
+  color: var(--bzz-input_color);
+  background-color: var(--bzz-input_background-color);
+}

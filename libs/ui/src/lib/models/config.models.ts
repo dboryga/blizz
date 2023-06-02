@@ -2,7 +2,7 @@ import { BlizzPredefinedTheme, BlizzTheme, BlizzThemeConfig } from './theme.mode
 import { BlizzComponentsConfig } from './components.models';
 
 export interface BlizzConfig {
-  base?: BlizzPredefinedConfig | `${BlizzPredefinedConfig}`;
+  base: BlizzPredefinedConfig | `${BlizzPredefinedConfig}`;
   theme?: BlizzPredefinedTheme | `${BlizzPredefinedTheme}` | BlizzThemeConfig;
   components?: Partial<BlizzComponentsConfig>;
 }
