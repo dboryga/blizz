@@ -13,7 +13,7 @@ export class BlizzService {
   static getCssString(object: { [k: string]: string }): string {
     return Object.entries(object)
       .map(([key, value]) => `${camelToKebabCase(key)}: ${value};`)
-      .join();
+      .join(' ');
   }
 
   static getThemeCssVariable(colorName: string): string {
@@ -35,7 +35,7 @@ export class BlizzService {
   static getCssVariables(config: BlizzConfigValue): string {
     const themeVariables = BlizzService.getThemeCssVariables(config.theme);
     const compVariables = BlizzService.getComponentsCssVariables(config.components);
-    return themeVariables + compVariables;
+    return `${themeVariables} ${compVariables}`;
   }
 
   static createStyleElement(
@@ -49,10 +49,14 @@ export class BlizzService {
     return style;
   }
 
-  static createLocalCss(elementRef: ElementRef, config: Readonly<BlizzConfigValue>) {
+  static createLocalCss(
+    elementRef: ElementRef,
+    config: Readonly<BlizzConfigValue>,
+    preserveCurrentStyle: boolean = true,
+  ) {
     const variables = BlizzService.getCssVariables(config);
     const nativeElement: HTMLElement = elementRef.nativeElement;
-    const currentStyle = nativeElement.getAttribute('style') ?? '';
+    const currentStyle = preserveCurrentStyle ? nativeElement.getAttribute('style') ?? '' : '';
     nativeElement.setAttribute('style', `${currentStyle}${variables}`);
   }
 
@@ -67,7 +71,7 @@ export class BlizzService {
     headElement.appendChild(styleElement);
   }
 
-  createLocalCss(elementRef: ElementRef) {
-    BlizzService.createLocalCss(elementRef, this.config);
+  createLocalCss(elementRef: ElementRef, preserveCurrentStyle: boolean = true) {
+    BlizzService.createLocalCss(elementRef, this.config, preserveCurrentStyle);
   }
 }

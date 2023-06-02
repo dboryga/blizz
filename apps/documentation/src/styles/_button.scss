@@ -7,3 +7,17 @@
     transition duration-150 ease-out
     hover:text-white hover:bg-cyan-500 hover:ease-in;
 }
+
+.btn-icon {
+  @apply
+    flex items-center p-3 rounded-full
+    text-gray-600 text-3xl
+    transition duration-200 ease-out
+    opacity-75 hover:opacity-100
+    bg-transparent hover:bg-black/5;
+
+  &:active,
+  &.active {
+    @apply text-cyan-600
+  }
+}

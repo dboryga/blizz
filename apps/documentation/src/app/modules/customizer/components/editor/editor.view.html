@@ -15,10 +15,21 @@
     </nav>
 
     <div class="props-sidenav">
-      <div class="prop-container mb-4" *ngFor="let prop of selectedGroupData">
-        {{ prop.displayName }}
-        {{ prop.value }}
-      </div>
+      <ng-container *ngIf="selectedSettingsGroup !== customizerSettingsGroups.Config; else getConfig">
+        <div class="prop-container mb-4" *ngFor="let prop of selectedGroupData">
+          {{ prop.displayName }}
+          {{ prop.value }}
+        </div>
+      </ng-container>
+      <ng-template #getConfig>
+        <div class="bg-gray-100 p-4 relative">
+          <pre>{{ configString }}</pre>
+          <button class="btn-icon absolute m-1 top-0 right-0" (click)="copyConfig()">
+            <doc-icon>content_copy</doc-icon>
+          </button>
+        </div>
+
+      </ng-template>
     </div>
   </aside>
 

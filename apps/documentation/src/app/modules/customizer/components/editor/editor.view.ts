@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocIconComponent } from '../../../../shared';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -9,11 +16,14 @@ import {
   BlizzComponentsConfig,
   BlizzConfig,
   blizzConfigHelpers,
+  BlizzConfigValue,
+  BlizzService,
   BlizzThemeConfig,
 } from '@blizz/ui';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Dictionary } from '@blizz/core';
 import { createSidebarData, SidebarData } from '../../utils/sidebar-data';
+import { set } from 'lodash';
 
 export const CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN = 'customizerConfig';
 
@@ -31,6 +41,7 @@ export class DocCustomizerEditorView implements OnInit {
   @ViewChild('preview', { static: true }) protected previewElement!: ElementRef<HTMLDivElement>;
 
   readonly groupLinks = GroupSidebarLinksData;
+  readonly customizerSettingsGroups = CustomizerSettingsGroups;
 
   get componentName() {
     return this.route.snapshot.paramMap.get(CustomizerParams.Component)!;
@@ -40,50 +51,73 @@ export class DocCustomizerEditorView implements OnInit {
     return this.route.snapshot.firstChild?.paramMap.get(CustomizerParams.SettingsGroup);
   }
 
-  set config(v: Readonly<Required<BlizzConfig>>) {
+  set config(v: Readonly<BlizzConfig>) {
     if (v === this._config) return;
     this._config = v;
-    this.themeConfig = v.theme as BlizzThemeConfig;
-    this.componentConfig = v.components[this.componentName as keyof BlizzComponentsConfig]!;
+    this.configValue = blizzConfigHelpers.setupConfig(this.config);
+    this.extendedConfig = {
+      base: this.config.base!,
+      components: this.configValue.components,
+      theme: {
+        base: typeof this.config.theme === 'object' ? this.config.theme.base : this.config.theme,
+        ...this.configValue.theme,
+      } as BlizzThemeConfig,
+    };
+    this.themeConfig = this.configValue.theme as BlizzThemeConfig;
+    this.componentConfig =
+      this.configValue.components[this.componentName as keyof BlizzComponentsConfig]!;
     this.sidebarData = createSidebarData(this.componentConfig, this.componentName);
+    BlizzService.createLocalCss(this.previewElement, this.configValue, false);
+    this.changeDetectorRef.detectChanges();
   }
-  get config(): Readonly<Required<BlizzConfig>> {
+  get config(): Readonly<BlizzConfig> {
     return this._config;
   }
-  protected _config!: Readonly<Required<BlizzConfig>>;
+  protected _config!: Readonly<BlizzConfig>;
 
+  configValue!: Readonly<BlizzConfigValue>;
+  extendedConfig!: Readonly<Required<BlizzConfig>>;
   themeConfig!: BlizzThemeConfig;
   componentConfig!: Dictionary;
   sidebarData!: SidebarData;
+
+  get configString() {
+    const json = JSON.stringify(this.config, null, 2);
+    return json.replace(/"([^"]+)":/g, '$1:').replace(/"/g, "'");
+  }
 
   get selectedGroupData() {
     return this.sidebarData.get(this.selectedSettingsGroup as CustomizerSettingsGroups);
   }
 
-  constructor(protected readonly route: ActivatedRoute, protected readonly router: Router) {}
+  constructor(
+    protected readonly route: ActivatedRoute,
+    protected readonly router: Router,
+    protected readonly changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
-    this.getCustomizerConfig();
+    this.getConfigFromLocalStorage();
   }
 
-  getCustomizerConfig() {
+  getConfigFromLocalStorage() {
     const localStorageConfig = localStorage.getItem(CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN);
     if (!localStorageConfig) {
-      const defaultConfig = blizzConfigHelpers.DEFAULT_BLIZZ_CONFIG;
-      const configValue = blizzConfigHelpers.setupConfig();
-      const newConfig: Readonly<Required<BlizzConfig>> = {
-        base: defaultConfig.base!,
-        components: configValue.components,
-        theme: {
-          base: defaultConfig.theme,
-          ...configValue.theme,
-        } as BlizzThemeConfig,
-      };
-      localStorage.setItem(CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN, JSON.stringify(newConfig));
-      this.config = newConfig;
+      this.config = structuredClone(blizzConfigHelpers.DEFAULT_BLIZZ_CONFIG);
+      localStorage.setItem(CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN, JSON.stringify(this.config));
       return;
     }
 
     this.config = JSON.parse(localStorageConfig);
+  }
+
+  updateConfigProperty(name: string, value: string) {
+    const clone = structuredClone(this.config);
+    Object.assign(clone, { components: { [this.componentName]: { [name]: value } } });
+    this.config = clone;
+  }
+
+  copyConfig() {
+    navigator.clipboard.writeText(this.configString);
   }
 }
