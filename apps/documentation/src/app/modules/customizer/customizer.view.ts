@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocCustomizerEditorView } from './components/editor/editor.view';
 import { ActivatedRoute } from '@angular/router';
 import { CustomizerParams } from './customizer.routing-data';
-import { BlizzChipComponent, BlizzComponentsConfig, BlizzInputComponent } from '@blizz/ui';
+import { BlizzChipComponent, BlizzComponentsConfigs, BlizzInputComponent } from '@blizz/ui';
 
 @Component({
   selector: 'doc-customizer',
@@ -17,7 +17,7 @@ export class DocCustomizerView {
   get componentName() {
     return this.route.snapshot.paramMap.get(
       CustomizerParams.Component,
-    ) as keyof BlizzComponentsConfig;
+    ) as keyof BlizzComponentsConfigs;
   }
 
   constructor(protected readonly route: ActivatedRoute) {}

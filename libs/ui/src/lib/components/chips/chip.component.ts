@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { injectComponentConfig } from '../../config';
+import { BlizzComponent } from '../../models/component.models';
+import { BlizzChipsConfig } from './chips-config.interface';
 
 @Component({
   selector: 'bzz-chip',
@@ -11,6 +13,10 @@ import { injectComponentConfig } from '../../config';
   standalone: true,
   imports: [CommonModule],
 })
-export class BlizzChipComponent {
-  readonly config = injectComponentConfig('chips');
+export class BlizzChipComponent implements BlizzComponent {
+  @HostBinding('attr.variation')
+  @Input()
+  variation: string | null = null;
+
+  readonly config: BlizzChipsConfig = injectComponentConfig('chips');
 }

@@ -1,15 +1,15 @@
 import { BlizzPredefinedTheme, BlizzTheme, BlizzThemeConfig } from './theme.models';
-import { BlizzComponentsConfig } from './components.models';
+import { BlizzComponentsConfigs } from './components.models';
 
 export interface BlizzConfig {
   base: BlizzPredefinedConfig | `${BlizzPredefinedConfig}`;
   theme?: BlizzPredefinedTheme | `${BlizzPredefinedTheme}` | BlizzThemeConfig;
-  components?: Partial<BlizzComponentsConfig>;
+  components?: Partial<BlizzComponentsConfigs>;
 }
 
 export interface BlizzConfigValue {
   theme: BlizzTheme;
-  components: BlizzComponentsConfig;
+  components: BlizzComponentsConfigs;
 }
 
 export enum BlizzPredefinedConfig {

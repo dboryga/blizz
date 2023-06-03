@@ -13,7 +13,7 @@ import { slideSidenavAnimation } from '../../animations/slide-sidenav.animation'
 import { GroupSidebarLinksData } from './group-sidebar-links';
 import { CustomizerParams, CustomizerSettingsGroups } from '../../customizer.routing-data';
 import {
-  BlizzComponentsConfig,
+  BlizzComponentsConfigs,
   BlizzConfig,
   blizzConfigHelpers,
   BlizzConfigValue,
@@ -64,9 +64,9 @@ export class DocCustomizerEditorView implements OnInit {
     };
     this.themeConfig = this.configValue.theme as BlizzThemeConfig;
     this.componentConfig =
-      this.configValue.components[this.componentName as keyof BlizzComponentsConfig]!;
+      this.configValue.components[this.componentName as keyof BlizzComponentsConfigs]!;
     this.sidebarData = createSidebarData(this.componentConfig, this.componentName);
-    BlizzService.createLocalCss(this.previewElement, this.configValue, false);
+    // BlizzService.createLocalCss(this.previewElement, this.configValue, false);
     this.changeDetectorRef.detectChanges();
   }
   get config(): Readonly<BlizzConfig> {

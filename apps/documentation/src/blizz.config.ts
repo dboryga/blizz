@@ -5,7 +5,9 @@ export const blizzConfig: BlizzConfig = {
   theme: 'crystal',
   components: {
     chips: {
-      padding: '8rem',
+      styles: {
+        padding: '8rem',
+      },
     },
   },
 };

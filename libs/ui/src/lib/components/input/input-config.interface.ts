@@ -1,15 +1,13 @@
-import { Props } from '../../models';
+import { BlizzComponentConfig, Props } from '../../models';
 import { Dictionary } from '@blizz/core';
 
-export interface BlizzInputConfig {
-  // Sizing
-  padding?: string;
-  border?: Props.Border;
-  // Text
-  lineHeight?: string;
-  // Colors
-  color?: string;
-  backgroundColor?: string;
-
-  variations?: Dictionary<BlizzInputConfig>;
+export interface BlizzInputConfig extends BlizzComponentConfig {
+  styles?: {
+    padding?: string;
+    border?: Props.Border;
+    lineHeight?: string;
+    color?: string;
+    backgroundColor?: string;
+  };
+  variations?: Dictionary<Omit<BlizzInputConfig, 'variations'>>;
 }

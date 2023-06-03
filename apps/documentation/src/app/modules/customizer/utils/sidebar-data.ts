@@ -66,7 +66,7 @@ function mapProperties(
       value,
       displayName: camelToSentenceCase(name),
       fullDisplayName: camelToSentenceCase(fullName),
-      cssVariable: BlizzService.getComponentCssVariable(componentName, fullName),
+      // cssVariable: BlizzService.getComponentCssVariable(componentName, fullName),
     };
   });
 }

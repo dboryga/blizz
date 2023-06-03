@@ -1,5 +1,6 @@
 import {
-  BlizzComponentsConfig,
+  BlizzComponentConfig,
+  BlizzComponentsConfigs,
   BlizzConfig,
   BlizzConfigValue,
   BlizzPredefinedConfig,
@@ -41,7 +42,9 @@ export const injectThemeConfig = () => {
   return config?.theme;
 };
 
-export const injectComponentConfig = (componentName: keyof BlizzComponentsConfig) => {
+export const injectComponentConfig = (
+  componentName: keyof BlizzComponentsConfigs,
+): BlizzComponentConfig => {
   const config = inject(BLIZZ_CONFIG);
   return config.components[componentName];
 };
