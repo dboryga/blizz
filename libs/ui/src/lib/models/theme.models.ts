@@ -1,10 +1,11 @@
-import { Dictionary } from '@blizz/core';
+import { Dictionary, ValueOf } from 'ts-essentials';
 
-export enum BlizzPredefinedTheme {
-  Crystal = 'crystal',
-}
+export const BLIZZ_PREDEFINED_THEME = {
+  Crystal: 'crystal',
+} as const;
+export type BlizzPredefinedTheme = ValueOf<typeof BLIZZ_PREDEFINED_THEME>;
 
-export interface BlizzThemeConfig extends BlizzTheme {
+export interface BlizzConfigTheme extends BlizzTheme {
   base: BlizzPredefinedTheme;
 }
 

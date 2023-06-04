@@ -1,4 +1,10 @@
-export const flattenObject = (obj: any, separator: string, prefix = ''): Record<string, string> => {
+import { Dictionary } from 'ts-essentials';
+
+export const flattenObject = <_Value, _Object>(
+  obj: _Object,
+  separator: string = '-',
+  prefix: string = '',
+): Dictionary<_Value> => {
   if (!obj) return {};
   let flatten = {};
 

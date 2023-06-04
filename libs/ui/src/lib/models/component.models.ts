@@ -1,6 +1,7 @@
-import { Dictionary } from '@blizz/core';
+import { injectComponentConfig } from "../config";
+
 
 export interface BlizzComponent {
   variation: string | null;
-  readonly config: Dictionary;
+  readonly config: ReturnType<typeof injectComponentConfig>;
 }

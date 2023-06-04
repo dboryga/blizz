@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { injectComponentConfig } from '../../config';
-import { BlizzChipsConfig } from '../chips';
 import { BlizzComponent } from '../../models/component.models';
 
 @Component({
@@ -24,5 +23,5 @@ export class BlizzInputComponent implements BlizzComponent {
   @Input()
   variation: string | null = null;
 
-  readonly config: BlizzChipsConfig = injectComponentConfig('input');
+  readonly config = injectComponentConfig('input');
 }

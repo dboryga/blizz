@@ -1,11 +1,13 @@
-import { BlizzComponentConfig, Props } from '../../models';
-import { Dictionary } from '@blizz/core';
+import { BlizzConfigComponent, BlizzConfigComponentElementsDictionary, Props } from '../../models';
 
-export interface BlizzChipsConfig extends BlizzComponentConfig {
-  styles?: {
-    padding?: string;
-    border?: Props.Border;
-    lineHeight?: string;
+export interface BlizzConfigChipElements extends BlizzConfigComponentElementsDictionary {
+  base?: {
+    styles?: {
+      padding?: string;
+      border?: Props.Border;
+      lineHeight?: string;
+    };
   };
-  variations?: Dictionary<Omit<BlizzChipsConfig, 'variations'>>;
 }
+
+export type BlizzConfigChip = BlizzConfigComponent<BlizzConfigChipElements>;

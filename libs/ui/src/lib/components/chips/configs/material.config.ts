@@ -1,11 +1,13 @@
-import { BlizzChipsConfig } from '../chips-config.interface';
+import { BlizzConfigChip } from '../chips-config.interface';
 
-export const CHIPS_MATERIAL_CONFIG: Readonly<BlizzChipsConfig> = {
-  styles: {
-    padding: '1em 2rem',
-    border: {
-      radius: '1rem',
+export const CHIPS_MATERIAL_CONFIG: Readonly<BlizzConfigChip> = {
+  elements: {
+    base: {
+      styles: {
+        padding: '1em 2rem',
+        border: 'none',
+        lineHeight: '1',
+      },
     },
-    lineHeight: '1',
   },
 };

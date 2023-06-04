@@ -1,10 +1,9 @@
 import {
-  BlizzComponentConfig,
-  BlizzComponentsConfigs,
+  BLIZZ_PREDEFINED_CONFIG,
+  BLIZZ_PREDEFINED_THEME,
   BlizzConfig,
+  BlizzConfigComponentsDictionary,
   BlizzConfigValue,
-  BlizzPredefinedConfig,
-  BlizzPredefinedTheme,
 } from './models';
 import { inject, InjectionToken } from '@angular/core';
 import { PREDEFINED_CONFIGS } from './configs';
@@ -12,8 +11,8 @@ import { PREDEFINED_THEMES } from './themes/themes';
 import * as _ from 'lodash';
 
 export const DEFAULT_BLIZZ_CONFIG: Readonly<BlizzConfig> = {
-  base: BlizzPredefinedConfig.Blizz,
-  theme: BlizzPredefinedTheme.Crystal,
+  base: BLIZZ_PREDEFINED_CONFIG.Blizz,
+  theme: BLIZZ_PREDEFINED_THEME.Crystal,
 };
 
 export const setupConfig = (config?: BlizzConfig): BlizzConfigValue => {
@@ -42,9 +41,9 @@ export const injectThemeConfig = () => {
   return config?.theme;
 };
 
-export const injectComponentConfig = (
-  componentName: keyof BlizzComponentsConfigs,
-): BlizzComponentConfig => {
+export const injectComponentConfig = <_Key extends keyof BlizzConfigComponentsDictionary>(
+  componentKey: _Key,
+) => {
   const config = inject(BLIZZ_CONFIG);
-  return config.components[componentName];
+  return config.components[componentKey];
 };

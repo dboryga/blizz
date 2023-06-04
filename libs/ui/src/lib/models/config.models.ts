@@ -1,18 +1,20 @@
-import { BlizzPredefinedTheme, BlizzTheme, BlizzThemeConfig } from './theme.models';
-import { BlizzComponentsConfigs } from './components.models';
+import { BlizzPredefinedTheme, BlizzTheme, BlizzConfigTheme } from './theme.models';
+import { BlizzConfigComponentsDictionary } from './components.models';
+import { DeepRequired, ValueOf } from 'ts-essentials';
 
 export interface BlizzConfig {
-  base: BlizzPredefinedConfig | `${BlizzPredefinedConfig}`;
-  theme?: BlizzPredefinedTheme | `${BlizzPredefinedTheme}` | BlizzThemeConfig;
-  components?: Partial<BlizzComponentsConfigs>;
+  base: BlizzPredefinedConfig;
+  theme?: BlizzPredefinedTheme | BlizzConfigTheme;
+  components?: Partial<BlizzConfigComponentsDictionary>;
 }
 
 export interface BlizzConfigValue {
-  theme: BlizzTheme;
-  components: BlizzComponentsConfigs;
+  theme: DeepRequired<BlizzTheme>;
+  components: DeepRequired<BlizzConfigComponentsDictionary>;
 }
 
-export enum BlizzPredefinedConfig {
-  Blizz = 'blizz',
-  Material = 'material',
-}
+export const BLIZZ_PREDEFINED_CONFIG = {
+  Blizz: 'blizz',
+  Material: 'material',
+} as const;
+export type BlizzPredefinedConfig = ValueOf<typeof BLIZZ_PREDEFINED_CONFIG>;

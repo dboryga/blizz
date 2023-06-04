@@ -42,8 +42,12 @@
   }
 }
 
-.props-sidenav {
+.inner-sidenav {
   @apply
     flex flex-col w-96 h-full p-5
     bg-white border-r;
+
+  .config {
+    @apply bg-gray-100 p-4 relative;
+  }
 }

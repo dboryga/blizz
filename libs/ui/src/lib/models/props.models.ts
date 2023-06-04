@@ -10,8 +10,10 @@ export interface XY {
   y?: string;
 }
 
-export interface Border {
-  width?: string;
-  style?: string;
-  radius?: string;
-}
+export type Border =
+  | {
+      width?: string;
+      style?: string;
+      radius?: string;
+    }
+  | 'none';

@@ -14,22 +14,24 @@
       <div class="flex-grow border-r"></div>
     </nav>
 
-    <div class="props-sidenav">
-      <ng-container *ngIf="selectedSettingsGroup !== customizerSettingsGroups.Config; else getConfig">
-        <div class="prop-container mb-4" *ngFor="let prop of selectedGroupData">
-          {{ prop.displayName }}
-          {{ prop.value }}
+    <div class="inner-sidenav" [ngSwitch]="selectedSettingsGroup">
+        <div *ngSwitchCase="settingsGroups.Elements" class="elements">
+          <div class="border-b mt-4" *ngFor="let element of sidebarData | keyvalue">
+            <h5>{{ element.key }}</h5>
+            <div class="mb-4" *ngFor="let prop of element.value ">
+              {{ prop.displayName }}
+              {{ prop.value }}
+            </div>
+          </div>
         </div>
-      </ng-container>
-      <ng-template #getConfig>
-        <div class="bg-gray-100 p-4 relative">
+
+
+        <div *ngSwitchCase="settingsGroups.Config" class="config">
           <pre>{{ configString }}</pre>
           <button class="btn-icon absolute m-1 top-0 right-0" (click)="copyConfig()">
             <doc-icon>content_copy</doc-icon>
           </button>
         </div>
-
-      </ng-template>
     </div>
   </aside>
 

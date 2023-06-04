@@ -11,18 +11,17 @@ import { DocIconComponent } from '../../../../shared';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { slideSidenavAnimation } from '../../animations/slide-sidenav.animation';
 import { GroupSidebarLinksData } from './group-sidebar-links';
-import { CustomizerParams, CustomizerSettingsGroups } from '../../customizer.routing-data';
+import { CUSTOMIZER_PARAMS, CUSTOMIZER_SETTINGS_GROUPS } from '../../customizer.routing-data';
 import {
-  BlizzComponentsConfigs,
   BlizzConfig,
+  BlizzConfigComponent,
   blizzConfigHelpers,
+  BlizzConfigTheme,
   BlizzConfigValue,
-  BlizzService,
-  BlizzThemeConfig,
 } from '@blizz/ui';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { Dictionary } from '@blizz/core';
-import { createSidebarData, SidebarData } from '../../utils/sidebar-data';
+import { SafeDictionary } from 'ts-essentials';
+import { createSidebarData, SidebarProperty } from '../../utils/sidebar-data';
 
 export const CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN = 'customizerConfig';
 
@@ -40,14 +39,14 @@ export class DocCustomizerEditorView implements OnInit {
   @ViewChild('preview', { static: true }) protected previewElement!: ElementRef<HTMLDivElement>;
 
   readonly groupLinks = GroupSidebarLinksData;
-  readonly customizerSettingsGroups = CustomizerSettingsGroups;
+  readonly settingsGroups = CUSTOMIZER_SETTINGS_GROUPS;
 
   get componentName() {
-    return this.route.snapshot.paramMap.get(CustomizerParams.Component)!;
+    return this.route.snapshot.paramMap.get(CUSTOMIZER_PARAMS.Component)!;
   }
 
   get selectedSettingsGroup() {
-    return this.route.snapshot.firstChild?.paramMap.get(CustomizerParams.SettingsGroup);
+    return this.route.snapshot.firstChild?.paramMap.get(CUSTOMIZER_PARAMS.SettingsGroup);
   }
 
   set config(v: Readonly<BlizzConfig>) {
@@ -60,11 +59,10 @@ export class DocCustomizerEditorView implements OnInit {
       theme: {
         base: typeof this.config.theme === 'object' ? this.config.theme.base : this.config.theme,
         ...this.configValue.theme,
-      } as BlizzThemeConfig,
+      } as BlizzConfigTheme,
     };
-    this.themeConfig = this.configValue.theme as BlizzThemeConfig;
-    this.componentConfig =
-      this.configValue.components[this.componentName as keyof BlizzComponentsConfigs]!;
+    this.themeConfig = this.configValue.theme as BlizzConfigTheme;
+    this.componentConfig = this.configValue.components[this.componentName];
     this.sidebarData = createSidebarData(this.componentConfig, this.componentName);
     // BlizzService.createLocalCss(this.previewElement, this.configValue, false);
     this.changeDetectorRef.detectChanges();
@@ -76,18 +74,18 @@ export class DocCustomizerEditorView implements OnInit {
 
   configValue!: Readonly<BlizzConfigValue>;
   extendedConfig!: Readonly<Required<BlizzConfig>>;
-  themeConfig!: BlizzThemeConfig;
-  componentConfig!: Dictionary;
-  sidebarData!: SidebarData;
+  themeConfig!: Readonly<BlizzConfigTheme>;
+  componentConfig!: Readonly<BlizzConfigComponent>;
+  sidebarData!: Readonly<SafeDictionary<SidebarProperty[]>>;
 
   get configString() {
     const json = JSON.stringify(this.config, null, 2);
     return json.replace(/"([^"]+)":/g, '$1:').replace(/"/g, "'");
   }
 
-  get selectedGroupData() {
-    return this.sidebarData.get(this.selectedSettingsGroup as CustomizerSettingsGroups);
-  }
+  // get selectedGroupData() {
+  //   return this.sidebarData.get(this.selectedSettingsGroup as CustomizerSettingsGroups);
+  // }
 
   constructor(
     protected readonly route: ActivatedRoute,
