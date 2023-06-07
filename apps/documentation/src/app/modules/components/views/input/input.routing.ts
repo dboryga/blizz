@@ -1,4 +1,4 @@
-import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page.model';
 import { DocInputOverviewView } from './overview/input-overview.view';
 import { DocInputApiView } from './api/input-api.view';
 import { DocInputExamplesView } from './examples/input-examples.view';

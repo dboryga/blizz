@@ -1,4 +1,4 @@
-import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page.model';
 import { DocRadioOverviewView } from './overview/radio-overview.view';
 import { DocRadioApiView } from './api/radio-api.view';
 import { DocRadioExamplesView } from './examples/radio-examples.view';

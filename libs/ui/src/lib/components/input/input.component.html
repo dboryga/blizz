@@ -1,3 +1,10 @@
 <ng-content select="label"></ng-content>
-<ng-content select="input"></ng-content>
+
+<div class="bzz-input-field">
+  <ng-content select="[bzzPrefix]"></ng-content>
+  <ng-content select="input"></ng-content>
+  <ng-content select="[bzzPrefix]"></ng-content>
+</div>
+
+
 <ng-content></ng-content>

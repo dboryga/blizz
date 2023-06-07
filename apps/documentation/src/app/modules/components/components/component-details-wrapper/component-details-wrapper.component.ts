@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocIconComponent, DocTabComponent } from '../../../../shared';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ComponentPages } from '../../models/component-page';
+import { ComponentPages } from '../../models/component-page.model';
 import { DocComponentData } from '../../components.routing-data';
-import { CUSTOMIZER_ROUTING } from '../../../customizer/customizer.routing';
 import { ModuleRoutesEnum } from '../../../../app.routing-data';
 
 @Component({

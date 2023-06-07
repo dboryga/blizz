@@ -1,4 +1,4 @@
-export * from './components.models';
-export * from './config.models';
-export * as Props from './props.models';
-export * from './theme.models';
+export * as Props from './props.model';
+export * from './config.model';
+export * from './state.model';
+export * from './theme.model';

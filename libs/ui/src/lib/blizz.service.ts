@@ -2,10 +2,17 @@ import { inject, Injectable } from '@angular/core';
 import { BLIZZ_CONFIG } from './config';
 import { DOCUMENT } from '@angular/common';
 import { flattenObject } from './utils';
-import { BlizzConfigComponent, BlizzConfigComponentsDictionary, BlizzTheme } from './models';
+import {
+  ANY_NATIVE_STATE,
+  BLIZZ_COLOR_SHADE_KEYS,
+  BlizzColorShade,
+  BlizzConfigComponent,
+  BlizzConfigComponentsDictionary,
+  BlizzTheme,
+} from './models';
 import { camelToKebabCase } from '@blizz/core';
-import { Dictionary, SafeDictionary } from 'ts-essentials';
-import { map, mapKeys, merge } from 'lodash';
+import { DeepPartial, Dictionary, SafeDictionary } from 'ts-essentials';
+import { map, mapKeys, mapValues, merge } from 'lodash';
 
 function joinProperties<_Value>(
   obj: Dictionary<_Value>,
@@ -25,37 +32,54 @@ export class BlizzService {
     return joinProperties(obj, (key, value) => `\t${camelToKebabCase(key)}: ${value};`);
   }
 
-  static getCssVariables<_Config extends SafeDictionary<string | _Config>>(
-    config: _Config,
-    prefix: string,
-  ) {
+  static getCssVariables<_Config>(config: _Config, prefix: string) {
     return BlizzService.getCssString(flattenObject(config, '-', prefix));
   }
-  static getCssRule<_Props extends SafeDictionary<string | _Props>>(
-    selector: string,
-    props?: _Props,
-    propsPrefix: string = '',
-  ) {
+  static getCssRule<_Props>(selector: string, props?: _Props, propsPrefix: string = '') {
     if (!props) return '';
     return `${selector} {\n${BlizzService.getCssVariables(props, propsPrefix)}\n}\n`;
   }
 
+  static isColorShade(
+    colorProp: BlizzColorShade | SafeDictionary<string> | string,
+  ): colorProp is BlizzColorShade {
+    if (typeof colorProp === 'string') return false;
+    return BLIZZ_COLOR_SHADE_KEYS.every((key) => key in colorProp);
+  }
+
+  static createDefaultColorVariable(
+    colorProp: BlizzColorShade | SafeDictionary<string> | string,
+    key: string,
+  ) {
+    if (!BlizzService.isColorShade(colorProp)) return colorProp;
+    const defaultValue = colorProp.default ?? 500;
+    delete colorProp.default;
+    return {
+      ...colorProp,
+      '': `var(--bzz-theme_${key}-${defaultValue})`,
+    };
+  }
+
   static getThemeCssRule(theme: BlizzTheme): string {
-    return BlizzService.getCssRule(':root', theme, '--bzz-theme_');
+    return BlizzService.getCssRule(
+      ':root',
+      mapValues(theme, BlizzService.createDefaultColorVariable),
+      '--bzz-theme_',
+    );
   }
 
   static getComponentCssRules(name: string, config: BlizzConfigComponent): string {
-    const { variations, elements } = config;
+    const selector = `bzz-${name}`;
+    const base = BlizzService.getComponentElementsCssRules(selector, config.elements);
+    const states = BlizzService.getComponentStatesCssRules(selector, config.states);
+    const variations = BlizzService.getComponentVariationsCssRules(selector, config.variations);
 
-    const general = BlizzService.getComponentElementsRules(`bzz-${name}`, elements);
-    const variationsRules = BlizzService.getComponentVariationsRules(name, variations);
-
-    return general + variationsRules;
+    return base + states + variations;
   }
 
-  static getComponentElementsRules(
+  static getComponentElementsCssRules(
     selector: string,
-    elements: BlizzConfigComponent['elements'] | undefined,
+    elements: DeepPartial<BlizzConfigComponent['elements']> | undefined,
   ) {
     if (!elements) return '';
 
@@ -70,17 +94,30 @@ export class BlizzService {
 
     return BlizzService.getCssRule(selector, propsWithElementPrefix, '--');
   }
-  static getComponentVariationsRules(
-    component: string,
-    variations: BlizzConfigComponent['variations'],
+
+  static getComponentStatesCssRules(
+    selector: string,
+    states: BlizzConfigComponent['states'] | undefined,
+  ) {
+    if (!states) return '';
+    return joinProperties(states, (state, elements) => {
+      const isNative = (Object.values(ANY_NATIVE_STATE) as string[]).includes(state);
+      const _selector = isNative ? `${selector}:${state}` : `${selector}[state-${state}=true]`;
+      return BlizzService.getComponentElementsCssRules(_selector, elements);
+    });
+  }
+
+  static getComponentVariationsCssRules(
+    selector: string,
+    variations: BlizzConfigComponent['variations'] | undefined,
   ) {
     if (!variations) return '';
-    return joinProperties(variations, (variation, { elements }) =>
-      BlizzService.getComponentElementsRules(
-        `bzz-${component}[variation="${variation}"]`,
-        elements,
-      ),
-    );
+    return joinProperties(variations, (variation, config) => {
+      const _selector = `${selector}[variation="${variation}"]`;
+      const base = BlizzService.getComponentElementsCssRules(_selector, config.elements);
+      const states = BlizzService.getComponentStatesCssRules(_selector, config.states);
+      return base + states;
+    });
   }
 
   static getComponentsCssRules(config: BlizzConfigComponentsDictionary) {

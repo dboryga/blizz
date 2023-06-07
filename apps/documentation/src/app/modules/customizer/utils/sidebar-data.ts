@@ -1,5 +1,5 @@
-import { camelToSentenceCase, firstLetterUpper } from '@blizz/core';
-import { BlizzConfigComponent, BlizzConfigStyles } from '@blizz/ui';
+import { camelToSentenceCase, firstLetterUpper, Nested } from '@blizz/core';
+import { BlizzConfigComponent } from '@blizz/ui';
 import { SafeDictionary } from 'ts-essentials';
 import { mapValues } from 'lodash';
 
@@ -12,18 +12,6 @@ export interface SidebarProperty {
   cssVariable?: string;
   props?: SidebarProperty[];
 }
-
-// export type SidebarData = ReadonlyMap<CustomizerSettingsGroups, SidebarProperty[]>;
-//
-// export const sidebarPropsByGroup: { [key in CustomizerSettingsGroups]: string[] } = {
-//   [CustomizerSettingsGroups.Elements]: [],
-//   [CustomizerSettingsGroups.Sizing]: ['padding', 'border'],
-//   [CustomizerSettingsGroups.Text]: ['lineHeight'],
-//   [CustomizerSettingsGroups.Colors]: [],
-//   [CustomizerSettingsGroups.Interactions]: [],
-//   [CustomizerSettingsGroups.Animations]: [],
-//   [CustomizerSettingsGroups.Config]: [],
-// };
 
 export function createSidebarData(
   componentConfig: BlizzConfigComponent,
@@ -43,12 +31,11 @@ export function createSidebarData(
   //
   // return data as SidebarData;
 
-
   return mapValues(componentConfig.elements, (props) => mapProperties(props?.styles, componentName));
 }
 
 function mapProperties(
-  props: BlizzConfigStyles | undefined,
+  props: Nested<string> | undefined,
   componentName: string,
   parent: string = '',
 ): SidebarProperty[] {

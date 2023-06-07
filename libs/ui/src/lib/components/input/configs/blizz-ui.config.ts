@@ -5,20 +5,45 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
   elements: {
     base: {
       styles: {
-        padding: '0.7rem 2.4rem',
+        padding: '0',
+      },
+    },
+    field: {
+      styles: {
+        padding: '0.5rem 1rem',
+        bgColor: theme('white'),
         border: {
+          width: '1px',
           style: 'solid',
-          radius: 'none',
-          width: '0',
+          color: theme('neutral-300'),
+          radius: '0',
         },
-        lineHeight: '1',
-        color: theme('text'),
-        backgroundColor: theme('primary'),
       },
     },
     label: {
       styles: {
+        position: 'top-left',
         color: theme('text'),
+      },
+    },
+  },
+  states: {
+    hover: {
+      field: {
+        styles: {
+          border: {
+            color: theme('neutral'),
+          },
+        },
+      },
+    },
+    myCustomState: {
+      field: {
+        styles: {
+          border: {
+            color: theme('primary'),
+          },
+        },
       },
     },
   },
@@ -28,6 +53,26 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
         base: {
           styles: {
             padding: '0.3rem 1rem',
+          },
+        },
+      },
+      states: {
+        hover: {
+          field: {
+            styles: {
+              border: {
+                color: theme('black'),
+              },
+            },
+          },
+        },
+        myCustomState: {
+          field: {
+            styles: {
+              border: {
+                color: theme('primary'),
+              },
+            },
           },
         },
       },

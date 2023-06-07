@@ -3,7 +3,7 @@ import { ComponentsHomeView } from './components-home.view';
 import { getTitle } from '../../shared';
 import { ModuleRoutesEnum } from '../../app.routing-data';
 import { BUTTON_ROUTING } from './views/button/button.routing';
-import { CHIPS_ROUTING } from './views/chips/chips.routing';
+import { CHIP_ROUTING } from './views/chip/chip.routing';
 import { TABLE_ROUTING } from './views/table/table.routing';
 import { CHECKBOX_ROUTING } from './views/checkbox/checkbox.routing';
 import { INPUT_ROUTING } from './views/input/input.routing';
@@ -18,7 +18,7 @@ export const COMPONENTS_ROUTING: Route = {
   children: [
     BUTTON_ROUTING,
     CHECKBOX_ROUTING,
-    CHIPS_ROUTING,
+    CHIP_ROUTING,
     INPUT_ROUTING,
     RADIO_ROUTING,
     SELECT_ROUTING,

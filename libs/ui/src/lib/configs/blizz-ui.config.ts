@@ -1,5 +1,5 @@
 import { BlizzConfigComponentsDictionary } from '../models';
-import { CHIPS_BLIZZ_UI_CONFIG } from '../components/chips';
+import { CHIPS_BLIZZ_UI_CONFIG } from '../components/chip';
 import { INPUT_BLIZZ_UI_CONFIG } from '../components/input';
 
 export const BLIZZ_UI_CONFIG: Readonly<BlizzConfigComponentsDictionary> = {

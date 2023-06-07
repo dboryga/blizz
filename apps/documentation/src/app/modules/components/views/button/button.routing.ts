@@ -1,4 +1,4 @@
-import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page.model';
 import { DocButtonOverviewView } from './overview/button-overview.view';
 import { DocButtonApiView } from './api/button-api.view';
 import { DocButtonExamplesView } from './examples/button-examples.view';

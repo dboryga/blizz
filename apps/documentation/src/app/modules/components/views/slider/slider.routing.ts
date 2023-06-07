@@ -1,4 +1,4 @@
-import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page.model';
 import { DocSliderOverviewView } from './overview/slider-overview.view';
 import { DocSliderApiView } from './api/slider-api.view';
 import { DocSliderExamplesView } from './examples/slider-examples.view';

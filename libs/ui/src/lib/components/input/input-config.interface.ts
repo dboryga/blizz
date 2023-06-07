@@ -1,20 +1,38 @@
-import { BlizzConfigComponent, BlizzConfigComponentElementsDictionary, Props } from '../../models';
+import {
+  BlizzConfigComponent,
+  BlizzConfigComponentElementsDictionary,
+  NativeElementState,
+  Props,
+} from '../../models';
+import { InputLabelPosition } from '../../models/props.model';
 
 export interface BlizzConfigInputElements extends BlizzConfigComponentElementsDictionary {
-  base?: {
-    styles?: {
+  base: {
+    styles: {
       padding?: string;
       border?: Props.Border;
-      lineHeight?: string;
-      color?: string;
-      backgroundColor?: string;
     };
   };
-  label?: {
-    styles?: {
+  field: {
+    styles: {
+      bgColor?: string;
+      padding?: string;
+      border?: Props.Border;
+      font?: Props.Font;
+    };
+  };
+  label: {
+    styles: {
+      position?: InputLabelPosition;
+      padding?: string;
       color?: string;
     };
   };
 }
 
-export type BlizzConfigInput = BlizzConfigComponent<BlizzConfigInputElements>;
+export type BlizzConfigInputStates = NativeElementState | 'myCustomState';
+
+export type BlizzConfigInput = BlizzConfigComponent<
+  BlizzConfigInputElements,
+  BlizzConfigInputStates
+>;

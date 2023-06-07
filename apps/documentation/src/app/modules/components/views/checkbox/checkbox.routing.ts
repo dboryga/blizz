@@ -1,4 +1,4 @@
-import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page.model';
 import { DocCheckboxOverviewView } from './overview/checkbox-overview.view';
 import { DocCheckboxApiView } from './api/checkbox-api.view';
 import { DocCheckboxExamplesView } from './examples/checkbox-examples.view';

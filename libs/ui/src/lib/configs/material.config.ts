@@ -1,5 +1,5 @@
 import { BlizzConfigComponentsDictionary } from '../models';
-import { CHIPS_MATERIAL_CONFIG } from '../components/chips';
+import { CHIPS_MATERIAL_CONFIG } from '../components/chip';
 import { INPUT_MATERIAL_CONFIG } from '../components/input';
 
 export const MATERIAL_CONFIG: Readonly<BlizzConfigComponentsDictionary> = {

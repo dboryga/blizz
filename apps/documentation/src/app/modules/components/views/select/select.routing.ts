@@ -1,4 +1,4 @@
-import { ComponentPages, DefaultComponentPage } from '../../models/component-page';
+import { ComponentPages, DefaultComponentPage } from '../../models/component-page.model';
 import { DocSelectOverviewView } from './overview/select-overview.view';
 import { DocSelectApiView } from './api/select-api.view';
 import { DocSelectExamplesView } from './examples/select-examples.view';

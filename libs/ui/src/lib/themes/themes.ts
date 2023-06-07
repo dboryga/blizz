@@ -1,6 +1,6 @@
-import { BlizzPredefinedTheme, BlizzTheme } from '../models';
-import { CRYSTAL_THEME } from './crystal.theme';
+import { BlizzPredefinedTheme, BlizzThemeConfig } from '../models';
+import { BLIZZ_CRYSTAL_THEME } from './crystal.theme';
 
-export const PREDEFINED_THEMES: Record<BlizzPredefinedTheme, BlizzTheme> = {
-  crystal: CRYSTAL_THEME,
+export const PREDEFINED_THEMES: Record<BlizzPredefinedTheme, BlizzThemeConfig> = {
+  crystal: BLIZZ_CRYSTAL_THEME,
 };

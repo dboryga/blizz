@@ -8,8 +8,8 @@ export type CustomizerParams = ValueOf<typeof CUSTOMIZER_PARAMS>;
 
 export const CUSTOMIZER_SETTINGS_GROUPS = {
   Elements: 'elements',
-  // Sizing: 'sizing',
-  // Text: 'text',
+  States: 'sizing',
+  Text: 'text',
   // Colors: 'colors',
   Interactions: 'interactions',
   Animations: 'animations',
