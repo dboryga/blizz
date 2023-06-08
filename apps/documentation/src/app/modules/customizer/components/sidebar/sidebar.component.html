@@ -1,0 +1,16 @@
+<nav class="group-sidenav">
+  <a
+    *ngFor="let link of groupLinks"
+    [routerLink]="link.path"
+    routerLinkActive="active"
+    class="group-link"
+  >
+    <doc-icon>{{ link.icon }}</doc-icon>
+    <span>{{ link.label }}</span>
+  </a>
+  <div class="flex-grow border-r"></div>
+</nav>
+
+<div class="inner-sidenav" >
+  <router-outlet></router-outlet>
+</div>

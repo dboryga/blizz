@@ -1,5 +1,5 @@
 :host {
-  @apply block h-full w-full overflow-y-hidden;
+  @apply flex h-full w-full overflow-y-hidden;
 }
 
 .group-sidenav {
@@ -23,13 +23,13 @@
 
     &.active {
       box-shadow:
-        0 4px 6px -1px rgb(0 0 0 / 0.1),
-        0 2px 4px -2px rgb(0 0 0 / 0.1),
-        0 -1px 3px 0 rgb(0 0 0 / 0.1),
-        0 -1px 2px -1px rgb(0 0 0 / 0.1);
+              0 4px 6px -1px rgb(0 0 0 / 0.1),
+              0 2px 4px -2px rgb(0 0 0 / 0.1),
+              0 -1px 3px 0 rgb(0 0 0 / 0.1),
+              0 -1px 2px -1px rgb(0 0 0 / 0.1);
 
       @apply
-        border-transparent;
+      border-transparent;
     }
 
     doc-icon {
@@ -46,8 +46,4 @@
   @apply
     flex flex-col w-96 h-full p-5
     bg-white border-r;
-
-  .config {
-    @apply bg-gray-100 p-4 relative;
-  }
 }

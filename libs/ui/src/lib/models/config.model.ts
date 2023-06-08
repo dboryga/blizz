@@ -38,9 +38,9 @@ export interface BlizzConfigComponent<
   variations: Dictionary<Omit<DeepPartial<BlizzConfigComponent<_Elements, _States>>, 'variations'>>;
 }
 
-export interface BlizzConfigComponentsDictionary extends Dictionary<BlizzConfigComponent> {
+export type BlizzConfigComponentsDictionary = {
   chip: BlizzConfigChip;
   input: BlizzConfigInput;
-}
+};
 
 export type ComponentKey = keyof BlizzConfigComponentsDictionary;

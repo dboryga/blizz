@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DocCustomizerEditorView } from './components/editor/editor.view';
-import { ActivatedRoute } from '@angular/router';
-import { CUSTOMIZER_PARAMS } from './customizer.routing-data';
-import { BlizzChipComponent, BlizzInputComponent, ComponentKey } from '@blizz/ui';
+import { DocCustomizerPreviewComponent } from './components/preview/preview.component';
+import { BlizzChipComponent, BlizzInputComponent } from '@blizz/ui';
+import { DocCustomizerService } from './customizer.service';
+import { DocCustomizerSidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
   selector: 'doc-customizer',
@@ -11,12 +11,15 @@ import { BlizzChipComponent, BlizzInputComponent, ComponentKey } from '@blizz/ui
   styleUrls: ['./customizer.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, DocCustomizerEditorView, BlizzChipComponent, BlizzInputComponent],
+  imports: [
+    CommonModule,
+    BlizzChipComponent,
+    BlizzInputComponent,
+    DocCustomizerSidebarComponent,
+    DocCustomizerPreviewComponent,
+  ],
+  providers: [DocCustomizerService],
 })
 export class DocCustomizerView {
-  get componentName() {
-    return this.route.snapshot.paramMap.get(CUSTOMIZER_PARAMS.Component) as ComponentKey;
-  }
-
-  constructor(protected readonly route: ActivatedRoute) {}
+  constructor(protected readonly service: DocCustomizerService) {}
 }

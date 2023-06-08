@@ -1,18 +1,17 @@
 import { ValueOf } from 'ts-essentials';
 
-export const CUSTOMIZER_PARAMS = {
+export const CUSTOMIZER_PARAM = {
   Component: 'component',
-  SettingsGroup: 'settingsGroup',
 } as const;
-export type CustomizerParams = ValueOf<typeof CUSTOMIZER_PARAMS>;
+export type CustomizerParam = ValueOf<typeof CUSTOMIZER_PARAM>;
 
-export const CUSTOMIZER_SETTINGS_GROUPS = {
+export const CUSTOMIZER_SETTINGS_GROUP = {
   Elements: 'elements',
-  States: 'sizing',
-  Text: 'text',
-  // Colors: 'colors',
+  States: 'states',
+  Variations: 'variations',
   Interactions: 'interactions',
   Animations: 'animations',
+  Snippet: 'snippet',
   Config: 'config',
 } as const;
-export type CustomizerSettingsGroups = ValueOf<typeof CUSTOMIZER_SETTINGS_GROUPS>;
+export type CustomizerSettingsGroup = ValueOf<typeof CUSTOMIZER_SETTINGS_GROUP>;

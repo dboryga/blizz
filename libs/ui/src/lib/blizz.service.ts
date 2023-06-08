@@ -15,7 +15,7 @@ import { DeepPartial, Dictionary, SafeDictionary } from 'ts-essentials';
 import { map, mapKeys, mapValues, merge } from 'lodash';
 
 function joinProperties<_Value>(
-  obj: Dictionary<_Value>,
+  obj: Record<string, _Value>,
   transformer: (key: keyof typeof obj, value: _Value) => string,
 ) {
   return Object.entries(obj)

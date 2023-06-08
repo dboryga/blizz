@@ -1,0 +1,7 @@
+<div class="border-b mt-4" *ngFor="let element of service.sidebarData | keyvalue">
+  <h5 class="font-bold">{{ element.key }}</h5>
+  <div class="mb-4" *ngFor="let prop of element.value ">
+    {{ prop.displayName }}
+    {{ prop.value }}
+  </div>
+</div>

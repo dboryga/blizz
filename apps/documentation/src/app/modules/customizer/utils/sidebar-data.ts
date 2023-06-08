@@ -31,7 +31,9 @@ export function createSidebarData(
   //
   // return data as SidebarData;
 
-  return mapValues(componentConfig.elements, (props) => mapProperties(props?.styles, componentName));
+  return mapValues(componentConfig.elements, (props) =>
+    mapProperties(props?.styles, componentName),
+  );
 }
 
 function mapProperties(
