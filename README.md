@@ -2,7 +2,8 @@
 
 # Blizz
 
-evelopment In Progress
+Angular UI library with design-program like Customizer.
+Stay tuned, development In Progress...
 
 
 # Nx
