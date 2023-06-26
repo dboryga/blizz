@@ -1,15 +1,18 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlizzConfig } from './models';
-import { BLIZZ_CONFIG, setupConfig } from './config';
-import { BlizzService } from './blizz.service';
+import { BLIZZ_CONFIG, BLIZZ_SERVICE_OPTIONS, setupConfig } from './config';
+import { BlizzService, BlizzServiceOptions } from './blizz.service';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
 })
 export class BlizzModule {
-  static forRoot(config?: BlizzConfig): ModuleWithProviders<BlizzModule> {
+  static forRoot(
+    config?: BlizzConfig,
+    options?: BlizzServiceOptions,
+  ): ModuleWithProviders<BlizzModule> {
     return {
       ngModule: BlizzModule,
       providers: [
@@ -18,11 +21,15 @@ export class BlizzModule {
           provide: BLIZZ_CONFIG,
           useValue: setupConfig(config),
         },
+        {
+          provide: BLIZZ_SERVICE_OPTIONS,
+          useValue: options,
+        },
       ],
     };
   }
 
   constructor(blizzService: BlizzService) {
-    blizzService.createGlobalCss();
+    blizzService.initiateBlizz();
   }
 }

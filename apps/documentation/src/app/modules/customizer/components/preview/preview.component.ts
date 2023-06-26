@@ -1,8 +1,17 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ElementRef,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { slideSidenavAnimation } from '../../animations/slide-sidenav.animation';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocCustomizerService } from '../../customizer.service';
+import { DocIconComponent } from '../../../../shared';
+import { BlizzComponent } from '@blizz/ui';
+import { camelToTitleCase } from '@blizz/core';
 
 @UntilDestroy()
 @Component({
@@ -11,11 +20,27 @@ import { DocCustomizerService } from '../../customizer.service';
   styleUrls: ['./preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule],
-  animations: [slideSidenavAnimation],
+  imports: [CommonModule, DocIconComponent],
 })
-export class DocCustomizerPreviewComponent {
-  @ViewChild('preview', { static: true }) protected previewElement!: ElementRef<HTMLDivElement>;
+export class DocCustomizerPreviewComponent implements OnInit {
+  readonly camelToTitleCase = camelToTitleCase;
 
-  constructor(protected readonly service: DocCustomizerService) {}
+  @ContentChild('previewElement') set componentRef(v: BlizzComponent) {
+    this.service.previewComponent = v;
+  }
+
+  @ContentChild('previewElement', { read: ElementRef }) set elementRef(v: ElementRef) {
+    this.service.previewElement = v.nativeElement;
+  }
+
+  constructor(
+    protected readonly service: DocCustomizerService,
+    protected readonly changeDetector: ChangeDetectorRef,
+  ) {}
+
+  ngOnInit() {
+    this.service.detectChanges$
+      .pipe(untilDestroyed(this))
+      .subscribe(() => this.changeDetector.detectChanges());
+  }
 }

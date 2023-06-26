@@ -3,14 +3,18 @@
 <doc-customizer-sidebar></doc-customizer-sidebar>
 
 <ng-container [ngSwitch]="service.componentKey">
-  <doc-customizer-preview *ngSwitchCase="'chips'">
-    <bzz-chip>Test</bzz-chip>
+  <doc-customizer-preview *ngSwitchCase="'chip'">
+    <bzz-chip #previewElement class="doc-customizer-preview" [disabled]="service.stateKey === 'disabled'">
+      <doc-icon bzzPrefix>add_reaction</doc-icon>
+      Text
+    </bzz-chip>
   </doc-customizer-preview>
 
+
   <doc-customizer-preview *ngSwitchCase="'input'">
-    <bzz-input labelPosition="floating">
+    <bzz-input #previewElement class="doc-customizer-preview">
       <label for="text-input">Label</label>
-      <input id="text-input" type="text" />
+      <input id="text-input" type="text" placeholder="Placeholder" />
     </bzz-input>
   </doc-customizer-preview>
 </ng-container>

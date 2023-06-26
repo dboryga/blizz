@@ -1,5 +1,5 @@
 :host {
-  @apply flex h-full w-full overflow-y-hidden;
+  @apply flex h-full overflow-y-hidden flex-shrink-0;
 }
 
 .group-sidenav {
@@ -44,6 +44,6 @@
 
 .inner-sidenav {
   @apply
-    flex flex-col w-96 h-full p-5
+    flex flex-col w-[26rem] h-full pr-0
     bg-white border-r;
 }

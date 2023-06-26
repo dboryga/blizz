@@ -1,3 +1,9 @@
 :host {
   display: block;
 }
+
+.add-variation-button {
+  @apply flex;
+
+  color: var(--bzz-theme-primary);
+}

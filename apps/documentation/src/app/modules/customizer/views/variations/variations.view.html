@@ -1,1 +1,114 @@
-Feature under construction.
+<ng-container *ngIf="service.sidebarData?.variations as variations">
+  <ng-container *ngIf="variations.length">
+    <div
+      *ngFor="let variation of variations"
+      class="py-1 px-5 border-b"
+      [class.bg-gray-50]="expandable.expanded"
+    >
+      <doc-expansion-toggle
+        [expandableRef]="expandable"
+        [single]="true"
+        [closable]="false"
+        (arrowClick)="variationArrowClick(expandable, $event)"
+      >
+        <input
+          name="variation-name"
+          class="invisible-input text-base grow mr-1 ml-[-0.25rem]"
+          [class.cursor-pointer]="expandable.collapsed"
+          [disabled]="expandable.collapsed"
+          [(ngModel)]="variation.key"
+          (ngModelChange)="renameVariation$.next({ key: variation.key, newKey: $event })"
+        />
+        <button
+          title="remove variation"
+          class="btn-icon"
+          (click)="removeVariation(variation.key); $event.stopPropagation()"
+        >
+          <doc-icon>remove</doc-icon>
+        </button>
+      </doc-expansion-toggle>
+
+      <div
+        bzzExpandable
+        bzzExpandableGroup="doc-customizer-variation"
+        #expandable="bzzExpandable"
+        [bzzExpandableExpanded]="service.variationKey === variation.key"
+        (bzzExpandableExpanded)="selectVariation(variation.key)"
+        (bzzExpandableCollapsed)="statesInitiallyExpanded = false"
+        class="pl-4"
+      >
+        <div>
+          <doc-expansion-toggle
+            [expandableRef]="variationElementsExpandable"
+            [label]="'Elements'"
+            [compact]="true"
+          ></doc-expansion-toggle>
+
+          <div
+            bzzExpandable
+            [bzzExpandableExpanded]="true"
+            #variationElementsExpandable="bzzExpandable"
+            class="pl-4"
+          >
+            <doc-customizer-elements-controls
+              [elements]="variation.elements"
+              [nested]="true"
+            ></doc-customizer-elements-controls>
+          </div>
+        </div>
+
+
+        <div>
+          <doc-expansion-toggle
+            [expandableRef]="variationStatesExpandable"
+            [label]="'States'"
+            [compact]="true"
+          ></doc-expansion-toggle>
+
+          <div
+            bzzExpandable
+            #variationStatesExpandable="bzzExpandable"
+            [bzzExpandableExpanded]="statesInitiallyExpanded"
+          >
+            <div *ngFor="let state of variation.states" class="pl-4">
+              <doc-expansion-toggle
+                [expandableRef]="stateExpandable"
+                [label]="state.key"
+                [single]="true"
+                [compact]="true"
+                (toggleClick)="stateExpandable.collapsed && router.navigate(['./', service.variationKey], { relativeTo: this.route })"
+              ></doc-expansion-toggle>
+
+              <div
+                bzzExpandable
+                [bzzExpandableGroup]="'doc-customizer-variation-' + variation.key + '-state'"
+                #stateExpandable="bzzExpandable"
+                [bzzExpandableExpanded]="service.stateKey === state.key"
+                (bzzExpandableExpanded)="selectState(state.key)"
+                class="pl-4"
+              >
+                <doc-customizer-elements-controls
+                  [elements]="state.elements"
+                  [nested]="true"
+                ></doc-customizer-elements-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<bzz-input variation="hero" class="px-5 mt-6">
+  <doc-icon bzzPrefix class="text-primary">add</doc-icon>
+  <input
+    #newVariationInput
+    id="doc-customizer-add-new-variation-input"
+    placeholder="New variation"
+    name="Add new variation"
+    (blur)="addVariation(newVariationInput)"
+    (keydown.enter)="addVariation(newVariationInput)"
+  />
+</bzz-input>
+

@@ -41,7 +41,8 @@
         "comma-dangle": ["warn", "always-multiline"],
         "change-detection-strategy/on-push": "error",
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/member-ordering": "off"
       }
     },
     {

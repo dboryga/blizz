@@ -1,13 +1,39 @@
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
 bzz-chip {
-  display: inline-block;
-  line-height: var(--bzz-chips_line-height);
-  padding: var(--bzz-chips_padding);
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
 
-  border-style: var(--bzz-chips_border-style);
-  border-width: var(--bzz-chips_border-width);
-  border-radius: var(--bzz-chips_border-radius);
-  border-color: var(--bzz-theme_primary);
+  @include props.cursor;
+  @include props.bgColor;
+  @include props.spacing;
+  @include props.width;
+  @include props.text;
+  @include props.border;
+  @include props.transform;
+  @include transitions.transition;
 
-  color: var(--bzz-theme_white);
-  background-color: var(--bzz-theme_primary);
+  [bzzPrefix] {
+    @include props.spacing('prefix_');
+    @include props.transform('prefix_');
+  }
+
+  [bzzSuffix] {
+    @include props.spacing('suffix_');
+    @include props.transform('suffix_');
+  }
+
+  &.--optimized-border {
+    @include props.optimizedBorder;
+  }
+
+  &[state-disabled=true] {
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    outline-offset: 4px;
+  }
 }

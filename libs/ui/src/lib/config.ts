@@ -1,6 +1,6 @@
 import {
-  BLIZZ_PREDEFINED_CONFIG,
-  BLIZZ_PREDEFINED_THEME,
+  BlizzPredefinedConfig,
+  BlizzPredefinedTheme,
   BlizzConfig,
   BlizzConfigComponent,
   BlizzConfigValue,
@@ -11,10 +11,11 @@ import { PREDEFINED_CONFIGS } from './configs';
 import { PREDEFINED_THEMES } from './themes/themes';
 import * as _ from 'lodash';
 import { merge, omit } from 'lodash';
+import { BlizzServiceOptions } from './blizz.service';
 
 export const DEFAULT_BLIZZ_CONFIG: Readonly<BlizzConfig> = {
-  base: BLIZZ_PREDEFINED_CONFIG.Blizz,
-  theme: BLIZZ_PREDEFINED_THEME.Crystal,
+  base: BlizzPredefinedConfig.Blizz,
+  theme: BlizzPredefinedTheme.Crystal,
 };
 
 export const setupConfig = (config?: BlizzConfig): BlizzConfigValue => {
@@ -38,6 +39,14 @@ export const BLIZZ_CONFIG = new InjectionToken<Readonly<BlizzConfigValue>>('bliz
   factory: () => setupConfig(),
 });
 
+export const BLIZZ_SERVICE_OPTIONS = new InjectionToken<Readonly<BlizzServiceOptions>>(
+  'blizz-service-options',
+  {
+    providedIn: 'root',
+    factory: () => ({}),
+  },
+);
+
 export const injectThemeConfig = () => {
   const config = inject(BLIZZ_CONFIG);
   return config?.theme;
@@ -53,7 +62,7 @@ export const getVariationConfig = <
   _Config extends ReturnType<typeof injectComponentConfig<_Key>>,
 >(
   config: _Config,
-  variationName: keyof typeof config.variations | null,
+  variationName?: keyof typeof config.variations | null,
 ): Omit<_Config, 'variations'> => {
   const baseConfig = omit(config, <keyof BlizzConfigComponent>'variations') as Omit<
     typeof config,

@@ -2,7 +2,7 @@
   <nav class="w-full h-full flex items-center px-8">
 
     <a class="h-full py-4 pr-2" routerLink="/">
-      <embed class="h-full" src="/assets/svg/logo-text.svg" />
+      <embed class="h-full" src="/assets/svg/logo-text.svg" tabIndex="-1" />
     </a>
 
     <div class="stack-container items-center">
@@ -11,15 +11,18 @@
         class="h-full"
         @fadeInOut
       >
+        <a routerLink="/installation" routerLinkActive #installationRla="routerLinkActive">
+          <doc-tab [active]="installationRla.isActive">Installation</doc-tab>
+        </a>
         <a routerLink="/components" routerLinkActive #componentsRla="routerLinkActive">
           <doc-tab [active]="componentsRla.isActive">Components</doc-tab>
         </a>
-        <a routerLink="/cdk" routerLinkActive #cdkRla="routerLinkActive">
-          <doc-tab [active]="cdkRla.isActive">CDK</doc-tab>
-        </a>
-        <a routerLink="/animations" routerLinkActive #animationsRla="routerLinkActive">
-          <doc-tab [active]="animationsRla.isActive">Animations</doc-tab>
-        </a>
+<!--        <a routerLink="/cdk" routerLinkActive #cdkRla="routerLinkActive">-->
+<!--          <doc-tab [active]="cdkRla.isActive">CDK</doc-tab>-->
+<!--        </a>-->
+<!--        <a routerLink="/animations" routerLinkActive #animationsRla="routerLinkActive">-->
+<!--          <doc-tab [active]="animationsRla.isActive">Animations</doc-tab>-->
+<!--        </a>-->
       </div>
 
       <ng-template #customizerMenu>

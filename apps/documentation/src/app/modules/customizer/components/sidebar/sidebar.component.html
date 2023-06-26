@@ -11,6 +11,8 @@
   <div class="flex-grow border-r"></div>
 </nav>
 
-<div class="inner-sidenav" >
-  <router-outlet></router-outlet>
+<div class="inner-sidenav scrollable-y scrollbar-sm scrollbar-static">
+  <div class="stack-container" [@routerFade]="outlet.activatedRouteData">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 </div>

@@ -1,0 +1,13 @@
+<div *ngIf="service?.config" class="flex items-end gap-2">
+  <bzz-input class="w-full">
+    <label>Base Config</label>
+    <input
+      #input
+      [value]="service.config.base"
+      (change)="service.changeBase(input.value)"
+    />
+  </bzz-input>
+  <button class="btn-icon btn-icon--small" title="Reset config" (click)="service.resetConfig()">
+    <doc-icon>settings_backup_restore</doc-icon>
+  </button>
+</div>

@@ -1,0 +1,54 @@
+<ng-container *ngIf="elements">
+  <div
+    *ngFor="let element of elements | keyvalue"
+    class="border-b"
+    [class.py-1]="!nested"
+    [class.px-5]="!nested"
+    [class.last:border-none]="nested"
+  >
+    <div
+      [bzzExpandableToggle]="expandable"
+      class="btn-expansion-toggle"
+    >
+      <span [ngClass]="nested ? 'text-sm' : 'text-base'">{{ camelToTitleCase(element.key) }}</span>
+      <button
+        class="btn-icon arrow"
+        [title]="expandable.expanded ? 'collapse' : 'expand'"
+      >
+        <doc-icon>expand_more</doc-icon>
+      </button>
+    </div>
+
+    <div bzzExpandable #expandable="bzzExpandable" class="pt-2" [class.py-4]="!nested">
+      <div class="mb-4" *ngFor="let prop of element.value">
+        <ng-container *ngIf="prop.children; else value">
+          <fieldset class="border p-4 flex flex-col gap-4">
+            <legend class="px-2 mx-[-0.5rem]">{{ prop.displayName }}</legend>
+
+            <ng-container *ngFor="let nested of prop.children">
+              <bzz-input class="w-full" [labelFloatingAlways]="true">
+                <label>{{ nested.displayName }}</label>
+                <input
+                  [(ngModel)]="nested.value"
+                  [placeholder]="nested.inheritedValue?.() ?? ''"
+                  (ngModelChange)="updateProperty(nested, $event)"
+                />
+              </bzz-input>
+            </ng-container>
+
+          </fieldset>
+        </ng-container>
+        <ng-template #value>
+          <bzz-input class="w-full" [labelFloatingAlways]="true">
+            <label>{{ prop.displayName }}</label>
+            <input
+              [(ngModel)]="prop.value"
+              [placeholder]="prop.inheritedValue?.() ?? ''"
+              (ngModelChange)="updateProperty(prop, $event)"
+            />
+          </bzz-input>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</ng-container>

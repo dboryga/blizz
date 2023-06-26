@@ -1,17 +1,17 @@
 import { Nested } from '@blizz/core';
 import { Dictionary, PickProperties, StrictOmit, ValueOf } from 'ts-essentials';
 
-export const BLIZZ_PREDEFINED_THEME = {
+export const BlizzPredefinedTheme = {
   Crystal: 'crystal',
 } as const;
-export type BlizzPredefinedTheme = ValueOf<typeof BLIZZ_PREDEFINED_THEME>;
+export type BlizzPredefinedTheme = ValueOf<typeof BlizzPredefinedTheme>;
 
 export type BlizzConfigTheme = BlizzTheme & {
   base: BlizzPredefinedTheme;
 };
 
-export const BLIZZ_COLOR_SHADE_KEYS = [100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
-export type BlizzColorShadeKey = ValueOf<typeof BLIZZ_COLOR_SHADE_KEYS>;
+export const BlizzColorShadeKey = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
+export type BlizzColorShadeKey = ValueOf<typeof BlizzColorShadeKey>;
 export interface BlizzColorShade extends Dictionary<string, BlizzColorShadeKey> {
   default?: BlizzColorShadeKey;
 }

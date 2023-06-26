@@ -14,7 +14,10 @@ if (environment.production) {
 
 bootstrapApplication(DocAppComponent, {
   providers: [
-    importProvidersFrom(RouterModule.forRoot(APP_ROUTING), BlizzModule.forRoot(blizzConfig)),
+    importProvidersFrom(
+      RouterModule.forRoot(APP_ROUTING),
+      BlizzModule.forRoot(blizzConfig, { selectorSuffix: ':not(.doc-customizer-preview)' }),
+    ),
     provideAnimations(),
   ],
 }).catch((err) => console.error(err));

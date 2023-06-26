@@ -4,6 +4,7 @@ import { DocCustomizerPreviewComponent } from './components/preview/preview.comp
 import { BlizzChipComponent, BlizzInputComponent } from '@blizz/ui';
 import { DocCustomizerService } from './customizer.service';
 import { DocCustomizerSidebarComponent } from './components/sidebar/sidebar.component';
+import { DocIconComponent } from '../../shared';
 
 @Component({
   selector: 'doc-customizer',
@@ -17,6 +18,7 @@ import { DocCustomizerSidebarComponent } from './components/sidebar/sidebar.comp
     BlizzInputComponent,
     DocCustomizerSidebarComponent,
     DocCustomizerPreviewComponent,
+    DocIconComponent,
   ],
   providers: [DocCustomizerService],
 })

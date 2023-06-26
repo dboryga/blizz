@@ -26,7 +26,8 @@ $scrollbar-width-sm: 0.25rem;
     }
   }
 
-  &:hover {
+  &:hover,
+  &.scrollbar-static {
     &::-webkit-scrollbar-track {
       @apply bg-slate-100;
     }

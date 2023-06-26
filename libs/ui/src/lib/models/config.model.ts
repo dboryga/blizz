@@ -15,11 +15,11 @@ export interface BlizzConfigValue {
   components: BlizzConfigComponentsDictionary;
 }
 
-export const BLIZZ_PREDEFINED_CONFIG = {
+export const BlizzPredefinedConfig = {
   Blizz: 'blizz',
   Material: 'material',
 } as const;
-export type BlizzPredefinedConfig = ValueOf<typeof BLIZZ_PREDEFINED_CONFIG>;
+export type BlizzPredefinedConfig = ValueOf<typeof BlizzPredefinedConfig>;
 
 export interface BlizzConfigComponentElement<_Styles extends Nested<string> = Nested<string>> {
   styles: _Styles;

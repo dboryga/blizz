@@ -1,1 +1,30 @@
-Feature under construction.
+<ng-container *ngIf="service.sidebarData?.states as states">
+  <ng-container *ngIf="states.length">
+    <div
+      *ngFor="let state of states"
+      class="py-1 px-5 border-b"
+      [class.bg-gray-50]="expandable.expanded"
+    >
+      <doc-expansion-toggle
+        [expandableRef]="expandable"
+        [label]="camelToTitleCase(state.key)"
+        [single]="true"
+        (toggleClick)="expandable.collapsed && router.navigate(['./'], { relativeTo: this.route })"
+      ></doc-expansion-toggle>
+
+      <div
+        bzzExpandable
+        bzzExpandableGroup="doc-customizer-state"
+        #expandable="bzzExpandable"
+        [bzzExpandableExpanded]="service.stateKey === state.key"
+        (bzzExpandableExpanded)="selectState(state.key)"
+        class="pl-4"
+      >
+        <doc-customizer-elements-controls
+          [elements]="state.elements"
+          [nested]="true"
+        ></doc-customizer-elements-controls>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

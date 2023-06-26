@@ -1,4 +1,4 @@
-import { CUSTOMIZER_SETTINGS_GROUP } from '../../customizer.routing-data';
+import { CustomizerSettingsGroup } from '../../customizer.routing-data';
 
 export interface GroupSidebarLink {
   path: string;
@@ -8,37 +8,42 @@ export interface GroupSidebarLink {
 
 export const GroupSidebarLinksData: GroupSidebarLink[] = [
   {
-    path: CUSTOMIZER_SETTINGS_GROUP.Elements,
+    path: CustomizerSettingsGroup.General,
+    icon: 'category',
+    label: 'General',
+  },
+  {
+    path: CustomizerSettingsGroup.Elements,
     icon: 'extension',
     label: 'Elements',
   },
   {
-    path: CUSTOMIZER_SETTINGS_GROUP.States,
+    path: CustomizerSettingsGroup.States,
     icon: 'family_history',
     label: 'States',
   },
   {
-    path: CUSTOMIZER_SETTINGS_GROUP.Variations,
+    path: CustomizerSettingsGroup.Variations,
     icon: 'shapes',
     label: 'Variations',
   },
+  // {
+  //   path: CustomizerSettingsGroup.Interactions,
+  //   icon: 'touch_app',
+  //   label: 'Interactions',
+  // },
+  // {
+  //   path: CustomizerSettingsGroup.Animations,
+  //   icon: 'animation',
+  //   label: 'Animations',
+  // },
   {
-    path: CUSTOMIZER_SETTINGS_GROUP.Interactions,
-    icon: 'touch_app',
-    label: 'Interactions',
-  },
-  {
-    path: CUSTOMIZER_SETTINGS_GROUP.Animations,
-    icon: 'animation',
-    label: 'Animations',
-  },
-  {
-    path: CUSTOMIZER_SETTINGS_GROUP.Snippet,
+    path: CustomizerSettingsGroup.Snippet,
     icon: 'code',
     label: 'Snippet',
   },
   {
-    path: CUSTOMIZER_SETTINGS_GROUP.Config,
+    path: CustomizerSettingsGroup.Config,
     icon: 'data_object',
     label: 'Get config',
   },

@@ -1,0 +1,26 @@
+<div
+  [bzzExpandableToggle]="expandableRef"
+  [bzzExpandableExpandSingle]="single"
+  [bzzExpandableClosable]="closable"
+  (click)="toggleClick.emit($event)"
+  class="btn-expansion-toggle"
+>
+  <span
+    *ngIf="label"
+    class="text-base mr-1"
+    [class.text-sm]="compact"
+    [class.font-bold]="compact"
+  >
+    {{ label }}
+  </span>
+
+  <ng-content></ng-content>
+
+  <button
+    class="btn-icon arrow"
+    [title]="expandableRef.expanded ? 'collapse' : 'expand'"
+    (click)="arrowClick.emit($event)"
+  >
+    <doc-icon>expand_more</doc-icon>
+  </button>
+</div>

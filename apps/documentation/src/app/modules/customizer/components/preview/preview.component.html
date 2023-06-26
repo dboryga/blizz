@@ -1,5 +1,21 @@
-<output class="grow h-full bg-gray-100">
-  <div #preview class="h-full grid place-items-center">
-    <ng-content></ng-content>
+<main
+  [id]="service.previewId"
+  class="relative h-full grid place-items-center p-10"
+>
+  <div class="absolute left-4 top-2">
+    <div class="flex items-center" *ngIf="service.variationKey as variationKey">
+      <span>Variation: <b>{{variationKey}}</b></span>
+      <button class="btn-icon" (click)="service.variationVisible = !service.variationVisible">
+        <doc-icon class="text-xl">{{ service.variationVisible ? 'visibility' : 'visibility_off' }}</doc-icon>
+      </button>
+    </div>
+    <div class="flex items-center" *ngIf="service.stateKey as stateKey">
+      <span>State: <b>{{camelToTitleCase(stateKey)}}</b></span>
+      <button class="btn-icon" (click)="service.stateVisible = !service.stateVisible">
+        <doc-icon class="text-xl">{{ service.stateVisible ? 'visibility' : 'visibility_off' }}</doc-icon>
+      </button>
+    </div>
   </div>
-</output>
+
+  <ng-content></ng-content>
+</main>

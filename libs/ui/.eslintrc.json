@@ -9,7 +9,6 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@typescript-eslint/no-non-null-assertion": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -25,7 +24,10 @@
             "prefix": "bzz",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@angular-eslint/no-input-rename": "off",
+        "@typescript-eslint/member-ordering": "off"
       }
     },
     {

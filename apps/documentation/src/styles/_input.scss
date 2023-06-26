@@ -1,0 +1,9 @@
+.invisible-input {
+  @apply p-1 rounded-none outline-0 bg-transparent;
+
+  &:focus {
+    @apply p-1 rounded-none;
+
+    box-shadow: 0 0 0 1px var(--bzz-theme_primary);
+  }
+}
