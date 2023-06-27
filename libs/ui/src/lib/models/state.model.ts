@@ -1,21 +1,27 @@
 import { ValueOf } from 'ts-essentials';
 
 export const NativeElementState = {
-  Focus: 'focus',
   Hover: 'hover',
+  Focus: 'focus',
+  FocusVisible: 'focus-visible',
+  FocusWithin: 'focus-within',
 } as const;
 export type NativeElementState = ValueOf<typeof NativeElementState>;
 
-export const NativeInputState = {
+export const NativeButtonState = {
   ...NativeElementState,
   Disabled: 'disabled',
+} as const;
+export type NativeButtonState = ValueOf<typeof NativeButtonState>;
+
+export const NativeInputState = {
+  ...NativeButtonState,
   Invalid: 'invalid',
   Required: 'required',
 } as const;
 export type NativeInputState = ValueOf<typeof NativeInputState>;
 
 export const NativeCheckboxState = {
-  ...NativeElementState,
   ...NativeInputState,
   Checked: 'checked',
 } as const;
@@ -30,6 +36,7 @@ export type NativeLinkState = ValueOf<typeof NativeLinkState>;
 
 export const AnyNativeState = {
   ...NativeElementState,
+  ...NativeButtonState,
   ...NativeInputState,
   ...NativeCheckboxState,
   ...NativeLinkState,

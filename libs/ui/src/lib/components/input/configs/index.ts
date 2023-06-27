@@ -1,2 +1,2 @@
-export * from './blizz-ui.config';
-export * from './material.config';
+export * from './input-blizz-ui.config';
+export * from './input-material.config';

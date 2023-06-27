@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-slider-examples',
   templateUrl: './slider-examples.view.html',
   styleUrls: ['./slider-examples.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

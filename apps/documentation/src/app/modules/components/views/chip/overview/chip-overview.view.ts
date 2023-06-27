@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-overview',
   templateUrl: './chip-overview.view.html',
   styleUrls: ['./chip-overview.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

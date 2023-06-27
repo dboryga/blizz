@@ -4,11 +4,13 @@ import { DOCUMENT } from '@angular/common';
 import { flattenObject } from './utils';
 import {
   AnyNativeState,
+  BLIZZ_HOST_ELEMENT_KEY,
   BlizzColorShade,
   BlizzColorShadeKey,
   BlizzConfigComponent,
   BlizzConfigComponentsDictionary,
   BlizzTheme,
+  ComponentKey,
 } from './models';
 import { camelToKebabCase } from '@blizz/core';
 import { DeepPartial, Dictionary, SafeDictionary } from 'ts-essentials';
@@ -32,6 +34,8 @@ function joinProperties<_Value>(
     .join('\n');
 }
 
+const attributeSelectors: ComponentKey[] = ['button'];
+
 @Injectable()
 export class BlizzService {
   readonly config = inject(BLIZZ_CONFIG);
@@ -43,11 +47,11 @@ export class BlizzService {
     return joinProperties(obj, (key, value) => `\t${camelToKebabCase(key)}: ${value};`);
   }
 
-  static getCssVariables<_Config>(config: _Config, prefix: string = '--') {
+  static getCssVariables<_Config>(config: _Config, prefix = '') {
     if (!config) return '';
     return BlizzService.getCssString(flattenObject(config, '-', prefix));
   }
-  static getCssRule<_Props>(selector: string, props?: _Props, propsPrefix: string = '--') {
+  static getCssRule<_Props>(selector: string, props?: _Props, propsPrefix = '') {
     if (!props) return '';
     return `${selector} {\n${BlizzService.getCssVariables(props, propsPrefix)}\n}\n`;
   }
@@ -81,14 +85,18 @@ export class BlizzService {
   }
 
   static getComponentCssRules(
-    name: string,
+    key: ComponentKey,
     config: BlizzConfigComponent,
     opts?: BlizzServiceOptions,
   ): string {
-    const selector = `bzz-${name}`;
-    const base = BlizzService.getComponentElementsCssRules(selector, config.elements, opts);
-    const states = BlizzService.getComponentStatesCssRules(selector, config.states, opts);
+    const componentSelector = `bzz-${key}`;
+    const selector = attributeSelectors.includes(key)
+      ? `[${componentSelector}]`
+      : componentSelector;
+    const base = BlizzService.getComponentElementsCssRules(key, selector, config.elements, opts);
+    const states = BlizzService.getComponentStatesCssRules(key, selector, config.states, opts);
     const variations = BlizzService.getComponentVariationsCssRules(
+      key,
       selector,
       config.variations,
       opts,
@@ -98,13 +106,14 @@ export class BlizzService {
   }
 
   static getComponentElementsCssRules(
+    componentKey: ComponentKey,
     selector: string,
     elements: DeepPartial<BlizzConfigComponent['elements']> | undefined,
     opts?: BlizzServiceOptions,
   ) {
     if (!elements) return '';
 
-    const propsWithElementPrefix = BlizzService.getComponentPropsWithElementPrefix(elements);
+    const propsWithElementPrefix = BlizzService.getComponentPropsWithPrefix(componentKey, elements);
 
     return BlizzService.getCssRule(
       `${ancestor(opts)} ${prefix(opts)}${selector}${suffix(opts)}`.trim(),
@@ -112,20 +121,30 @@ export class BlizzService {
     );
   }
 
-  static getComponentPropsWithElementPrefix(
+  static getComponentPropsWithPrefix(
+    componentKey: ComponentKey,
     elements: DeepPartial<BlizzConfigComponent['elements']> | undefined,
   ) {
     return merge(
       {},
-      ...map(elements, (props, element) =>
-        element === 'base'
-          ? props!.styles!
-          : mapKeys(props!.styles!, (value, prop) => `${element}_${prop}`),
+      ...map(elements, (props, elementKey) =>
+        mapKeys(props!.styles!, (value, propKey) =>
+          BlizzService.getCssVariable(componentKey, elementKey, propKey),
+        ),
       ),
     );
   }
 
+  static getCssVariable(componentKey: ComponentKey, elementKey = '', propertyKey = '') {
+    if (elementKey === BLIZZ_HOST_ELEMENT_KEY) elementKey = '';
+    const component = componentKey ? `--bzz-${componentKey}` : '';
+    const element = elementKey ? `-${elementKey}` : '';
+    const property = propertyKey ? `_${propertyKey}` : '';
+    return `${component}${element}${property}`;
+  }
+
   static getComponentStatesCssRules(
+    componentKey: ComponentKey,
     selector: string,
     states: BlizzConfigComponent['states'] | undefined,
     opts?: BlizzServiceOptions,
@@ -133,6 +152,7 @@ export class BlizzService {
     if (!states) return '';
     return joinProperties(states, (state, elements) => {
       return BlizzService.getComponentElementsCssRules(
+        componentKey,
         BlizzService.getStateSelector(selector, state, opts),
         elements,
         opts,
@@ -157,6 +177,7 @@ export class BlizzService {
   }
 
   static getComponentVariationsCssRules(
+    componentKey: ComponentKey,
     selector: string,
     variations: BlizzConfigComponent['variations'] | undefined,
     opts?: BlizzServiceOptions,
@@ -165,8 +186,18 @@ export class BlizzService {
     return joinProperties(variations, (variation, config) => {
       if (!config) return '';
       const _selector = BlizzService.getVariationSelector(selector, variation, opts);
-      const base = BlizzService.getComponentElementsCssRules(_selector, config.elements, opts);
-      const states = BlizzService.getComponentStatesCssRules(_selector, config.states, opts);
+      const base = BlizzService.getComponentElementsCssRules(
+        componentKey,
+        _selector,
+        config.elements,
+        opts,
+      );
+      const states = BlizzService.getComponentStatesCssRules(
+        componentKey,
+        _selector,
+        config.states,
+        opts,
+      );
       return base + states;
     });
   }
@@ -182,8 +213,8 @@ export class BlizzService {
     opts?: BlizzServiceOptions,
   ) {
     if (!config) return '';
-    return joinProperties(config, (name, props) =>
-      BlizzService.getComponentCssRules(name, props, opts),
+    return joinProperties(config, (key, props) =>
+      BlizzService.getComponentCssRules(key as ComponentKey, props, opts),
     );
   }
 

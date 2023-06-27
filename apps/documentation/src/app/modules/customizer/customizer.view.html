@@ -4,17 +4,53 @@
 
 <ng-container [ngSwitch]="service.componentKey">
   <doc-customizer-preview *ngSwitchCase="'chip'">
-    <bzz-chip #previewElement class="doc-customizer-preview" [disabled]="service.stateKey === 'disabled'">
+    <bzz-chip
+      #previewElement
+      class="doc-customizer-preview"
+      [disabled]="service.stateVisible && service.stateKey === 'disabled'"
+    >
       <doc-icon bzzPrefix>add_reaction</doc-icon>
       Text
     </bzz-chip>
   </doc-customizer-preview>
 
-
   <doc-customizer-preview *ngSwitchCase="'input'">
-    <bzz-input #previewElement class="doc-customizer-preview">
-      <label for="text-input">Label</label>
-      <input id="text-input" type="text" placeholder="Placeholder" />
+    <bzz-input #previewElement class="doc-customizer-preview" [labelFloatingAlways]="service.stateVisible && service.stateKey === 'labelFloating'">
+      <label for="doc-customizer-preview-text-input">Label</label>
+      <input
+        id="doc-customizer-preview-text-input"
+        type="text"
+        placeholder="Placeholder"
+        [disabled]="service.stateVisible && service.stateKey === 'disabled'"
+      />
     </bzz-input>
   </doc-customizer-preview>
+
+  <doc-customizer-preview *ngSwitchCase="'icon'">
+    <bzz-icon #previewElement class="doc-customizer-preview">
+      check_circle
+    </bzz-icon>
+  </doc-customizer-preview>
+
+  <doc-customizer-preview *ngSwitchCase="'button'">
+    <button bzz-button #previewElement class="doc-customizer-preview">
+      <bzz-icon>
+        check_circle
+      </bzz-icon>
+      Button
+    </button>
+  </doc-customizer-preview>
+
+  <doc-customizer-preview *ngSwitchCase="'icon-button'">
+<!--    <button bzzIconButton #previewElement class="doc-customizer-preview">-->
+<!--      check_circle-->
+<!--    </button>-->
+  </doc-customizer-preview>
+
+<!--  <doc-customizer-preview *ngSwitchCase="'select'">-->
+<!--    <bzz-select #previewElement class="doc-customizer-preview">-->
+<!--      <label for="doc-customizer-preview-select">Label</label>-->
+<!--      <input id="doc-customizer-preview-select" type="text" placeholder="Placeholder" />-->
+<!--    </bzz-select>-->
+<!--  </doc-customizer-preview>-->
 </ng-container>

@@ -10,6 +10,8 @@ import { INPUT_ROUTING } from './views/input/input.routing';
 import { RADIO_ROUTING } from './views/radio/radio.routing';
 import { SELECT_ROUTING } from './views/select/select.routing';
 import { SLIDER_ROUTING } from './views/slider/slider.routing';
+import { ICON_BUTTON_ROUTING } from './views/icon-button/icon-button.routing';
+import { ICON_ROUTING } from './views/icon/icon.routing';
 
 export const COMPONENTS_ROUTING: Route = {
   path: ModuleRoutesEnum.Components,
@@ -23,6 +25,8 @@ export const COMPONENTS_ROUTING: Route = {
     RADIO_ROUTING,
     SELECT_ROUTING,
     SLIDER_ROUTING,
+    ICON_ROUTING,
+    ICON_BUTTON_ROUTING,
     TABLE_ROUTING,
     { path: '', pathMatch: 'full', component: ComponentsHomeView },
     { path: '**', redirectTo: '' },

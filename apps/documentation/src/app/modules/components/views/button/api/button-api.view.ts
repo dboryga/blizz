@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-button-api',
   templateUrl: './button-api.view.html',
   styleUrls: ['./button-api.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

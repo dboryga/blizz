@@ -1,9 +1,10 @@
 import { BlizzConfigInput } from '../input-config.interface';
 import { theme } from '../../../utils';
+import { BLIZZ_HOST_ELEMENT_KEY } from '../../../models';
 
 export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
   elements: {
-    base: {
+    [BLIZZ_HOST_ELEMENT_KEY]: {
       styles: {
         width: {
           value: '100%',
@@ -19,6 +20,7 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
     field: {
       styles: {
         padding: '0.625rem 1rem',
+        gap: '0.5rem',
         bgColor: theme('white'),
         border: {
           width: '1px',
@@ -47,16 +49,6 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
         text: {
           color: theme('neutral-400'),
         },
-      },
-    },
-    prefix: {
-      styles: {
-        padding: '0 0.5rem 0 0',
-      },
-    },
-    suffix: {
-      styles: {
-        padding: '0 0 0 0.5rem',
       },
     },
   },
@@ -120,6 +112,33 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
         },
       },
     },
+    disabled: {
+      base: {
+        styles: {
+          cursor: 'default',
+        },
+      },
+      field: {
+        styles: {
+          cursor: 'default',
+          bgColor: theme('neutral-200'),
+          text: {
+            color: theme('neutral-400'),
+          },
+          border: {
+            width: '1px',
+            color: theme('neutral-300'),
+          },
+        },
+      },
+      label: {
+        styles: {
+          text: {
+            color: theme('neutral-400'),
+          },
+        },
+      },
+    },
   },
   variations: {
     hero: {
@@ -146,7 +165,7 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
         label: {
           styles: {
             position: 'top-left',
-            padding: '0 0 0.1rem 0',
+            padding: '0',
             text: {
               color: theme('primary-600'),
               weight: 'bold',
@@ -189,6 +208,27 @@ export const INPUT_BLIZZ_UI_CONFIG: Readonly<BlizzConfigInput> = {
             styles: {
               text: {
                 color: theme('error'),
+              },
+            },
+          },
+        },
+        disabled: {
+          base: {
+            styles: {
+              cursor: 'default',
+            },
+          },
+          field: {
+            styles: {
+              border: {
+                color: theme('neutral-300'),
+              },
+            },
+          },
+          label: {
+            styles: {
+              text: {
+                color: 'rgba(0, 0, 0, 0.36)',
               },
             },
           },

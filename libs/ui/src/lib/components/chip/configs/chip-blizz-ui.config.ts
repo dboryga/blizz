@@ -1,11 +1,12 @@
 import { BlizzConfigChip } from '../chip-config.interface';
 import { theme } from '../../../utils';
 
-export const CHIPS_MATERIAL_CONFIG: Readonly<BlizzConfigChip> = {
+export const CHIP_BLIZZ_UI_CONFIG: Readonly<BlizzConfigChip> = {
   elements: {
-    base: {
+    body: {
       styles: {
         padding: '0.5rem 1rem',
+        gap: '0.5rem',
         border: {
           radius: '0.5rem',
           width: '1px',
@@ -20,34 +21,32 @@ export const CHIPS_MATERIAL_CONFIG: Readonly<BlizzConfigChip> = {
     },
     prefix: {
       styles: {
-        padding: '0 0.5rem 0 0',
         margin: '0 0 0 -0.5rem',
       },
     },
     suffix: {
       styles: {
-        padding: '0 0 0 0.5rem',
         margin: '0 -0.5rem 0 0',
       },
     },
   },
   states: {
     hover: {
-      base: {
+      body: {
         styles: {
           bgColor: 'rgba(0, 0, 0, .05)',
         },
       },
     },
     selectable: {
-      base: {
+      body: {
         styles: {
           cursor: 'pointer',
         },
       },
     },
     selected: {
-      base: {
+      body: {
         styles: {
           bgColor: theme('primary'),
           text: {
@@ -60,7 +59,7 @@ export const CHIPS_MATERIAL_CONFIG: Readonly<BlizzConfigChip> = {
       },
     },
     disabled: {
-      base: {
+      body: {
         styles: {
           cursor: 'default',
           bgColor: theme('neutral-200'),
@@ -74,5 +73,40 @@ export const CHIPS_MATERIAL_CONFIG: Readonly<BlizzConfigChip> = {
       },
     },
   },
-  variations: {},
+  variations: {
+    hero: {
+      elements: {
+        body: {
+          styles: {
+            border: {
+              width: '0',
+            },
+            bgColor: theme('primary-500'),
+            text: {
+              color: theme('white'),
+            },
+          },
+        },
+      },
+      states: {
+        hover: {
+          body: {
+            styles: {
+              bgColor: theme('primary-600'),
+            },
+          },
+        },
+        disabled: {
+          body: {
+            styles: {
+              bgColor: theme('neutral-300'),
+              text: {
+                color: theme('neutral-500'),
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 };

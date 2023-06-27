@@ -14,6 +14,7 @@ import { DocIconComponent } from '../../../../shared';
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-general',
   templateUrl: './general.view.html',
   styleUrls: ['./general.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,

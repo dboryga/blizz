@@ -8,7 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BlizzExpandableDirective, BlizzExpandableModule, camelToTitleCase } from '@blizz/core';
+import { BlizzExpandableDirective, BlizzExpandableModule, kebabToTitleCase } from '@blizz/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DocIconComponent } from '../../../../shared';
 import { BlizzInputComponent } from '@blizz/ui';
@@ -18,6 +18,7 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-states',
   templateUrl: './states.view.html',
   styleUrls: ['./states.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -35,8 +36,6 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
   ],
 })
 export class DocCustomizerStatesView implements OnInit {
-  readonly camelToTitleCase = camelToTitleCase;
-
   constructor(
     protected readonly service: DocCustomizerService,
     protected readonly route: ActivatedRoute,
@@ -64,4 +63,6 @@ export class DocCustomizerStatesView implements OnInit {
     this.router.navigate(['./'], { relativeTo: this.route });
     event.stopPropagation();
   }
+
+  protected readonly kebabToTitleCase = kebabToTitleCase;
 }

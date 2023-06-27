@@ -1,2 +1,2 @@
-export * from './blizz-ui.config';
-export * from './material.config';
+export * from './chip-blizz-ui.config';
+export * from './chip-material.config';

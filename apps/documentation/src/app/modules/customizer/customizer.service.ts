@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { CustomizerParam } from './customizer.routing-data';
 import {
-  BlizzComponent,
   BlizzConfig,
   blizzConfigHelpers,
   BlizzConfigValue,
@@ -24,6 +23,7 @@ import {
 import { get, has, isEmpty, map, omit, remove, set, unset } from 'lodash';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, filter, Observable, Subject } from 'rxjs';
+import { BlizzComponent } from '@blizz/ui';
 
 export const CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN = 'customizerConfig';
 
@@ -206,13 +206,13 @@ export class DocCustomizerService implements OnDestroy {
 
   private _updateProperty(sidebarProp: SidebarProperty, value?: string) {
     const path = `components.${this.componentKey}.${sidebarProp.path}`;
-    value?.length && value !== sidebarProp.inheritedValue?.()
+    value?.length && value !== sidebarProp.inheritedValue()
       ? set(this._config, path, value)
       : unset(this._config, path);
     this._purgeConfig(path);
     this.updateLocalStorageConfig();
     this._updateLocalComponentCssVariable(sidebarProp, value);
-    this._previewComponent?.changeDetector.detectChanges();
+    this._previewComponent?.changeDetector.markForCheck();
     this._detectChanges$.next();
   }
 
@@ -233,7 +233,8 @@ export class DocCustomizerService implements OnDestroy {
   renameVariation(key: string, newKey: string) {
     const clone = structuredClone(
       get(this._config, `components.${this.componentKey}.variations.${key}`),
-    );
+    ) as SidebarElements;
+    if (!clone) return;
     this._removeVariationFromConfig(key);
     this._setVariationInConfig(newKey, clone);
     this.updateLocalStorageConfig();
@@ -333,7 +334,7 @@ export class DocCustomizerService implements OnDestroy {
       if (rule.selectorText === selector) {
         if (value?.length) return rule.style.setProperty(sidebarProp.cssVariable, value);
 
-        const inheritedValue = sidebarProp.inheritedValue?.();
+        const inheritedValue = sidebarProp.inheritedValue();
         if (inheritedValue) return rule.style.setProperty(sidebarProp.cssVariable, inheritedValue);
 
         return rule.style.removeProperty(sidebarProp.cssVariable);
@@ -344,13 +345,14 @@ export class DocCustomizerService implements OnDestroy {
   }
 
   private _purgeConfig(path: string) {
-    const pathArr = path.split('.');
-    let value = get(this._config, pathArr);
+    let value = get(this._config, path);
 
-    while (pathArr.length && (!value || isEmpty(value))) {
-      unset(this._config, pathArr);
+    while (path.length && (!value || isEmpty(value))) {
+      unset(this._config, path);
+      const pathArr = path.split('.');
       pathArr.pop();
-      value = get(this._config, pathArr);
+      path = pathArr.join();
+      value = get(this._config, path);
     }
   }
 

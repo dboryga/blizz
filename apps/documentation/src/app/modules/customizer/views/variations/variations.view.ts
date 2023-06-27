@@ -9,7 +9,12 @@ import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocIconComponent } from '../../../../shared';
-import { BlizzExpandableDirective, BlizzExpandableModule } from '@blizz/core';
+import {
+  BlizzExpandableDirective,
+  BlizzExpandableModule,
+  camelToKebabCase,
+  camelToTitleCase,
+} from '@blizz/core';
 import { BlizzInputComponent } from '@blizz/ui';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -20,6 +25,7 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-variations',
   templateUrl: './variations.view.html',
   styleUrls: ['./variations.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -103,4 +109,7 @@ export class DocCustomizerVariationsView implements OnInit {
     this.service.renameVariation(key, newKey);
     this.selectVariation(newKey);
   }
+
+  protected readonly camelToKebabCase = camelToKebabCase;
+  protected readonly camelToTitleCase = camelToTitleCase;
 }

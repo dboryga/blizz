@@ -6,6 +6,8 @@ import { INPUT_DATA } from './views/input/input.routing-data';
 import { RADIO_DATA } from './views/radio/radio.routing-data';
 import { SELECT_DATA } from './views/select/select.routing-data';
 import { SLIDER_DATA } from './views/slider/slider.routing-data';
+import { ICON_DATA } from './views/icon/icon.routing-data';
+import { ICON_BUTTON_DATA } from './views/icon-button/icon-button.routing-data';
 
 export interface DocComponentData {
   path: string;
@@ -25,5 +27,7 @@ export const COMPONENTS_DATA: DocComponentData[] = [
   RADIO_DATA,
   SELECT_DATA,
   SLIDER_DATA,
+  ICON_DATA,
+  ICON_BUTTON_DATA,
   // TABLE_DATA,
 ];

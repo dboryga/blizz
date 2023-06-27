@@ -3,18 +3,21 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
-  Input, Output,
-  ViewEncapsulation
+  Input,
+  Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { getVariationConfig, injectComponentConfig } from '../../config';
-import { BlizzComponent } from '../../models/component.model';
 import { InputLabelPosition } from '../../models/props.model';
-import { canOptimizeBorder } from '../../utils';
 import { effectiveBackgroundColor } from '@blizz/core';
+import { canOptimizeBorder } from '../../utils';
+import { BlizzComponent } from '../../models/component.model';
+import { BlizzService } from '../../blizz.service';
 
 @Component({
   selector: 'bzz-input',
@@ -27,12 +30,12 @@ import { effectiveBackgroundColor } from '@blizz/core';
 })
 export class BlizzInputComponent implements BlizzComponent, AfterContentChecked {
   static instanceIdx = 0;
-  readonly componentName = 'input';
-  readonly config = injectComponentConfig(this.componentName);
+  readonly componentKey = 'input';
+  readonly config = injectComponentConfig(this.componentKey);
   readonly computedStyles = getComputedStyle(this.hostElementRef.nativeElement);
 
   @HostBinding('id')
-  readonly id = `bzz-${this.componentName}-${BlizzInputComponent.instanceIdx++}` as const;
+  readonly id = `bzz-${this.componentKey}-${BlizzInputComponent.instanceIdx++}` as const;
 
   @Input()
   @HostBinding('attr.variation')
@@ -42,14 +45,29 @@ export class BlizzInputComponent implements BlizzComponent, AfterContentChecked 
     return getVariationConfig(this.config, this.variation);
   }
 
-  @HostBinding('class.--empty')
+  constructor(
+    public readonly hostElementRef: ElementRef<HTMLElement>,
+    public readonly changeDetector: ChangeDetectorRef,
+  ) {}
+
+  @HostBinding('attr.state-empty')
   get empty() {
     return !this.inputElement?.value?.length;
+  }
+
+  @HostBinding('attr.state-required')
+  get required() {
+    return !this.inputElement?.required;
   }
 
   @HostBinding('class.--no-input-element')
   get disableTransitions() {
     return !this.inputElement || !this.labelElement;
+  }
+
+  @HostBinding('attr.state-disabled')
+  get disabled(): boolean {
+    return !!this.inputElement?.disabled;
   }
 
   @Input()
@@ -59,7 +77,9 @@ export class BlizzInputComponent implements BlizzComponent, AfterContentChecked 
   get labelPosition(): InputLabelPosition {
     if (this._labelPosition) return this._labelPosition;
     return (
-      (this.computedStyles.getPropertyValue('--label_position') as InputLabelPosition) ?? 'top-left'
+      (this.computedStyles.getPropertyValue(
+        BlizzService.getCssVariable(this.componentKey, 'label', 'position'),
+      ) as InputLabelPosition) ?? 'top-left'
     );
   }
   protected _labelPosition: InputLabelPosition | null = null;
@@ -70,7 +90,6 @@ export class BlizzInputComponent implements BlizzComponent, AfterContentChecked 
 
   @HostBinding('attr.state-labelFloating')
   get labelFloating(): boolean {
-    this.computedStyles.getPropertyValue('--label_floating-scale');
     return (
       this.labelPosition === 'floating' && (this.labelFloatingAlways || !this.empty || this.focused)
     );
@@ -82,7 +101,12 @@ export class BlizzInputComponent implements BlizzComponent, AfterContentChecked 
       return this._memo_floatingLabelBgWhenTransparent?.value;
     }
     if (this.labelPosition !== 'floating') return;
-    if (this.computedStyles.getPropertyValue('--field_bg-color') !== 'transparent') return;
+    if (
+      this.computedStyles.getPropertyValue(
+        BlizzService.getCssVariable(this.componentKey, 'field', 'bg-color'),
+      ) !== 'transparent'
+    )
+      return;
 
     return effectiveBackgroundColor(this.hostElementRef.nativeElement);
   }
@@ -90,12 +114,20 @@ export class BlizzInputComponent implements BlizzComponent, AfterContentChecked 
 
   @HostBinding('class.--optimized-border')
   get optimizedBorder() {
-    return canOptimizeBorder(this.computedStyles, '--border-width', '--border-style');
+    return canOptimizeBorder(
+      this.computedStyles,
+      BlizzService.getCssVariable(this.componentKey, '', 'border-width'),
+      BlizzService.getCssVariable(this.componentKey, '', 'border-style'),
+    );
   }
 
   @HostBinding('class.--optimized-field-border')
   get optimizedFieldBorder() {
-    return canOptimizeBorder(this.computedStyles, '--field_border-width', '--field_border-style');
+    return canOptimizeBorder(
+      this.computedStyles,
+      BlizzService.getCssVariable(this.componentKey, 'field', 'border-width'),
+      BlizzService.getCssVariable(this.componentKey, 'field', 'border-style'),
+    );
   }
 
   @HostBinding('class')
@@ -156,11 +188,6 @@ export class BlizzInputComponent implements BlizzComponent, AfterContentChecked 
   @Output() inputFocus = new EventEmitter<void>();
   @Output() inputBlur = new EventEmitter<void>();
   @Output() inputFocusChange = new EventEmitter<boolean>();
-
-  constructor(
-    public readonly hostElementRef: ElementRef<HTMLElement>,
-    public readonly changeDetector: ChangeDetectorRef,
-  ) {}
 
   ngAfterContentChecked() {
     this.getReferences();

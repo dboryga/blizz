@@ -30,8 +30,6 @@ import { BlizzInputComponent } from '@blizz/ui';
   ],
 })
 export class DocCustomizerElementsControlsComponent implements OnInit {
-  readonly camelToTitleCase = camelToTitleCase;
-
   @Input() elements?: SidebarElements | null;
 
   @Input() nested = false;
@@ -50,4 +48,6 @@ export class DocCustomizerElementsControlsComponent implements OnInit {
   protected updateProperty(sidebarProp: SidebarProperty, value: string) {
     this.service.updateProperty$.next({ sidebarProp, value });
   }
+
+  protected readonly camelToTitleCase = camelToTitleCase;
 }

@@ -1,9 +1,10 @@
 import { BlizzConfigInput } from '../input-config.interface';
 import { theme } from '../../../utils';
+import { BLIZZ_HOST_ELEMENT_KEY } from '../../../models';
 
 export const INPUT_MATERIAL_CONFIG: Readonly<BlizzConfigInput> = {
   elements: {
-    base: {
+    [BLIZZ_HOST_ELEMENT_KEY]: {
       styles: {
         width: {
           value: '100%',
@@ -21,6 +22,7 @@ export const INPUT_MATERIAL_CONFIG: Readonly<BlizzConfigInput> = {
     field: {
       styles: {
         padding: '0.1rem 1rem 0.5rem',
+        gap: '0.5rem',
         text: {
           size: '1rem',
           height: '1.5',
@@ -50,16 +52,6 @@ export const INPUT_MATERIAL_CONFIG: Readonly<BlizzConfigInput> = {
         text: {
           color: theme('neutral-400'),
         },
-      },
-    },
-    prefix: {
-      styles: {
-        padding: '0 0.5rem 0 0',
-      },
-    },
-    suffix: {
-      styles: {
-        padding: '0 0 0 0.5rem',
       },
     },
   },
@@ -104,6 +96,24 @@ export const INPUT_MATERIAL_CONFIG: Readonly<BlizzConfigInput> = {
         styles: {
           text: {
             color: theme('error-700'),
+          },
+        },
+      },
+    },
+    labelFloating: {
+      label: {
+        styles: {
+          transform: {
+            translate: '0 -50%',
+          },
+        },
+      },
+    },
+    disabled: {
+      base: {
+        styles: {
+          transform: {
+            opacity: '0.6',
           },
         },
       },

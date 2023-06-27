@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-table-overview',
   templateUrl: './table-overview.view.html',
   styleUrls: ['./table-overview.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

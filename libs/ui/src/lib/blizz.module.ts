@@ -5,7 +5,6 @@ import { BLIZZ_CONFIG, BLIZZ_SERVICE_OPTIONS, setupConfig } from './config';
 import { BlizzService, BlizzServiceOptions } from './blizz.service';
 
 @NgModule({
-  declarations: [],
   imports: [CommonModule],
 })
 export class BlizzModule {

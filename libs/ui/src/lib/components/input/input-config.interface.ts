@@ -1,13 +1,14 @@
 import {
   BlizzConfigComponent,
   BlizzConfigComponentElementsDictionary,
+  BLIZZ_HOST_ELEMENT_KEY,
   NativeInputState,
   Props,
 } from '../../models';
 import { InputLabelPosition } from '../../models/props.model';
 
 export interface BlizzConfigInputElements extends BlizzConfigComponentElementsDictionary {
-  base?: {
+  [BLIZZ_HOST_ELEMENT_KEY]?: {
     styles: {
       cursor?: Props.Cursor;
       bgColor?: string;
@@ -25,6 +26,7 @@ export interface BlizzConfigInputElements extends BlizzConfigComponentElementsDi
       bgColor?: string;
       padding?: string;
       margin?: string;
+      gap?: string;
       border?: Props.Border;
       text?: Props.Text;
       transform?: Props.Transform;
@@ -52,6 +54,7 @@ export interface BlizzConfigInputElements extends BlizzConfigComponentElementsDi
     styles: {
       padding?: string;
       margin?: string;
+      text?: Props.Text;
       transform?: Props.Transform;
     };
   };
@@ -59,12 +62,13 @@ export interface BlizzConfigInputElements extends BlizzConfigComponentElementsDi
     styles: {
       padding?: string;
       margin?: string;
+      text?: Props.Text;
       transform?: Props.Transform;
     };
   };
 }
 
-export type BlizzConfigInputStates = NativeInputState | 'labelFloating';
+export type BlizzConfigInputStates = NativeInputState | 'labelFloating' | 'empty';
 
 export type BlizzConfigInput = BlizzConfigComponent<
   BlizzConfigInputElements,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-input-api',
   templateUrl: './input-api.view.html',
   styleUrls: ['./input-api.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

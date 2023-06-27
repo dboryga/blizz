@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-radio-overview',
   templateUrl: './radio-overview.view.html',
   styleUrls: ['./radio-overview.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

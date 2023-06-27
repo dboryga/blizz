@@ -30,7 +30,7 @@
                 <label>{{ nested.displayName }}</label>
                 <input
                   [(ngModel)]="nested.value"
-                  [placeholder]="nested.inheritedValue?.() ?? ''"
+                  [placeholder]="nested.inheritedValue() ?? ''"
                   (ngModelChange)="updateProperty(nested, $event)"
                 />
               </bzz-input>
@@ -43,7 +43,7 @@
             <label>{{ prop.displayName }}</label>
             <input
               [(ngModel)]="prop.value"
-              [placeholder]="prop.inheritedValue?.() ?? ''"
+              [placeholder]="prop.inheritedValue() ?? ''"
               (ngModelChange)="updateProperty(prop, $event)"
             />
           </bzz-input>

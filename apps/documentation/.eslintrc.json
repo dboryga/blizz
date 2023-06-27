@@ -11,6 +11,7 @@
       "rules": {
         "@typescript-eslint/member-ordering": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@angular-eslint/no-outputs-metadata-property": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
+  selector: 'doc-components-checkbox-overview',
   templateUrl: './checkbox-overview.view.html',
   styleUrls: ['./checkbox-overview.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

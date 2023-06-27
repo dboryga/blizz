@@ -1,3 +1,29 @@
-bzz-button {
-  display: block;
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
+[bzz-button] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  @include props.cursor('button', pointer);
+  @include props.bgColor('button');
+  @include props.flexSpacing('button');
+  @include props.width('button');
+  @include props.text('button');
+  @include props.border('button');
+  @include props.transform('button');
+  @include transitions.transition('button');
+
+  [bzzPrefix] {
+    @include props.spacing('button-prefix');
+    @include props.text('button-prefix');
+    @include props.transform('button-prefix');
+  }
+
+  [bzzSuffix] {
+    @include props.spacing('button-suffix');
+    @include props.text('button-suffix');
+    @include props.transform('button-suffix');
+  }
 }

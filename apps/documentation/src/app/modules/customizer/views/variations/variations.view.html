@@ -73,7 +73,7 @@
             <div *ngFor="let state of variation.states" class="pl-4">
               <doc-expansion-toggle
                 [expandableRef]="stateExpandable"
-                [label]="state.key"
+                [label]="camelToTitleCase(state.key)"
                 [single]="true"
                 [compact]="true"
                 (toggleClick)="stateExpandable.collapsed && router.navigate(['./', service.variationKey], { relativeTo: this.route })"

@@ -5,6 +5,7 @@ import { DocComponentDetailsWrapperComponent } from '../../components/component-
 import { routerFadeAnimation } from '../../../../shared/animations/fade.animations';
 
 @Component({
+  selector: 'doc-components-slider',
   template: `
     <doc-component-details-wrapper>
       <div class="stack-container" [@routerFade]="outlet.activatedRouteData">

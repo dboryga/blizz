@@ -4,46 +4,48 @@
 bzz-input {
   position: relative;
   display: flex;
-  @include props.cursor;
-  @include props.bgColor;
-  @include props.spacing;
-  @include props.width;
-  @include props.text;
-  @include props.border;
-  @include props.transform;
+  @include props.cursor('input');
+  @include props.bgColor('input');
+  @include props.spacing('input');
+  @include props.width('input');
+  @include props.text('input');
+  @include props.border('input');
+  @include props.transform('input');
   @include transitions.transition;
 
   .bzz-input-label {
     display: block;
-    @include props.cursor('label_');
-    @include props.spacing('label_');
-    @include props.text('label_');
-    @include props.transform('label_');
+    @include props.cursor('input-label');
+    @include props.spacing('input-label');
+    @include props.text('input-label');
+    @include props.transform('input-label');
   }
 
   .bzz-input-field {
     flex-grow: 1;
     display: flex;
-    @include props.cursor('field_');
-    @include props.bgColor('field_');
-    @include props.spacing('field_');
-    @include props.border('field_');
-    @include props.text('field_');
-    @include props.transform('field_');
+    @include props.cursor('input-field');
+    @include props.bgColor('input-field');
+    @include props.flexSpacing('input-field');
+    @include props.border('input-field');
+    @include props.text('input-field');
+    @include props.transform('input-field');
   }
 
   [bzzPrefix] {
-    @include props.spacing('prefix_');
-    @include props.transform('prefix_');
+    @include props.spacing('input-prefix');
+    @include props.text('input-prefix');
+    @include props.transform('input-prefix');
   }
 
   [bzzSuffix] {
-    @include props.spacing('suffix_');
-    @include props.transform('suffix_');
+    @include props.spacing('input-suffix');
+    @include props.text('input-suffix');
+    @include props.transform('input-suffix');
   }
 
   &.--optimized-field-border .bzz-input-field {
-    @include props.optimizedBorder('field_');
+    @include props.optimizedBorder('input-field');
   }
 
   input {
@@ -57,13 +59,17 @@ bzz-input {
   }
 
   input::placeholder {
-    @include props.text('placeholder_');
-    @include props.transform('placeholder_');
+    @include props.text('input-placeholder');
+    @include props.transform('input-placeholder');
     @include transitions.transition;
   }
 
+  &[state-disabled="true"] {
+    pointer-events: none;
+  }
+
   &.--optimized-border {
-    @include props.optimizedBorder;
+    @include props.optimizedBorder('input');
     @include transitions.transition;
   }
 
@@ -93,13 +99,13 @@ bzz-input {
       display: flex;
       align-items: center;
 
-      padding: var(--field_padding);
+      padding: var(--bzz-input-field_padding);
       padding-top: 0;
       padding-bottom: 0;
       height: 100%;
 
-      font-size: var(--field_text-size);
-      line-height: var(--field_text-height);
+      font-size: var(--bzz-input-field_text-size);
+      line-height: var(--bzz-input-field_text-height);
 
       border-color: transparent;
       pointer-events: none;
@@ -109,10 +115,10 @@ bzz-input {
     label {
       display: block;
       transform-origin: left;
-      background: var(--floating-label-color, var(--field_bg-color));
-      background: var(--floating-label-color, linear-gradient(0deg, var(--field_bg-color) 0%, var(--field_bg-color) 50%, transparent 50%, transparent 100%));
-      padding: 0 var(--label_floating-border-gap, 2px);
-      margin: 0 calc(var(--label_floating-border-gap, 2px) * -1);
+      background: var(--floating-label-color, var(--bzz-input-field_bg-color));
+      background: var(--floating-label-color, linear-gradient(0deg, var(--bzz-input-field_bg-color) 0%, var(--bzz-input-field_bg-color) 50%, transparent 50%, transparent 100%));
+      padding: 0 var(--bzz-input-label_floating-border-gap, 2px);
+      margin: 0 calc(var(--bzz-input-label_floating-border-gap, 2px) * -1);
       @include transitions.transition(120ms, transitions.$ease-in, scale);
     }
 
@@ -125,7 +131,7 @@ bzz-input {
       @include transitions.transition(80ms, transitions.$ease-out);
 
       label {
-        scale: var(--label_floating-scale);
+        scale: var(--bzz-input-label_floating-scale);
         @include transitions.transition(80ms, transitions.$ease-out, scale);
       }
 

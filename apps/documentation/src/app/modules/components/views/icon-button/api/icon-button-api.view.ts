@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { DocSidebarComponent } from '../../../../../shared';
 
 @Component({
-  templateUrl: './table-customize.view.html',
-  styleUrls: ['./table-customize.view.scss'],
+  selector: 'doc-components-icon-button-api',
+  templateUrl: './icon-button-api.view.html',
+  styleUrls: ['./icon-button-api.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, DocSidebarComponent],
 })
-export class DocTableCustomizeView {}
+export class DocIconButtonApiView {}

@@ -3,7 +3,7 @@ import { ComponentKey } from './config.model';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 
 export interface BlizzComponent {
-  readonly componentName: ComponentKey;
+  readonly componentKey: ComponentKey;
   readonly id: `bzz-${ComponentKey}-${number}`;
 
   readonly config: ReturnType<typeof injectComponentConfig>;

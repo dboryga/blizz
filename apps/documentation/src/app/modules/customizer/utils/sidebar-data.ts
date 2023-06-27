@@ -25,8 +25,8 @@ export type SidebarProperty = {
   statePath: string;
   propPath: string;
   // Values
-  value?: string;
-  inheritedValue?: () => string | undefined;
+  value?: string | undefined;
+  inheritedValue: () => string | undefined;
   cssVariable?: string;
   // Children
   children?: SidebarProperty[];
@@ -54,7 +54,7 @@ export type SidebarData = {
 export function getComponentSchema(
   key: ComponentKey,
 ): objectified.ReferenceType | objectified.LiteralObjectType {
-  const schema = COMPONENTS_CONFIG_SCHEMA.find((item) => get(item, 'key') === key);
+  const schema = COMPONENTS_CONFIG_SCHEMA?.find((item) => get(item, 'key') === key);
   if (!schema || !objectified.hasProps(schema)) {
     throw new Error(`Blizz Customizer: Component '${key}' schema not found.`);
   }
@@ -244,6 +244,8 @@ function mapProperties(
           statePath,
           elementPath,
           propPath,
+          // Values
+          inheritedValue: () => undefined,
         };
         return {
           ...data,
@@ -262,29 +264,29 @@ function mapProperties(
       const elementKeyCss = elementKey === 'base' ? '' : `${elementKey}_`;
       const cssVariable = `--${elementKeyCss}${camelToKebabCase(fullName)}`;
 
-      const inheritedFromElement = () =>
-        variationKey || stateKey
-          ? get(config, `${elementPath}.styles.${propPath}`) ??
-            get(baseConfig, `${elementPath}.styles.${propPath}`)
+      const inheritFromElementPath = `${elementPath}.styles.${propPath}`;
+      const inheritedFromElement = (path: string) =>
+        (variationKey || stateKey) && path !== inheritFromElementPath
+          ? get(config, inheritFromElementPath) ?? get(baseConfig, inheritFromElementPath)
           : undefined;
 
-      const inheritedFromState = () =>
-        stateKey
-          ? get(config, `${statePath}.${elementKey}.styles.${propPath}`) ??
-            get(baseConfig, `${statePath}${elementKey}.styles.${propPath}`)
+      const inheritedFromStatePath = `${statePath}.${elementKey}.styles.${propPath}`;
+      const inheritedFromState = (path: string) =>
+        stateKey && path !== inheritedFromStatePath
+          ? get(config, inheritedFromStatePath) ?? get(baseConfig, inheritedFromStatePath)
           : undefined;
 
-      const inheritedFromVariation = () =>
-        variationKey
-          ? get(config, `${variationPath}.${elementPath}.styles.${propPath}`) ??
-            get(baseConfig, `${variationPath}.${elementPath}.styles.${propPath}`)
+      const inheritedFromVariationPath = `${variationPath}.${elementPath}.styles.${propPath}`;
+      const inheritedFromVariation = (path: string) =>
+        variationKey && path !== inheritedFromVariationPath
+          ? get(config, inheritedFromVariationPath) ?? get(baseConfig, inheritedFromVariationPath)
           : undefined;
 
       const inheritedValue = () =>
         get(baseConfig, path) ??
-        inheritedFromState() ??
-        inheritedFromVariation() ??
-        inheritedFromElement();
+        inheritedFromState(path) ??
+        inheritedFromVariation(path) ??
+        inheritedFromElement(path);
 
       // Lowest level property (doesn't have any nested properties)
       return {
