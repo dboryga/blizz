@@ -1,3 +1,61 @@
 :host {
   @apply flex flex-col min-h-full;
+
+  &::ng-deep {
+    section {
+      @apply mb-12;
+
+      pre {
+        @apply mt-2;
+      }
+
+      a {
+        @apply transition-colors cursor-pointer;
+
+        &:hover {
+          color: var(--bzz-theme_primary-600);
+        }
+      }
+
+      :not(code) > a {
+        @apply underline;
+      }
+    }
+
+    h5 {
+      @apply pb-2;
+    }
+
+    .table-header {
+      @apply mt-6 p-2 bg-gray-50 border border-b-0 text-base font-bold;
+
+      &:first-of-type {
+        @apply mt-2;
+      }
+    }
+
+    ul {
+      @apply list-inside list-disc;
+    }
+    ol {
+      @apply list-inside list-decimal;
+    }
+    li:not(:last-child) {
+      @apply mb-4;
+    }
+
+    table {
+      @apply w-full border-collapse;
+      table-layout: fixed
+    }
+
+    thead th:last-child {
+      width: 50%;
+    }
+
+    th,
+    td {
+      @apply p-2 text-left border whitespace-normal break-words text-sm;
+    }
+  }
 }

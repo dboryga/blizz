@@ -4,5 +4,5 @@ export enum ModuleRoutesEnum {
   Customizer = 'customizer',
   Cdk = 'cdk',
   Animations = 'animations',
-  Profile = 'profile',
+  // Profile = 'profile',
 }

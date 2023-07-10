@@ -12,8 +12,9 @@ bzz-chip {
   @include props.width('chip');
   @include props.text('chip');
   @include props.border('chip');
+  @include props.shadow('chip');
   @include props.transform('chip');
-  @include transitions.transition('chip');
+  @include transitions.transition;
 
   [bzzPrefix] {
     @include props.spacing('chip-prefix');
@@ -28,7 +29,7 @@ bzz-chip {
   }
 
   &.--optimized-border {
-    @include props.optimizedBorder('chip');
+    @include props.optimizedBorder('chip', );
   }
 
   &[state-disabled=true] {

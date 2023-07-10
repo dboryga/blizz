@@ -26,12 +26,13 @@ import { getVariationConfig, injectComponentConfig } from '../../config';
 })
 export class BlizzChipComponent implements BlizzComponent {
   static instanceIdx = 0;
-  readonly componentKey = 'input';
+  readonly componentKey = 'chip';
   readonly config = injectComponentConfig(this.componentKey);
   readonly computedStyles = getComputedStyle(this.hostElementRef.nativeElement);
 
+  @Input()
   @HostBinding('id')
-  readonly id = `bzz-${this.componentKey}-${BlizzChipComponent.instanceIdx++}` as const;
+  id = `bzz-${this.componentKey}-${BlizzChipComponent.instanceIdx++}`;
 
   @Input()
   @HostBinding('attr.variation')

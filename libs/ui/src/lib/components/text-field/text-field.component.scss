@@ -1,0 +1,158 @@
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
+bzz-text-field {
+  position: relative;
+  display: flex;
+  @include props.cursor('text-field');
+  @include props.bgColor('text-field');
+  @include props.spacing('text-field');
+  @include props.width('text-field');
+  @include props.text('text-field');
+  @include props.border('text-field');
+  @include props.shadow('text-field');
+  @include props.transform('text-field');
+  @include transitions.transition;
+
+  .bzz-text-field__label {
+    display: block;
+    @include props.cursor('text-field-label');
+    @include props.spacing('text-field-label');
+    @include props.text('text-field-label');
+    @include props.transform('text-field-label');
+  }
+
+  .bzz-text-field__field {
+    flex-grow: 1;
+    display: flex;
+    @include props.cursor('text-field-field');
+    @include props.bgColor('text-field-field');
+    @include props.flexSpacing('text-field-field');
+    @include props.text('text-field-field');
+    @include props.border('text-field-field');
+    @include props.shadow('text-field-field');
+    @include props.transform('text-field-field');
+  }
+
+  [bzzPrefix] {
+    @include props.spacing('text-field-prefix');
+    @include props.text('text-field-prefix');
+    @include props.transform('text-field-prefix');
+  }
+
+  [bzzSuffix] {
+    @include props.spacing('text-field-suffix');
+    @include props.text('text-field-suffix');
+    @include props.transform('text-field-suffix');
+  }
+
+  &.--optimized-field-border .bzz-text-field__field {
+    @include props.optimizedBorder('text-field-field');
+  }
+
+  .bzz-text-field__control {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  select {
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .bzz-text-field__control::placeholder {
+    @include props.text('text-field-placeholder');
+    @include props.transform('text-field-placeholder');
+    @include transitions.transition;
+  }
+
+  &[state-disabled="true"] {
+    pointer-events: none;
+  }
+
+  &.--optimized-border {
+    @include props.optimizedBorder('text-field');
+    @include transitions.transition;
+  }
+
+  &.--label-top     { flex-direction: column; }
+  &.--label-bottom  { flex-direction: column-reverse; }
+  &.--label-left    { flex-direction: row; }
+  &.--label-right   { flex-direction: row-reverse; }
+
+  &.--label-secondary-left .bzz-text-field__label,
+  &.--label-secondary-top .bzz-text-field__label {
+    align-self: start;
+  }
+
+  &.--label-secondary-center .bzz-text-field__label {
+    align-self: center;
+  }
+
+  &.--label-secondary-right .bzz-text-field__label,
+  &.--label-secondary-bottom .bzz-text-field__label {
+    align-self: end;
+  }
+
+  &.--label-floating {
+    .bzz-text-field__label {
+      align-self: center;
+      position: absolute;
+      display: flex;
+      align-items: center;
+
+      padding: var(--bzz-text-field-field_padding);
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 100%;
+
+      font-size: var(--bzz-text-field-field_text-size);
+      line-height: var(--bzz-text-field-field_text-height);
+
+      border-color: transparent;
+      pointer-events: none;
+      @include transitions.transition(120ms, transitions.$ease-in);
+    }
+
+    label {
+      display: block;
+      transform-origin: left;
+      background: var(--floating-label-color, var(--bzz-text-field-field_bg-color));
+      background: var(--floating-label-color, linear-gradient(0deg, var(--bzz-text-field-field_bg-color) 0%, var(--bzz-text-field-field_bg-color) 50%, transparent 50%, transparent 100%));
+      padding: 0 var(--bzz-text-field-label_floating-border-gap, 2px);
+      margin: 0 calc(var(--bzz-text-field-label_floating-border-gap, 2px) * -1);
+      @include transitions.transition(120ms, transitions.$ease-in, scale);
+    }
+
+    .bzz-text-field__control:not(.--label-floating-always)::placeholder {
+      visibility: hidden;
+    }
+
+    &[state-labelFloating=true] .bzz-text-field__label {
+      @include transitions.transition(80ms, transitions.$ease-out);
+
+      label {
+        scale: var(--bzz-text-field-label_floating-scale);
+        @include transitions.transition(80ms, transitions.$ease-out, scale);
+      }
+
+      ~ .bzz-text-field__field .bzz-text-field__control::placeholder {
+        visibility: visible;
+      }
+    }
+
+    &.--label-floating-always {
+      .bzz-text-field__label,
+      .bzz-text-field__label label,
+      .bzz-text-field__control::placeholder, {
+        transition: none;
+      }
+    }
+  }
+}
+

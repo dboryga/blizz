@@ -14,19 +14,18 @@
   margin: var(--bzz-#{$key}_margin);
 }
 
-@mixin spacing($key: '') {
-  padding: var(--bzz-#{$key}_padding);
-  margin: var(--bzz-#{$key}_margin);
-}
-
 @mixin gap($key: '') {
   gap: var(--bzz-#{$key}_gap);
 }
 
+@mixin spacing($key: '') {
+  @include padding($key);
+  @include margin($key);
+}
+
 @mixin flexSpacing($key: '') {
-  padding: var(--bzz-#{$key}_padding);
-  margin: var(--bzz-#{$key}_margin);
-  gap: var(--bzz-#{$key}_gap);
+  @include spacing($key);
+  @include gap($key);
 }
 
 @mixin width($key: '') {
@@ -39,6 +38,11 @@
   min-height: var(--bzz-#{$key}_height-min);
   height: var(--bzz-#{$key}_height-value);
   max-height: var(--bzz-#{$key}_height-max);
+}
+
+@mixin sizing($key: '') {
+  @include width($key);
+  @include height($key);
 }
 
 @mixin text($key: '') {
@@ -60,10 +64,15 @@
   border-color: var(--bzz-#{$key}_border-color);
 }
 
+@mixin shadow($key: '') {
+  box-shadow: var(--bzz-#{$key}_shadow);
+}
+
 @mixin optimizedBorder($key: '') {
   border: none;
-  box-shadow: inset 0 0 0 var(--bzz-#{$key}_border-width) var(--bzz-#{$key}_border-color);
+  box-shadow: inset 0 0 0 var(--bzz-#{$key}_border-width) var(--bzz-#{$key}_border-color), var(--bzz-#{$key}_shadow, 0 0 transparent);
 }
+
 
 @mixin transform($key: '') {
   opacity: var(--bzz-#{$key}_transform-opacity, 1);

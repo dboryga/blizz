@@ -1,13 +1,16 @@
 <h3 class="pb-2">{{ title }}</h3>
 
 <nav class="flex align-baseline border-b mb-6">
-  <a [routerLink]="pages.OVERVIEW" routerLinkActive #overviewRla="routerLinkActive">
+  <a [routerLink]="pages.Overview" routerLinkActive #overviewRla="routerLinkActive">
     <doc-tab [active]="overviewRla.isActive">Overview</doc-tab>
   </a>
-  <a [routerLink]="pages.API" routerLinkActive #apiRla="routerLinkActive">
+  <a [routerLink]="pages.Api" routerLinkActive #apiRla="routerLinkActive">
     <doc-tab [active]="apiRla.isActive">API</doc-tab>
   </a>
-  <a [routerLink]="pages.EXAMPLES" routerLinkActive #examplesRla="routerLinkActive">
+  <a [routerLink]="pages.Config" routerLinkActive #configRla="routerLinkActive">
+    <doc-tab [active]="configRla.isActive">Config</doc-tab>
+  </a>
+  <a [routerLink]="pages.Examples" routerLinkActive #examplesRla="routerLinkActive">
     <doc-tab [active]="examplesRla.isActive">Examples</doc-tab>
   </a>
 

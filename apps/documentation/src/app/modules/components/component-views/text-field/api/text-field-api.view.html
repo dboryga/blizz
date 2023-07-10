@@ -1,0 +1,137 @@
+<main class="flex-grow">
+  <h4 class="hidden">API</h4>
+
+  <section>
+    <h5>Import</h5>
+    <code>import &#123; BlizzTextFieldComponent &#125; from '@blizz/ui';</code>
+  </section>
+
+  <section>
+    <h5>BlizzTextFieldComponent</h5>
+    <div class="py-2">Selector: <code>bzz-text-field</code></div>
+
+    <h6 class="table-header">Inputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">id</td>
+        <td class="font-mono">string</td>
+        <td class="font-mono">-</td>
+        <td>The ID attribute of the text field.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">variation</td>
+        <td class="font-mono">string | null</td>
+        <td class="font-mono">null</td>
+        <td>The variation style of the text field.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">labelPosition</td>
+        <td class="font-mono">Props.InputLabelPosition</td>
+        <td class="font-mono">'top-left'</td>
+        <td>The position of the label in the text field.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">labelFloatingAlways</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">false</td>
+        <td>Indicates whether the label should always float above the input.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Outputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Event Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">inputFocus</td>
+        <td class="font-mono">void</td>
+        <td>Emitted when the text field is focused.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">inputBlur</td>
+        <td class="font-mono">void</td>
+        <td>Emitted when the text field loses focus.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">inputFocusChange</td>
+        <td class="font-mono">boolean</td>
+        <td>Emitted when the focus state of the text field changes.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Computed Properties</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">empty</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the text field is empty.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">required</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the text field is required.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">disabled</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the text field is disabled.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">focused</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the text field is currently focused.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Methods</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Return Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">focus()</td>
+        <td class="font-mono">void</td>
+        <td>Sets focus on the input element.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">blur()</td>
+        <td class="font-mono">void</td>
+        <td>Removes focus from the input element.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

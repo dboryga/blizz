@@ -3,8 +3,8 @@ import { ValueOf } from 'ts-essentials';
 export const NativeElementState = {
   Hover: 'hover',
   Focus: 'focus',
-  FocusVisible: 'focus-visible',
-  FocusWithin: 'focus-within',
+  FocusVisible: 'focusVisible',
+  FocusWithin: 'focusWithin',
 } as const;
 export type NativeElementState = ValueOf<typeof NativeElementState>;
 

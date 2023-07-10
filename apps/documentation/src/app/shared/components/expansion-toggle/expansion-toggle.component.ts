@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { DocIconComponent } from '../icon';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { BlizzExpandableDirective, BlizzExpandableModule } from '@blizz/core';
+import { BlizzCdkExpandableDirective, BlizzCdkExpandableModule } from '@blizz/core';
 
 @UntilDestroy()
 @Component({
@@ -11,14 +11,15 @@ import { BlizzExpandableDirective, BlizzExpandableModule } from '@blizz/core';
   styleUrls: ['./expansion-toggle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, DocIconComponent, BlizzExpandableModule],
+  imports: [CommonModule, DocIconComponent, BlizzCdkExpandableModule],
 })
 export class DocExpansionToggleComponent {
-  @Input() expandableRef!: BlizzExpandableDirective;
+  @Input({ required: true }) expandableRef!: BlizzCdkExpandableDirective;
   @Input() label?: string;
   @Input() single = false;
   @Input() compact = false;
-  @Input() closable = true;
+  @Input() canExpand = true;
+  @Input() canCollapse = true;
 
   @Output() toggleClick = new EventEmitter<MouseEvent>();
   @Output() arrowClick = new EventEmitter<MouseEvent>();

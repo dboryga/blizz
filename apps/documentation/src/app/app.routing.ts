@@ -23,10 +23,10 @@ export const APP_ROUTING: Routes = [
   //   data: { label: 'Animations' },
   //   children: [],
   // },
-  {
-    path: ModuleRoutesEnum.Profile,
-    title: getTitle('Profile'),
-    data: { label: 'Profile' },
-    children: [],
-  },
+  // {
+  //   path: ModuleRoutesEnum.Profile,
+  //   title: getTitle('Profile'),
+  //   data: { label: 'Profile' },
+  //   children: [],
+  // },
 ];

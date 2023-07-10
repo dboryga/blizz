@@ -1,16 +1,16 @@
-import { camelToKebabCase, camelToSentenceCase, firstLetterUpper } from '@blizz/core';
-import { BlizzConfigComponent, BlizzConfigComponentsDictionary, ComponentKey } from '@blizz/ui';
+import { camelToSentenceCase, firstLetterUpper } from '@blizz/core';
+import { BlizzConfigComponent, BlizzService, ComponentKey } from '@blizz/ui';
 import { get, keys, omit } from 'lodash';
-import { objectified, objectifyType } from 'ts-objectify-type';
+import { objectified } from 'ts-objectify-type';
 import { PROPERTY_DISPLAY_NAME } from './display-names';
 import { DeepPartial, Dictionary } from 'ts-essentials';
 import { unique } from 'ng-packagr/lib/utils/array';
+import { ComponentsSchema } from '../../../shared/utils/components-schema';
 
-const COMPONENTS_CONFIG_SCHEMA = objectifyType<BlizzConfigComponentsDictionary>();
-
-export type SidebarProperty = {
+export type SidebarProperty = Partial<objectified.Type> & {
   // Keys
   key: string;
+  componentKey: string;
   elementKey: string;
   variationKey?: string;
   stateKey?: string;
@@ -51,47 +51,13 @@ export type SidebarData = {
   variations?: SidebarVariation[] | null;
 };
 
-export function getComponentSchema(
-  key: ComponentKey,
-): objectified.ReferenceType | objectified.LiteralObjectType {
-  const schema = COMPONENTS_CONFIG_SCHEMA?.find((item) => get(item, 'key') === key);
-  if (!schema || !objectified.hasProps(schema)) {
-    throw new Error(`Blizz Customizer: Component '${key}' schema not found.`);
-  }
-
-  return schema;
-}
-
-export function getElementsSchema(
-  key: string,
-  componentSchema: objectified.ReferenceType | objectified.LiteralObjectType,
-) {
-  const elementsSchema = componentSchema.props?.find((prop) => get(prop, 'key') === 'elements');
-  if (!elementsSchema || !objectified.hasProps(elementsSchema)) {
-    throw new Error(`Blizz Customizer: Component '${key}' has no elements.`);
-  }
-  return elementsSchema;
-}
-
-export function getStatesFromSchema(
-  key: ComponentKey,
-  componentSchema: objectified.ReferenceType | objectified.LiteralObjectType,
-): string[] {
-  if (!objectified.isReference(componentSchema)) return [];
-
-  const statesUnion = componentSchema.typeArguments?.[1];
-  if (!statesUnion || !objectified.isUnion(statesUnion)) return [];
-
-  return statesUnion.unionOf.map((state) => JSON.parse(state.type));
-}
-
 export function createSidebarData(
   key: ComponentKey,
   baseConfig: BlizzConfigComponent,
   config: DeepPartial<BlizzConfigComponent> | undefined,
 ): SidebarData {
-  const schema = getComponentSchema(key);
-  const elementsSchema = getElementsSchema(key, schema);
+  const schema = ComponentsSchema.getComponentSchema(key);
+  const elementsSchema = ComponentsSchema.getElementsSchema(schema);
 
   const elements = mapElements(elementsSchema, key, config, baseConfig);
   const states = mapStates(schema, elementsSchema, key, config, baseConfig);
@@ -105,9 +71,9 @@ export function createSidebarData(
 }
 
 export function mapVariations(
-  componentSchema: objectified.ReferenceType | objectified.LiteralObjectType,
+  componentSchema: objectified.ReferenceType,
   elementsSchema: objectified.Type,
-  key: ComponentKey,
+  componentKey: ComponentKey,
   config: DeepPartial<BlizzConfigComponent> | undefined | null,
   baseConfig: DeepPartial<BlizzConfigComponent> | undefined | null,
 ): SidebarVariation[] | null {
@@ -120,30 +86,51 @@ export function mapVariations(
 
       return {
         key: variationKey,
-        elements: mapElements(elementsSchema, key, config, baseConfig, undefined, variationKey),
-        states: mapStates(componentSchema, elementsSchema, key, config, baseConfig, variationKey),
+        elements: mapElements(
+          elementsSchema,
+          componentKey,
+          config,
+          baseConfig,
+          undefined,
+          variationKey,
+        ),
+        states: mapStates(
+          componentSchema,
+          elementsSchema,
+          componentKey,
+          config,
+          baseConfig,
+          variationKey,
+        ),
       };
     })
     .filter((variation): variation is SidebarVariation => !!variation?.key);
 }
 
 export function mapStates(
-  componentSchema: objectified.ReferenceType | objectified.LiteralObjectType,
+  componentSchema: objectified.ReferenceType,
   elementsSchema: objectified.Type,
-  key: ComponentKey,
+  componentKey: ComponentKey,
   config: DeepPartial<BlizzConfigComponent> | undefined | null,
   baseConfig: DeepPartial<BlizzConfigComponent> | undefined | null,
   variationKey?: string,
 ): SidebarState[] | null {
   if (!objectified.hasProps(elementsSchema)) return null;
 
-  return getStatesFromSchema(key, componentSchema)
+  return ComponentsSchema.getStatesFromSchema(componentSchema)
     .map((stateKey) => {
       if (config?.states?.[stateKey as keyof typeof config.states] === null) return null;
 
       return {
         key: stateKey,
-        elements: mapElements(elementsSchema, key, config, baseConfig, stateKey, variationKey),
+        elements: mapElements(
+          elementsSchema,
+          componentKey,
+          config,
+          baseConfig,
+          stateKey,
+          variationKey,
+        ),
       };
     })
     .filter((state): state is SidebarState | any => !!state?.key);
@@ -151,7 +138,7 @@ export function mapStates(
 
 export function mapElements(
   elementsSchema: objectified.Type,
-  key: ComponentKey,
+  componentKey: ComponentKey,
   config: DeepPartial<BlizzConfigComponent> | undefined | null,
   baseConfig: DeepPartial<BlizzConfigComponent> | undefined | null,
   stateKey?: string,
@@ -165,7 +152,9 @@ export function mapElements(
       !objectified.hasProps(element) ||
       typeof element.key !== 'string'
     ) {
-      console.warn(`Blizz Customizer: Component '${key}' has invalid element schema at index ${i}`);
+      console.warn(
+        `Blizz Customizer: Component '${componentKey}' has invalid element schema at index ${i}`,
+      );
       return obj;
     }
 
@@ -180,6 +169,7 @@ export function mapElements(
         styles.props,
         config,
         baseConfig,
+        componentKey,
         element.key,
         stateKey,
         variationKey,
@@ -192,6 +182,7 @@ function mapProperties(
   props: objectified.Type[],
   config: DeepPartial<BlizzConfigComponent> | undefined | null,
   baseConfig: DeepPartial<BlizzConfigComponent> | undefined | null,
+  componentKey: ComponentKey,
   elementKey: string,
   stateKey?: string,
   variationKey?: string,
@@ -231,6 +222,7 @@ function mapProperties(
           ...omit(prop, 'props'),
           // Keys
           key: prop.key,
+          componentKey,
           elementKey,
           stateKey,
           variationKey,
@@ -253,6 +245,7 @@ function mapProperties(
             prop.props,
             config,
             baseConfig,
+            componentKey,
             elementKey,
             stateKey,
             variationKey,
@@ -261,8 +254,7 @@ function mapProperties(
         };
       }
 
-      const elementKeyCss = elementKey === 'base' ? '' : `${elementKey}_`;
-      const cssVariable = `--${elementKeyCss}${camelToKebabCase(fullName)}`;
+      const cssVariable = BlizzService.getCssVariable(componentKey, elementKey, fullName);
 
       const inheritFromElementPath = `${elementPath}.styles.${propPath}`;
       const inheritedFromElement = (path: string) =>
@@ -293,6 +285,7 @@ function mapProperties(
         ...prop,
         // Keys
         key: prop.key,
+        componentKey,
         elementKey,
         stateKey,
         variationKey,

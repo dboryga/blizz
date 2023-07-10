@@ -1,0 +1,86 @@
+<main class="flex-grow">
+  <h4 class="hidden">API</h4>
+
+  <section>
+    <h5>Import</h5>
+    <code>import &#123; BlizzChipComponent &#125; from '@blizz/ui';</code>
+  </section>
+
+  <section>
+    <h5><code>BlizzChipComponent</code></h5>
+    <div class="py-2">Selector: <code>bzz-chip</code></div>
+
+    <h6 class="table-header">Inputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">variation</td>
+        <td class="font-mono">string</td>
+        <td class="font-mono">-</td>
+        <td>Sets the visual variation of the chip.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">selectable</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">true</td>
+        <td>Determines whether the chip can be selected or not.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">selected</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">false</td>
+        <td>Gets or sets the selected state of the chip. Only applicable when the chip is selectable.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">disabled</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">false</td>
+        <td>Gets or sets the disabled state of the chip.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Outputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Event Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">selectionSelect</td>
+        <td class="font-mono">void</td>
+        <td>An event emitted when the chip is selected.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">selectionDeselect</td>
+        <td class="font-mono">void</td>
+        <td>An event emitted when the chip is deselected.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">selectionChange</td>
+        <td class="font-mono">boolean</td>
+        <td>An event emitted when the selection state of the chip changes. It emits a boolean value indicating the new selection state.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">disabledChange</td>
+        <td class="font-mono">boolean</td>
+        <td>An event emitted when the disabled state of the chip changes. It emits a boolean value indicating the new disabled state.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

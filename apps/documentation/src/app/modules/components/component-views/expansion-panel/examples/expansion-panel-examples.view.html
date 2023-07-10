@@ -1,0 +1,38 @@
+<main class="flex-grow">
+  <h4 class="hidden">Examples</h4>
+
+  <section>
+    <h5>Basic Expansion Panel</h5>
+    <pre><code>&lt;bzz-expansion-panel&gt;<br>  &lt;bzz-expansion-panel-trigger&gt;Panel Trigger&lt;/bzz-expansion-panel-trigger&gt;<br>  &lt;bzz-expansion-panel-content&gt;Panel Content&lt;/bzz-expansion-panel-content&gt;<br>&lt;/bzz-expansion-panel&gt;</code></pre>
+  </section>
+
+  <section>
+    <h5>Expansion Panel with Custom Indicator</h5>
+    <pre><code>&lt;bzz-expansion-panel&gt;
+  &lt;bzz-expansion-panel-trigger&gt;Panel Trigger&lt;/bzz-expansion-panel-trigger&gt;
+  &lt;bzz-expansion-panel-indicator&gt;
+    &lt;!-- Indicator Content --&gt;
+  &lt;/bzz-expansion-panel-indicator&gt;
+  &lt;bzz-expansion-panel-content&gt;Panel Content&lt;/bzz-expansion-panel-content&gt;
+&lt;/bzz-expansion-panel&gt;</code></pre>
+  </section>
+
+  <section>
+    <h5>Grouped Expansion Panels</h5>
+    <p class="mb-2">
+      In most cases it is recommended to use <a [routerLink]="accordionPath">Accordion</a> component, to easily achieve grouped expansion panels.
+    </p>
+    <pre><code>&lt;bzz-expansion-panel group="groupId"&gt;
+  &lt;bzz-expansion-panel-trigger&gt;Panel 1&lt;/bzz-expansion-panel-trigger&gt;
+  &lt;bzz-expansion-panel-content&gt;Panel 1 Content&lt;/bzz-expansion-panel-content&gt;
+&lt;/bzz-expansion-panel&gt;
+
+&lt;bzz-expansion-panel group="groupId"&gt;
+  &lt;bzz-expansion-panel-trigger&gt;Panel 2&lt;/bzz-expansion-panel-trigger&gt;
+  &lt;bzz-expansion-panel-content&gt;Panel 2 Content&lt;/bzz-expansion-panel-content&gt;
+&lt;/bzz-expansion-panel&gt;</code></pre>
+  </section>
+
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

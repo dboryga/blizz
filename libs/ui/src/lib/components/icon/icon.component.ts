@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   HostBinding,
   Input,
   ViewEncapsulation,
@@ -22,12 +21,12 @@ import { getVariationConfig, injectComponentConfig } from '../../config';
 })
 export class BlizzIconComponent implements BlizzComponent {
   static instanceIdx = 0;
-  readonly componentKey = 'input';
+  readonly componentKey = 'icon';
   readonly config = injectComponentConfig(this.componentKey);
-  readonly computedStyles = getComputedStyle(this.hostElementRef.nativeElement);
 
+  @Input()
   @HostBinding('id')
-  readonly id = `bzz-${this.componentKey}-${BlizzIconComponent.instanceIdx++}` as const;
+  id = `bzz-${this.componentKey}-${BlizzIconComponent.instanceIdx++}`;
 
   @Input()
   @HostBinding('attr.variation')
@@ -37,10 +36,7 @@ export class BlizzIconComponent implements BlizzComponent {
     return getVariationConfig(this.config, this.variation);
   }
 
-  constructor(
-    public readonly hostElementRef: ElementRef<HTMLElement>,
-    public readonly changeDetector: ChangeDetectorRef,
-  ) {}
+  constructor(public readonly changeDetector: ChangeDetectorRef) {}
 
   @HostBinding('role')
   get hostRole() {

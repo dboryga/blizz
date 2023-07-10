@@ -8,10 +8,14 @@ import {
 import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BlizzExpandableDirective, BlizzExpandableModule, kebabToTitleCase } from '@blizz/core';
+import {
+  BlizzCdkExpandableDirective,
+  BlizzCdkExpandableModule,
+  kebabToTitleCase,
+} from '@blizz/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DocIconComponent } from '../../../../shared';
-import { BlizzInputComponent } from '@blizz/ui';
+import { BlizzTextFieldComponent } from '@blizz/ui';
 import { FormsModule } from '@angular/forms';
 import { DocCustomizerElementsControlsComponent } from '../../components/elements-controls/elements-controls.component';
 import { DocExpansionToggleComponent } from '../../../../shared/components/expansion-toggle/expansion-toggle.component';
@@ -27,8 +31,8 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
   imports: [
     CommonModule,
     DocIconComponent,
-    BlizzExpandableModule,
-    BlizzInputComponent,
+    BlizzCdkExpandableModule,
+    BlizzTextFieldComponent,
     FormsModule,
     RouterModule,
     DocCustomizerElementsControlsComponent,
@@ -55,7 +59,7 @@ export class DocCustomizerStatesView implements OnInit {
   }
 
   protected onExpandArrowClick(
-    expandableDirectiveRef: BlizzExpandableDirective,
+    expandableDirectiveRef: BlizzCdkExpandableDirective,
     event: MouseEvent,
   ) {
     if (expandableDirectiveRef.collapsed) return;

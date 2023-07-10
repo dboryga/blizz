@@ -1,5 +1,5 @@
 <header class="border-b w-full h-16 z-50">
-  <nav class="w-full h-full flex items-center px-8">
+  <nav class="w-full h-full flex items-center px-8" [class.max-container]="!(isCustomizer$ | async)">
 
     <a class="h-full py-4 pr-2" routerLink="/">
       <embed class="h-full" src="/assets/svg/logo-text.svg" tabIndex="-1" />

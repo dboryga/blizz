@@ -1,0 +1,317 @@
+<main class="flex-grow">
+  <h4 class="hidden">API</h4>
+
+  <section>
+    <h5>Import</h5>
+    <code>import &#123; BlizzExpansionPanelComponent &#125; from '@blizz/ui';</code>
+  </section>
+
+  <section>
+    <h5><code>BlizzExpansionPanelComponent</code></h5>
+    <div class="py-2">Selector: <code>bzz-expansion-panel</code></div>
+
+    <h6 class="table-header">Inputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">group</td>
+        <td class="font-mono">string</td>
+        <td class="font-mono">-</td>
+        <td>
+          Sets the group identifier for the expansion panel. Panels with the same group identifier will behave as an
+          accordion, where only one panel can be expanded at a time.
+        </td>
+      </tr>
+      <tr>
+        <td class="font-mono">expandSingle</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">false</td>
+        <td>
+          Determines whether only one panel can be expanded at a time within the group. This property is only applicable
+          when a group identifier is set.
+        </td>
+      </tr>
+      <tr>
+        <td class="font-mono">expanded</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">false</td>
+        <td>
+          Gets or sets the expanded state of the panel. When set to <code>true</code>, the panel will be expanded and its
+          content will be visible. When set to <code>false</code>, the panel will be collapsed and its content will be
+          hidden.
+        </td>
+      </tr>
+      <tr>
+        <td class="font-mono">id</td>
+        <td class="font-mono">string</td>
+        <td class="font-mono">-</td>
+        <td>The ID attribute of the element.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">variation</td>
+        <td class="font-mono">string | null</td>
+        <td class="font-mono">null</td>
+        <td>Sets the visual variation of the expansion panel.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Computed Properties</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">collapsed</td>
+        <td class="font-mono">boolean</td>
+        <td>Returns whether the expansion panel is currently collapsed. This property is computed based on the expanded state of the panel.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Methods</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Method</th>
+        <th>Return Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">toggle()</td>
+        <td class="font-mono">void</td>
+        <td>Toggles the expanded state of the panel. If the panel is expanded, it will be collapsed, and vice versa.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">expand()</td>
+        <td class="font-mono">void</td>
+        <td>Expands the panel, making its content visible.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">collapse()</td>
+        <td class="font-mono">void</td>
+        <td>Collapse the panel, hiding its content.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h5><code>BlizzExpansionPanelTriggerComponent</code></h5>
+    <p>The component that represents a header element of the expansion panel. It is the element that users interact with to expand or collapse the panel. This component typically contains text, buttons, or icons that provide a visual cue and indicate the state of the panel. By default, it contains a chevron arrow representing whether panel is expanded or collapsed.</p>
+    <div class="pt-4">Selector: <code>bzz-expansion-panel-trigger</code></div>
+    <div class="py-2">Host Directive: <code>BlizzCdkExpandableTriggerDirective</code></div>
+
+    <h6 class="table-header">Inputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">canExpand</td>
+        <td class="font-mono">boolean</td>
+        <td>Specifies if the trigger can trigger expansion.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">canCollapse</td>
+        <td class="font-mono">boolean</td>
+        <td>Specifies if the trigger can trigger collapse.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Outputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Event Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">indicatorClick</td>
+        <td class="font-mono">MouseEvent</td>
+        <td>Event emitted when the indicator is clicked.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Computed Properties</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">directive</td>
+        <td class="font-mono">BlizzCdkExpandableTriggerDirective</td>
+        <td>The instance of the host directive <code>BlizzCdkExpandableTriggerDirective</code>.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">service</td>
+        <td class="font-mono">ExpansionPanelService</td>
+        <td>The instance of the <code>ExpansionPanelService</code>.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">config</td>
+        <td class="font-mono">BlizzConfigExpansionPanel</td>
+        <td>The configuration object for the associated panel.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">indicatorStyles</td>
+        <td class="font-mono">-</td>
+        <td>The styles for the indicator component from config.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">defaultIndicatorStyles</td>
+        <td class="font-mono">-</td>
+        <td>The styles for the default indicator component from config.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">hovering</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the trigger is currently being hovered over.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h5><code>BlizzExpansionPanelContentComponent</code></h5>
+    <p>The component that represents a content of the expansion panel. It is the section that is shown or hidden when the panel is expanded or collapsed, respectively. This component can contain any type of content, such as text, images, or other components, to provide additional information or functionality related to the panel.</p>
+    <div class="pt-4">Selector: <code>bzz-expansion-panel-content</code></div>
+    <div class="py-2">Host Directive: <code>BlizzCdkExpandableDirective</code></div>
+
+    <h6 class="table-header">Computed Properties</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">directive</td>
+        <td class="font-mono">BlizzCdkExpandableTriggerDirective</td>
+        <td>The instance of the host directive <code>BlizzCdkExpandableTriggerDirective</code>.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">service</td>
+        <td class="font-mono">ExpansionPanelService</td>
+        <td>The instance of the <code>ExpansionPanelService</code>.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h5><code>ExpansionPanelService</code></h5>
+    <p>A service that provides methods and properties to control and manage the expansion panel functionality.</p>
+
+    <h6 class="table-header">Properties</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">triggerRef</td>
+        <td class="font-mono">BlizzExpansionPanelTriggerComponent</td>
+        <td>The reference to the trigger component.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">contentRef</td>
+        <td class="font-mono">BlizzExpansionPanelContentComponent</td>
+        <td>The reference to the content component.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">hostRef</td>
+        <td class="font-mono">BlizzExpansionPanelComponent</td>
+        <td>The reference to the host expansion panel component.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">expanded</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the panel is expanded or not.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">group</td>
+        <td class="font-mono">string | symbol | number | null</td>
+        <td>The group identifier for the panel.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">expandSingle</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether only a single panel can be expanded at a time.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">collapsed</td>
+        <td class="font-mono">boolean</td>
+        <td>Indicates whether the panel is collapsed or not.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Methods</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Return Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">toggle</td>
+        <td class="font-mono">void</td>
+        <td>Toggles the expansion state of the panel.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">expand</td>
+        <td class="font-mono">void</td>
+        <td>Expands the panel.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">collapse</td>
+        <td class="font-mono">void</td>
+        <td>Collapse the panel.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

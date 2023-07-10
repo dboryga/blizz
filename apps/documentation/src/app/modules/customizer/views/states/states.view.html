@@ -9,15 +9,16 @@
         [expandableRef]="expandable"
         [label]="kebabToTitleCase(state.key)"
         [single]="true"
+        [canCollapse]="false"
         (toggleClick)="expandable.collapsed && router.navigate(['./'], { relativeTo: this.route })"
       ></doc-expansion-toggle>
 
       <div
         bzzExpandable
-        bzzExpandableGroup="doc-customizer-state"
         #expandable="bzzExpandable"
+        bzzExpandableGroup="doc-customizer-state"
         [bzzExpandableExpanded]="service.stateKey === state.key"
-        (bzzExpandableExpanded)="selectState(state.key)"
+        (bzzExpandableAfterExpand)="selectState(state.key)"
         class="pl-4"
       >
         <doc-customizer-elements-controls

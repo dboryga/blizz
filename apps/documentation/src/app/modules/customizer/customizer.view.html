@@ -6,7 +6,7 @@
   <doc-customizer-preview *ngSwitchCase="'chip'">
     <bzz-chip
       #previewElement
-      class="doc-customizer-preview"
+      doc-customizer
       [disabled]="service.stateVisible && service.stateKey === 'disabled'"
     >
       <doc-icon bzzPrefix>add_reaction</doc-icon>
@@ -14,8 +14,8 @@
     </bzz-chip>
   </doc-customizer-preview>
 
-  <doc-customizer-preview *ngSwitchCase="'input'">
-    <bzz-input #previewElement class="doc-customizer-preview" [labelFloatingAlways]="service.stateVisible && service.stateKey === 'labelFloating'">
+  <doc-customizer-preview *ngSwitchCase="'textField'">
+    <bzz-text-field #previewElement doc-customizer [labelFloatingAlways]="service.stateVisible && service.stateKey === 'labelFloating'">
       <label for="doc-customizer-preview-text-input">Label</label>
       <input
         id="doc-customizer-preview-text-input"
@@ -23,34 +23,90 @@
         placeholder="Placeholder"
         [disabled]="service.stateVisible && service.stateKey === 'disabled'"
       />
-    </bzz-input>
+    </bzz-text-field>
   </doc-customizer-preview>
 
   <doc-customizer-preview *ngSwitchCase="'icon'">
-    <bzz-icon #previewElement class="doc-customizer-preview">
+    <bzz-icon #previewElement doc-customizer>
       check_circle
     </bzz-icon>
   </doc-customizer-preview>
 
   <doc-customizer-preview *ngSwitchCase="'button'">
-    <button bzz-button #previewElement class="doc-customizer-preview">
-      <bzz-icon>
+    <button
+      bzz-button
+      #previewElement doc-customizer
+      [disabled]="service.stateVisible && service.stateKey === 'disabled'"
+    >
+      <bzz-icon bzzPrefix doc-customizer>
         check_circle
       </bzz-icon>
       Button
     </button>
   </doc-customizer-preview>
 
-  <doc-customizer-preview *ngSwitchCase="'icon-button'">
-<!--    <button bzzIconButton #previewElement class="doc-customizer-preview">-->
-<!--      check_circle-->
-<!--    </button>-->
+  <doc-customizer-preview *ngSwitchCase="'iconButton'">
+    <button
+      bzz-icon-button
+      #previewElement doc-customizer
+      [disabled]="service.stateVisible && service.stateKey === 'disabled'"
+    >
+      <bzz-icon doc-customizer>star</bzz-icon>
+    </button>
   </doc-customizer-preview>
 
-<!--  <doc-customizer-preview *ngSwitchCase="'select'">-->
-<!--    <bzz-select #previewElement class="doc-customizer-preview">-->
-<!--      <label for="doc-customizer-preview-select">Label</label>-->
-<!--      <input id="doc-customizer-preview-select" type="text" placeholder="Placeholder" />-->
-<!--    </bzz-select>-->
-<!--  </doc-customizer-preview>-->
+  <doc-customizer-preview *ngSwitchCase="'expansionPanel'">
+    <div style="max-width: 40rem; width: 100%; height: 40rem">
+      <bzz-expansion-panel
+        #previewElement
+        doc-customizer
+        [expanded]="service.stateVisible && service.stateKey === 'expanded'"
+      >
+        <bzz-expansion-panel-trigger>Trigger</bzz-expansion-panel-trigger>
+        <bzz-expansion-panel-content>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid architecto asperiores at consectetur corporis cum dolore dolores ea eaque earum est et fuga id ipsum laudantium libero magnam magni molestiae necessitatibus nihil odio omnis pariatur perferendis possimus quam qui quo ratione recusandae repudiandae rerum similique sint soluta, temporibus vitae.
+        </bzz-expansion-panel-content>
+      </bzz-expansion-panel>
+    </div>
+  </doc-customizer-preview>
+
+  <doc-customizer-preview *ngSwitchCase="'accordion'">
+    <div style="max-width: 40rem; width: 100%; height: 50rem">
+      <bzz-accordion #previewElement doc-customizer>
+        <bzz-expansion-panel doc-customizer>
+          <bzz-expansion-panel-trigger doc-customizer>Panel 1</bzz-expansion-panel-trigger>
+          <bzz-expansion-panel-content doc-customizer>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur dignissimos ducimus eligendi eos est facere fugiat impedit ipsum nam omnis placeat possimus quam quas, quasi quibusdam totam ullam vero voluptate voluptatem? A culpa distinctio explicabo maiores minima nobis similique! Eaque facilis fugit labore maiores minus qui sit velit veritatis.
+          </bzz-expansion-panel-content>
+        </bzz-expansion-panel>
+        <bzz-expansion-panel doc-customizer>
+          <bzz-expansion-panel-trigger doc-customizer>Panel 2</bzz-expansion-panel-trigger>
+          <bzz-expansion-panel-content doc-customizer>
+            Accusamus amet corporis cumque dicta eligendi esse, illum inventore necessitatibus optio recusandae repellendus totam ut voluptas! Corporis culpa et id maiores ullam.
+          </bzz-expansion-panel-content>
+        </bzz-expansion-panel>
+        <bzz-expansion-panel doc-customizer>
+          <bzz-expansion-panel-trigger doc-customizer>Panel 3</bzz-expansion-panel-trigger>
+          <bzz-expansion-panel-content doc-customizer>
+            A aperiam blanditiis commodi consequuntur, dolorum error ex ipsum iste laboriosam laudantium maxime minima nihil nisi, officia possimus praesentium provident quam quasi sapiente soluta! Aliquid animi aspernatur at autem delectus dolor dolore dolorem doloribus eligendi est eveniet ex facilis fugiat illum ipsam laboriosam molestiae nam necessitatibus nobis non numquam odio optio perspiciatis placeat quaerat quas quasi quis quisquam reprehenderit repudiandae, sint suscipit vero voluptates. Adipisci amet, aspernatur commodi culpa deserunt dolor eaque earum facere, inventore iusto labore maiores, maxime molestiae nobis non nulla quibusdam quisquam quo ratione saepe similique tenetur vel voluptatum.
+          </bzz-expansion-panel-content>
+        </bzz-expansion-panel>
+      </bzz-accordion>
+    </div>
+  </doc-customizer-preview>
+
+  <doc-customizer-preview *ngSwitchCase="'select'">
+    <bzz-text-field #previewElement doc-customizer>
+      <label for="doc-customizer-preview-select">Label</label>
+      <select
+        bzz-select
+        name="doc-customizer-select"
+        id="doc-customizer-preview-select"
+      >
+        <option value="one">Option 1</option>
+        <option value="two">Option 2</option>
+        <option value="three">Option 3</option>
+      </select>
+    </bzz-text-field>
+  </doc-customizer-preview>
 </ng-container>

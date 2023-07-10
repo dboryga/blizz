@@ -34,7 +34,7 @@ function joinProperties<_Value>(
     .join('\n');
 }
 
-const attributeSelectors: ComponentKey[] = ['button'];
+const attributeSelectors: ComponentKey[] = ['button', 'iconButton'];
 
 @Injectable()
 export class BlizzService {
@@ -42,18 +42,24 @@ export class BlizzService {
   readonly options = inject(BLIZZ_SERVICE_OPTIONS);
   protected readonly document = inject(DOCUMENT);
 
-  static getCssString(obj: Dictionary<string>): string {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  static getCssString(obj: Dictionary<string>, opts?: BlizzServiceOptions): string {
     if (!obj) return '';
     return joinProperties(obj, (key, value) => `\t${camelToKebabCase(key)}: ${value};`);
   }
 
-  static getCssVariables<_Config>(config: _Config, prefix = '') {
+  static getCssVariables<_Config>(config: _Config, prefix = '', opts?: BlizzServiceOptions) {
     if (!config) return '';
-    return BlizzService.getCssString(flattenObject(config, '-', prefix));
+    return BlizzService.getCssString(flattenObject(config, '-', prefix), opts);
   }
-  static getCssRule<_Props>(selector: string, props?: _Props, propsPrefix = '') {
+  static getCssRule<_Props>(
+    selector: string,
+    props?: _Props,
+    propsPrefix = '',
+    opts?: BlizzServiceOptions,
+  ) {
     if (!props) return '';
-    return `${selector} {\n${BlizzService.getCssVariables(props, propsPrefix)}\n}\n`;
+    return `${selector} {\n${BlizzService.getCssVariables(props, propsPrefix, opts)}\n}\n`;
   }
 
   static isColorShade(
@@ -81,6 +87,7 @@ export class BlizzService {
       opts?.ancestorSelector || ':root',
       mapValues(theme, BlizzService.createDefaultColorVariable),
       '--bzz-theme_',
+      opts,
     );
   }
 
@@ -89,7 +96,7 @@ export class BlizzService {
     config: BlizzConfigComponent,
     opts?: BlizzServiceOptions,
   ): string {
-    const componentSelector = `bzz-${key}`;
+    const componentSelector = `bzz-${camelToKebabCase(key)}`;
     const selector = attributeSelectors.includes(key)
       ? `[${componentSelector}]`
       : componentSelector;
@@ -118,6 +125,8 @@ export class BlizzService {
     return BlizzService.getCssRule(
       `${ancestor(opts)} ${prefix(opts)}${selector}${suffix(opts)}`.trim(),
       propsWithElementPrefix,
+      undefined,
+      opts,
     );
   }
 
@@ -137,9 +146,9 @@ export class BlizzService {
 
   static getCssVariable(componentKey: ComponentKey, elementKey = '', propertyKey = '') {
     if (elementKey === BLIZZ_HOST_ELEMENT_KEY) elementKey = '';
-    const component = componentKey ? `--bzz-${componentKey}` : '';
-    const element = elementKey ? `-${elementKey}` : '';
-    const property = propertyKey ? `_${propertyKey}` : '';
+    const component = componentKey ? `--bzz-${camelToKebabCase(componentKey)}` : '';
+    const element = elementKey ? `-${camelToKebabCase(elementKey)}` : '';
+    const property = propertyKey ? `_${camelToKebabCase(propertyKey)}` : '';
     return `${component}${element}${property}`;
   }
 
@@ -162,8 +171,8 @@ export class BlizzService {
 
   static getStateSelector(baseSelector: string, state: string, opts?: BlizzServiceOptions) {
     const isNative = (Object.values(AnyNativeState) as string[]).includes(state);
-    const stateAttr = `[state-${state}=true]`;
-    const pseudoClass = `:${state}`;
+    const stateAttr = `[state-${state}="true"]`;
+    const pseudoClass = `:${camelToKebabCase(state)}`;
 
     const selectors = [
       stateAttr,

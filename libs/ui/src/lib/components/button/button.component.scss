@@ -9,11 +9,12 @@
   @include props.cursor('button', pointer);
   @include props.bgColor('button');
   @include props.flexSpacing('button');
-  @include props.width('button');
+  @include props.sizing('button');
   @include props.text('button');
   @include props.border('button');
+  @include props.shadow('button');
   @include props.transform('button');
-  @include transitions.transition('button');
+  @include transitions.transition;
 
   [bzzPrefix] {
     @include props.spacing('button-prefix');

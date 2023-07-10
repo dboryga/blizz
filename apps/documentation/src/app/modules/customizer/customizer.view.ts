@@ -2,10 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocCustomizerPreviewComponent } from './components/preview/preview.component';
 import {
+  BlizzAccordionComponent,
   BlizzButtonComponent,
   BlizzChipComponent,
+  BlizzExpansionPanelModule,
+  BlizzIconButtonComponent,
   BlizzIconComponent,
-  BlizzInputComponent,
+  BlizzSelectComponent,
+  BlizzTextFieldComponent,
 } from '@blizz/ui';
 import { DocCustomizerService } from './customizer.service';
 import { DocCustomizerSidebarComponent } from './components/sidebar/sidebar.component';
@@ -19,13 +23,17 @@ import { DocIconComponent } from '../../shared';
   standalone: true,
   imports: [
     CommonModule,
-    BlizzChipComponent,
-    BlizzInputComponent,
     DocCustomizerSidebarComponent,
     DocCustomizerPreviewComponent,
+    BlizzChipComponent,
+    BlizzTextFieldComponent,
     DocIconComponent,
     BlizzIconComponent,
     BlizzButtonComponent,
+    BlizzExpansionPanelModule,
+    BlizzAccordionComponent,
+    BlizzIconButtonComponent,
+    BlizzSelectComponent,
   ],
   providers: [DocCustomizerService],
 })

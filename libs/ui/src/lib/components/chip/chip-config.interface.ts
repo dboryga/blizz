@@ -15,8 +15,9 @@ export interface BlizzConfigChipElements extends BlizzConfigComponentElementsDic
       margin?: string;
       gap?: string;
       width?: Props.Clamp;
-      border?: Props.Border;
       text?: Props.Text;
+      border?: Props.Border;
+      shadow?: string;
       transform?: Props.Transform;
     };
   };

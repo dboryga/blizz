@@ -108,5 +108,17 @@ export const CHIP_BLIZZ_UI_CONFIG: Readonly<BlizzConfigChip> = {
         },
       },
     },
+    flat: {
+      elements: {
+        body: {
+          styles: {
+            bgColor: theme('neutral-200'),
+            border: {
+              width: '0',
+            },
+          },
+        },
+      },
+    },
   },
 };

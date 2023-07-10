@@ -14,8 +14,9 @@ export interface BlizzConfigIconElements extends BlizzConfigComponentElementsDic
       margin?: string;
       width?: Props.Clamp;
       height?: Props.Clamp;
-      border?: Props.Border;
       text?: Props.Text;
+      border?: Props.Border;
+      shadow?: string;
       transform?: Props.Transform;
     };
   };

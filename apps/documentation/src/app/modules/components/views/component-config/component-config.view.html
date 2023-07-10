@@ -1,0 +1,33 @@
+<main class="flex-grow overflow-hidden">
+
+  <h4 class="hidden">Config</h4>
+
+  <section>
+    <div class="flex items-center pb-2">
+      <h5 class="!pb-0">Elements</h5>
+      <bzz-chip variation="flat" class="ml-2 font-mono" [selectable]="false">
+        {{ elementsSchema.referenceName }}
+      </bzz-chip>
+    </div>
+    <pre class="relative overflow-x-auto text-sm cursor-text"><code>{{ elementsInterface }}</code></pre>
+  </section>
+
+  <section>
+    <h5>States</h5>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th class="!w-3/4">Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let state of statesWithDescriptions">
+        <td class="font-mono">{{ state.name }}</td>
+        <td>{{ state.desc }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>

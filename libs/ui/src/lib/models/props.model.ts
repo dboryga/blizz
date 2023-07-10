@@ -218,6 +218,22 @@ export type Cursor =
   | 'zoom-in'
   | 'zoom-out';
 
+export type FlexAlignSelf =
+  | 'auto'
+  | 'normal'
+  | 'center'
+  | 'start'
+  | 'end'
+  | 'self-start'
+  | 'self-end'
+  | 'flex-start'
+  | 'flex-end'
+  | 'baseline'
+  | 'first baseline'
+  | 'last baseline'
+  | 'stretch'
+  | 'unset';
+
 /**
  * SPECIAL TYPES
  */

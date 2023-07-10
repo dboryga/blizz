@@ -16,8 +16,9 @@ export interface BlizzConfigButtonElements extends BlizzConfigComponentElementsD
       gap?: string;
       width?: Props.Clamp;
       height?: Props.Clamp;
-      border?: Props.Border;
       text?: Props.Text;
+      border?: Props.Border;
+      shadow?: string;
       transform?: Props.Transform;
     };
   };

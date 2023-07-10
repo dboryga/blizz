@@ -3,9 +3,13 @@ import { DeepPartial, Dictionary, SafeDictionary, ValueOf } from 'ts-essentials'
 import { Nested } from '@blizz/core';
 import { NativeElementState } from './state.model';
 import { BlizzConfigChip } from '../components/chip';
-import { BlizzConfigInput } from '../components/input';
+import { BlizzConfigTextField } from '../components/text-field';
 import { BlizzConfigIcon } from '../components/icon';
 import { BlizzConfigButton } from '../components/button';
+import { BlizzConfigExpansionPanel } from '../components/expansion-panel';
+import { BlizzConfigAccordion } from '../components/accordion';
+import { BlizzConfigIconButton } from '../components/icon-button';
+import { BlizzConfigSelect } from '../components/select';
 
 export interface BlizzConfig {
   base: BlizzPredefinedConfig;
@@ -49,11 +53,14 @@ export interface BlizzConfigComponent<
 export const BLIZZ_HOST_ELEMENT_KEY = 'body';
 
 export type BlizzConfigComponentsDictionary = {
-  chip: BlizzConfigChip;
-  input: BlizzConfigInput;
-  icon: BlizzConfigIcon;
+  accordion: BlizzConfigAccordion;
   button: BlizzConfigButton;
-  // iconButton: BlizzConfigIconButton;
+  chip: BlizzConfigChip;
+  expansionPanel: BlizzConfigExpansionPanel;
+  icon: BlizzConfigIcon;
+  iconButton: BlizzConfigIconButton;
+  textField: BlizzConfigTextField;
+  select: BlizzConfigSelect;
 };
 
 export type ComponentKey = keyof BlizzConfigComponentsDictionary;
