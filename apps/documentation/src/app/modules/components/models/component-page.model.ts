@@ -1,7 +1,8 @@
-export enum ComponentPages {
-  OVERVIEW = 'overview',
-  API = 'api',
-  EXAMPLES = 'examples',
-}
+export const COMPONENT_PAGES = {
+  Overview: 'overview',
+  Api: 'api',
+  Config: 'config',
+  Examples: 'examples',
+} as const;
 
-export const DefaultComponentPage = ComponentPages.OVERVIEW;
+export const DefaultComponentPage = COMPONENT_PAGES.Overview;

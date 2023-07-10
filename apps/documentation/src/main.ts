@@ -16,7 +16,7 @@ bootstrapApplication(DocAppComponent, {
   providers: [
     importProvidersFrom(
       RouterModule.forRoot(APP_ROUTING),
-      BlizzModule.forRoot(blizzConfig, { selectorSuffix: ':not(.doc-customizer-preview)' }),
+      BlizzModule.forRoot(blizzConfig, { selectorSuffix: ':not([doc-customizer])' }),
     ),
     provideAnimations(),
   ],

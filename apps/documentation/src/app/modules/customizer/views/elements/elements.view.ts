@@ -12,6 +12,7 @@ import { DocCustomizerElementsControlsComponent } from '../../components/element
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-elements',
   templateUrl: './elements.view.html',
   styleUrls: ['./elements.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,

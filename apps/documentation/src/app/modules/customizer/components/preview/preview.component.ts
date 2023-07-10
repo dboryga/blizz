@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocCustomizerService } from '../../customizer.service';
 import { DocIconComponent } from '../../../../shared';
-import { BlizzComponent } from '@blizz/ui';
 import { camelToTitleCase } from '@blizz/core';
 
 @UntilDestroy()
@@ -25,7 +24,7 @@ import { camelToTitleCase } from '@blizz/core';
 export class DocCustomizerPreviewComponent implements OnInit {
   readonly camelToTitleCase = camelToTitleCase;
 
-  @ContentChild('previewElement') set componentRef(v: BlizzComponent) {
+  @ContentChild('previewElement') set componentRef(v: any) {
     this.service.previewComponent = v;
   }
 

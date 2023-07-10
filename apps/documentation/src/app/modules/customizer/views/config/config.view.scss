@@ -3,5 +3,5 @@
 }
 
 pre {
-  @apply bg-gray-100 p-4 relative;
+  @apply relative overflow-x-auto w-full text-sm cursor-text;
 }

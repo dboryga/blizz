@@ -1,0 +1,35 @@
+<main class="flex-grow">
+  <h4 class="hidden">Overview</h4>
+
+  <section>
+    <p>
+      The "Accordion" component is a wrapper for <a [routerLink]="expansionPanelPath" title="Expansion Panel">Expansion Panel</a>
+      components that provides accordion behavior.<br>
+      By default, only one expansion panel can be expanded at a time.
+      However, you can enable multi-panel expansion by setting the <code>multi</code> input to <code>true</code>.
+    </p>
+  </section>
+
+  <section>
+    <h5>Usage</h5>
+    <p>
+      To use the Accordion component, simply wrap your expansion-panel components inside the <code>bzz-accordion</code> element. You can
+      customize the behavior of the accordion by using the available component inputs.
+    </p>
+
+    <pre><code>&lt;bzz-accordion&gt;
+
+  <a [routerLink]="expansionPanelPath" title="Expansion Panel">&lt;bzz-expansion-panel&gt;
+    &lt;!-- Content of the first expansion panel --&gt;
+  &lt;/bzz-expansion-panel&gt;</a>
+
+  <a [routerLink]="expansionPanelPath" title="Expansion Panel">&lt;bzz-expansion-panel&gt;
+    &lt;!-- Content of the second expansion panel --&gt;
+  &lt;/bzz-expansion-panel&gt;</a>
+
+&lt;/bzz-accordion&gt;</code></pre>
+  </section>
+
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

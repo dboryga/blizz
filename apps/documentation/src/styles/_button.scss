@@ -47,13 +47,11 @@
     @apply transition-transform;
   }
 
-  &.bzz-expandable-toggle {
-    &--expanded {
-      @apply font-bold text-black;
+  &[aria-expanded=true] {
+    @apply font-bold text-black;
 
-      .btn-icon.arrow {
-        transform: rotate(180deg);
-      }
+    .btn-icon.arrow {
+      transform: rotate(180deg);
     }
   }
 }

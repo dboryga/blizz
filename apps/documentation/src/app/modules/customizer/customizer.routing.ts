@@ -56,10 +56,10 @@ export const CUSTOMIZER_ROUTING: Route = {
     //   path: CustomizerSettingsGroup.Animations,
     //   component: DocCustomizerAnimationsView,
     // },
-    {
-      path: CustomizerSettingsGroup.Snippet,
-      component: DocCustomizerSnippetView,
-    },
+    // {
+    //   path: CustomizerSettingsGroup.Snippet,
+    //   component: DocCustomizerSnippetView,
+    // },
     {
       path: CustomizerSettingsGroup.Config,
       component: DocCustomizerConfigView,

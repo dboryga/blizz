@@ -2,17 +2,17 @@ import { Dictionary } from 'ts-essentials';
 
 export const flattenObject = <_Value, _Object>(
   obj: _Object,
-  separator: string = '-',
-  prefix: string = '',
+  separator = '-',
+  prefix = '',
 ): Dictionary<_Value> => {
   return _flattenObject(obj, separator, prefix, true);
 };
 
 const _flattenObject = <_Value, _Object>(
   obj: _Object,
-  separator: string = '-',
-  prefix: string = '',
-  _skipSeparator: boolean = false,
+  separator = '-',
+  prefix = '',
+  _skipSeparator = false,
 ): Dictionary<_Value> => {
   if (!obj) return {};
   let flatten = {};

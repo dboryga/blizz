@@ -1,0 +1,29 @@
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
+[bzz-icon-button] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  @include props.cursor('icon-button', pointer);
+  @include props.bgColor('icon-button');
+  @include props.spacing('icon-button');
+  @include props.sizing('icon-button');
+  @include props.text('icon-button');
+  @include props.border('icon-button');
+  @include props.shadow('icon-button');
+  @include props.transform('icon-button');
+  @include transitions.transition;
+
+  bzz-icon {
+    //color: inherit;
+    //font-size: inherit;
+    //font-weight: inherit;
+    //line-height: inherit;
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+}

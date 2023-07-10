@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "plugins": [
-      { "transform": "ts-objectify-type/transformer" }
+      {
+        "transform": "ts-objectify-type/transformer"
+      }
     ],
     "paths": {
       "@blizz/api-interfaces": ["libs/api-interfaces/src/index.ts"],

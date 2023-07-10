@@ -7,7 +7,7 @@
     [class.last:border-none]="nested"
   >
     <div
-      [bzzExpandableToggle]="expandable"
+      [bzzExpandableTrigger]="expandable"
       class="btn-expansion-toggle"
     >
       <span [ngClass]="nested ? 'text-sm' : 'text-base'">{{ camelToTitleCase(element.key) }}</span>
@@ -19,36 +19,81 @@
       </button>
     </div>
 
-    <div bzzExpandable #expandable="bzzExpandable" class="pt-2" [class.py-4]="!nested">
-      <div class="mb-4" *ngFor="let prop of element.value">
-        <ng-container *ngIf="prop.children; else value">
-          <fieldset class="border p-4 flex flex-col gap-4">
-            <legend class="px-2 mx-[-0.5rem]">{{ prop.displayName }}</legend>
+    <div bzzExpandable #expandable="bzzExpandable">
+      <div class="pt-2" [class.py-4]="!nested">
+        <div class="mb-4" *ngFor="let prop of element.value">
 
-            <ng-container *ngFor="let nested of prop.children">
-              <bzz-input class="w-full" [labelFloatingAlways]="true">
-                <label>{{ nested.displayName }}</label>
-                <input
-                  [(ngModel)]="nested.value"
-                  [placeholder]="nested.inheritedValue?.() ?? ''"
-                  (ngModelChange)="updateProperty(nested, $event)"
-                />
-              </bzz-input>
-            </ng-container>
+          <ng-container *ngIf="!prop.children?.length; else nestedProps">
+            <ng-container
+              [ngTemplateOutlet]="valueTemplate"
+              [ngTemplateOutletContext]="{ $implicit: prop }"
+            ></ng-container>
+          </ng-container>
 
-          </fieldset>
-        </ng-container>
-        <ng-template #value>
-          <bzz-input class="w-full" [labelFloatingAlways]="true">
-            <label>{{ prop.displayName }}</label>
-            <input
-              [(ngModel)]="prop.value"
-              [placeholder]="prop.inheritedValue?.() ?? ''"
-              (ngModelChange)="updateProperty(prop, $event)"
-            />
-          </bzz-input>
-        </ng-template>
+
+          <ng-template #nestedProps>
+            <fieldset class="border p-4 flex flex-col gap-4">
+              <legend class="px-2 mx-[-0.5rem]">{{ prop.displayName }}</legend>
+              <ng-container *ngFor="let nested of prop.children">
+                <ng-container
+                  [ngTemplateOutlet]="valueTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: nested }"
+                ></ng-container>
+              </ng-container>
+            </fieldset>
+          </ng-template>
+
+        </div>
       </div>
     </div>
   </div>
 </ng-container>
+
+<ng-template #valueTemplate let-prop>
+  <bzz-text-field class="w-full" [labelFloatingAlways]="true">
+    <label>{{ prop.displayName }}</label>
+
+    <ng-container *ngIf="prop.type === 'union'; else variationRefTemplate">
+      <ng-container *ngIf="getUnionSelectOptions(prop) as options; else variationRefTemplate">
+        <ng-container *ngIf="options?.length; else variationRefTemplate">
+          <select
+            bzz-select
+            [ngModel]="prop.value ?? prop.inheritedValue()"
+            (ngModelChange)="updateProperty(prop, $event)"
+          >
+            <option value=""></option>
+            <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+          </select>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+
+    <ng-template #variationRefTemplate>
+      <ng-container *ngIf="prop.key === 'variation'; else defaultInputTemplate">
+        <ng-container *ngIf="getVariationRefSelectOptions(prop) as options; else defaultInputTemplate">
+          <ng-container *ngIf="options?.length; else defaultInputTemplate">
+            <select
+              bzz-select
+              [ngModel]="prop.value ?? prop.inheritedValue()"
+              (ngModelChange)="updateProperty(prop, $event)"
+            >
+              <option value=""></option>
+              <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+            </select>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #defaultInputTemplate>
+      <input
+        [(ngModel)]="prop.value"
+        [placeholder]="prop.inheritedValue() ?? ''"
+        (ngModelChange)="updateProperty(prop, $event)"
+      />
+    </ng-template>
+
+
+  </bzz-text-field>
+</ng-template>

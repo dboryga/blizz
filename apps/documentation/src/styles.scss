@@ -22,10 +22,10 @@
     @apply text-2xl;
   }
   h5 {
-    @apply text-xl;
+    @apply text-xl font-bold;
   }
   h6 {
-    @apply text-base;
+    @apply text-xl;
   }
 }
 
@@ -60,4 +60,22 @@ svg {
 
 .text-primary {
   color: var(--bzz-theme_primary);
+}
+
+.text-primary-600 {
+  color: var(--bzz-theme_primary-600);
+}
+
+.max-container {
+  max-width: 100rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+pre:has(> code) {
+  @apply bg-gray-100 p-4;
+}
+
+:not(pre) > code {
+  @apply bg-gray-100 px-1 inline-block;
 }

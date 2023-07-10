@@ -14,7 +14,7 @@ export const CustomizerSettingsGroup = {
   Variations: 'variations',
   // Interactions: 'interactions',
   // Animations: 'animations',
-  Snippet: 'snippet',
+  // Snippet: 'snippet',
   Config: 'config',
 } as const;
 export type CustomizerSettingsGroup = ValueOf<typeof CustomizerSettingsGroup>;

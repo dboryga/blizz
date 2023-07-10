@@ -1,0 +1,21 @@
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
+bzz-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Material Symbols Outlined' !important;
+  font-style: normal !important;
+  user-select: none;
+
+  @include props.cursor('icon');
+  @include props.bgColor('icon');
+  @include props.spacing('icon');
+  @include props.width('icon');
+  @include props.height('icon');
+  @include props.text('icon');
+  @include props.border('icon');
+  @include props.transform('icon');
+  @include transitions.transition;
+}

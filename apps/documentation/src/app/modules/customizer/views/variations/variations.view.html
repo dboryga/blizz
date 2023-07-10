@@ -3,19 +3,19 @@
     <div
       *ngFor="let variation of variations"
       class="py-1 px-5 border-b"
-      [class.bg-gray-50]="expandable.expanded"
+      [class.bg-gray-50]="variationExpandable.expanded"
     >
       <doc-expansion-toggle
-        [expandableRef]="expandable"
+        [expandableRef]="variationExpandable"
         [single]="true"
-        [closable]="false"
-        (arrowClick)="variationArrowClick(expandable, $event)"
+        [canCollapse]="false"
+        (arrowClick)="variationArrowClick(variationExpandable, $event)"
       >
         <input
           name="variation-name"
           class="invisible-input text-base grow mr-1 ml-[-0.25rem]"
-          [class.cursor-pointer]="expandable.collapsed"
-          [disabled]="expandable.collapsed"
+          [class.cursor-pointer]="variationExpandable.collapsed"
+          [disabled]="variationExpandable.collapsed"
           [(ngModel)]="variation.key"
           (ngModelChange)="renameVariation$.next({ key: variation.key, newKey: $event })"
         />
@@ -30,11 +30,11 @@
 
       <div
         bzzExpandable
+        #variationExpandable="bzzExpandable"
         bzzExpandableGroup="doc-customizer-variation"
-        #expandable="bzzExpandable"
         [bzzExpandableExpanded]="service.variationKey === variation.key"
-        (bzzExpandableExpanded)="selectVariation(variation.key)"
-        (bzzExpandableCollapsed)="statesInitiallyExpanded = false"
+        (bzzExpandableAfterExpand)="selectVariation(variation.key)"
+        (bzzExpandableAfterCollapse)="statesInitiallyExpanded = false"
         class="pl-4"
       >
         <div>
@@ -46,8 +46,8 @@
 
           <div
             bzzExpandable
-            [bzzExpandableExpanded]="true"
             #variationElementsExpandable="bzzExpandable"
+            [bzzExpandableExpanded]="true"
             class="pl-4"
           >
             <doc-customizer-elements-controls
@@ -56,7 +56,6 @@
             ></doc-customizer-elements-controls>
           </div>
         </div>
-
 
         <div>
           <doc-expansion-toggle
@@ -73,7 +72,7 @@
             <div *ngFor="let state of variation.states" class="pl-4">
               <doc-expansion-toggle
                 [expandableRef]="stateExpandable"
-                [label]="state.key"
+                [label]="camelToTitleCase(state.key)"
                 [single]="true"
                 [compact]="true"
                 (toggleClick)="stateExpandable.collapsed && router.navigate(['./', service.variationKey], { relativeTo: this.route })"
@@ -81,10 +80,10 @@
 
               <div
                 bzzExpandable
-                [bzzExpandableGroup]="'doc-customizer-variation-' + variation.key + '-state'"
                 #stateExpandable="bzzExpandable"
+                [bzzExpandableGroup]="'doc-customizer-variation-' + variation.key + '-state'"
                 [bzzExpandableExpanded]="service.stateKey === state.key"
-                (bzzExpandableExpanded)="selectState(state.key)"
+                (bzzExpandableAfterExpand)="selectState(state.key)"
                 class="pl-4"
               >
                 <doc-customizer-elements-controls
@@ -100,7 +99,7 @@
   </ng-container>
 </ng-container>
 
-<bzz-input variation="hero" class="px-5 mt-6">
+<bzz-text-field variation="hero" class="px-5 mt-6">
   <doc-icon bzzPrefix class="text-primary">add</doc-icon>
   <input
     #newVariationInput
@@ -110,5 +109,5 @@
     (blur)="addVariation(newVariationInput)"
     (keydown.enter)="addVariation(newVariationInput)"
   />
-</bzz-input>
+</bzz-text-field>
 

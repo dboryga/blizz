@@ -8,16 +8,21 @@ import {
 import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BlizzExpandableDirective, BlizzExpandableModule, camelToTitleCase } from '@blizz/core';
+import {
+  BlizzCdkExpandableDirective,
+  BlizzCdkExpandableModule,
+  kebabToTitleCase,
+} from '@blizz/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DocIconComponent } from '../../../../shared';
-import { BlizzInputComponent } from '@blizz/ui';
+import { BlizzTextFieldComponent } from '@blizz/ui';
 import { FormsModule } from '@angular/forms';
 import { DocCustomizerElementsControlsComponent } from '../../components/elements-controls/elements-controls.component';
 import { DocExpansionToggleComponent } from '../../../../shared/components/expansion-toggle/expansion-toggle.component';
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-states',
   templateUrl: './states.view.html',
   styleUrls: ['./states.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -26,8 +31,8 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
   imports: [
     CommonModule,
     DocIconComponent,
-    BlizzExpandableModule,
-    BlizzInputComponent,
+    BlizzCdkExpandableModule,
+    BlizzTextFieldComponent,
     FormsModule,
     RouterModule,
     DocCustomizerElementsControlsComponent,
@@ -35,8 +40,6 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
   ],
 })
 export class DocCustomizerStatesView implements OnInit {
-  readonly camelToTitleCase = camelToTitleCase;
-
   constructor(
     protected readonly service: DocCustomizerService,
     protected readonly route: ActivatedRoute,
@@ -56,7 +59,7 @@ export class DocCustomizerStatesView implements OnInit {
   }
 
   protected onExpandArrowClick(
-    expandableDirectiveRef: BlizzExpandableDirective,
+    expandableDirectiveRef: BlizzCdkExpandableDirective,
     event: MouseEvent,
   ) {
     if (expandableDirectiveRef.collapsed) return;
@@ -64,4 +67,6 @@ export class DocCustomizerStatesView implements OnInit {
     this.router.navigate(['./'], { relativeTo: this.route });
     event.stopPropagation();
   }
+
+  protected readonly kebabToTitleCase = kebabToTitleCase;
 }

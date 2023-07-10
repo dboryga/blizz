@@ -6,7 +6,7 @@ import { routerFadeAnimation } from '../../shared/animations/fade.animations';
 import { COMPONENTS_DATA } from './components.routing-data';
 
 @Component({
-  selector: 'doc-component',
+  selector: 'doc-components',
   templateUrl: './components.view.html',
   styleUrls: ['./components.view.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

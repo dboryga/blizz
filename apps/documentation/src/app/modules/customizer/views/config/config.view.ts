@@ -12,6 +12,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-config',
   templateUrl: './config.view.html',
   styleUrls: ['./config.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,

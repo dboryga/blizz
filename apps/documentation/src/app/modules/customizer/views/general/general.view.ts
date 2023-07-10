@@ -8,18 +8,30 @@ import {
 import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BlizzInputComponent } from '@blizz/ui';
+import {
+  BlizzIconButtonComponent,
+  BlizzPredefinedConfig,
+  BlizzTextFieldComponent,
+} from '@blizz/ui';
 import { FormsModule } from '@angular/forms';
 import { DocIconComponent } from '../../../../shared';
+import { keys, values } from 'lodash';
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-general',
   templateUrl: './general.view.html',
   styleUrls: ['./general.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, BlizzInputComponent, FormsModule, DocIconComponent],
+  imports: [
+    CommonModule,
+    BlizzTextFieldComponent,
+    FormsModule,
+    DocIconComponent,
+    BlizzIconButtonComponent,
+  ],
 })
 export class DocCustomizerGeneralView implements OnInit {
   constructor(
@@ -33,6 +45,5 @@ export class DocCustomizerGeneralView implements OnInit {
       .subscribe(() => this.changeDetector.markForCheck());
   }
 
-  protected readonly untilDestroyed = untilDestroyed;
-  protected readonly stop = stop;
+  protected readonly blizzPredefinedConfigs = values(BlizzPredefinedConfig);
 }

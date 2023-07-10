@@ -1,10 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-snippet',
   templateUrl: './snippet.view.html',
   styleUrls: ['./snippet.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,

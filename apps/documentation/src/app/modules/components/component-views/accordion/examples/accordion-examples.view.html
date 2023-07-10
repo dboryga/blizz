@@ -1,0 +1,36 @@
+<main class="flex-grow">
+  <h4 class="hidden">Examples</h4>
+
+  <section>
+    <h5>Basic Accordion</h5>
+    <pre><code>&lt;bzz-accordion&gt;
+  <a [routerLink]="expansionPanelPath" title="Expansion Panel">&lt;bzz-expansion-panel&gt;
+    &lt;bzz-expansion-panel-trigger&gt;Panel 1&lt;/bzz-expansion-panel-trigger&gt;
+    &lt;bzz-expansion-panel-content&gt;Content 1&lt;/bzz-expansion-panel-content&gt;
+  &lt;/bzz-expansion-panel&gt;</a>
+
+  <a [routerLink]="expansionPanelPath" title="Expansion Panel">&lt;bzz-expansion-panel&gt;
+    &lt;bzz-expansion-panel-trigger&gt;Panel 2&lt;/bzz-expansion-panel-trigger&gt;
+    &lt;bzz-expansion-panel-content&gt;Content 2&lt;/bzz-expansion-panel-content&gt;
+  &lt;/bzz-expansion-panel&gt;</a>
+&lt;/bzz-accordion&gt;</code></pre>
+  </section>
+
+  <section>
+    <h5>Multi Accordion</h5>
+    <p>You can set the <code>multi</code> attribute to allow multiple expansion panels to be open at the same time.</p>
+    <pre><code>&lt;bzz-accordion [multi]="true"&gt;
+  <a [routerLink]="expansionPanelPath" title="Expansion Panel">&lt;bzz-expansion-panel&gt;
+    &lt;bzz-expansion-panel-trigger&gt;Panel 1&lt;/bzz-expansion-panel-trigger&gt;
+    &lt;bzz-expansion-panel-content&gt;Content 1&lt;/bzz-expansion-panel-content&gt;
+  &lt;/bzz-expansion-panel&gt;</a>
+
+  <a [routerLink]="expansionPanelPath" title="Expansion Panel">&lt;bzz-expansion-panel&gt;
+    &lt;bzz-expansion-panel-trigger&gt;Panel 2&lt;/bzz-expansion-panel-trigger&gt;
+    &lt;bzz-expansion-panel-content&gt;Content 2&lt;/bzz-expansion-panel-content&gt;
+  &lt;/bzz-expansion-panel&gt;</a>
+&lt;/bzz-accordion&gt;</code></pre>
+  </section>
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

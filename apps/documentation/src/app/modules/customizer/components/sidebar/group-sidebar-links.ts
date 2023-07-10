@@ -37,11 +37,11 @@ export const GroupSidebarLinksData: GroupSidebarLink[] = [
   //   icon: 'animation',
   //   label: 'Animations',
   // },
-  {
-    path: CustomizerSettingsGroup.Snippet,
-    icon: 'code',
-    label: 'Snippet',
-  },
+  // {
+  //   path: CustomizerSettingsGroup.Snippet,
+  //   icon: 'code',
+  //   label: 'Snippet',
+  // },
   {
     path: CustomizerSettingsGroup.Config,
     icon: 'data_object',

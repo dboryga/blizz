@@ -1,0 +1,99 @@
+<main class="flex-grow">
+  <h4 class="hidden">API</h4>
+
+  <section>
+    <h5>Import</h5>
+    <code>import &lt; BlizzAccordionComponent &gt; from '@blizz/ui';</code>
+  </section>
+
+  <section>
+    <h5>BlizzAccordionComponent</h5>
+    <div class="py-2">Selector: <code>bzz-accordion</code></div>
+
+    <h6 class="table-header">Inputs</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Input</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">group</td>
+        <td class="font-mono">string</td>
+        <td class="font-mono">-</td>
+        <td>The group identifier for the accordion. If not provided, it defaults to the component's ID.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">multi</td>
+        <td class="font-mono">boolean</td>
+        <td class="font-mono">false</td>
+        <td>Specifies whether the accordion allows multiple panels to be expanded at the same time.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">id</td>
+        <td class="font-mono">string</td>
+        <td class="font-mono">-</td>
+        <td>The ID attribute of the element.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">variation</td>
+        <td class="font-mono">string | null</td>
+        <td class="font-mono">null</td>
+        <td>The variation of the accordion.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Computed Properties</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">panelComponentsRefs</td>
+        <td class="font-mono">QueryList&lt;BlizzExpansionPanelComponent&gt;</td>
+        <td>A query list of references to the expansion-panel components.</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h6 class="table-header">Methods</h6>
+    <table>
+      <thead>
+      <tr>
+        <th>Method</th>
+        <th>Return Type</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="font-mono">expandAll()</td>
+        <td class="font-mono">void</td>
+        <td>Expands all expansion panels in the accordion.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">collapseAll()</td>
+        <td class="font-mono">void</td>
+        <td>Collapse all expansion panels in the accordion.</td>
+      </tr>
+      <tr>
+        <td class="font-mono">setupPanels()</td>
+        <td class="font-mono">void</td>
+        <td>Sets up the nested expansion panels properties, providing accordion behaviour.</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<doc-sidenav [left]="true"></doc-sidenav>

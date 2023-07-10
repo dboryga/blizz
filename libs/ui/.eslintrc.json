@@ -9,24 +9,12 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "bzz",
-            "style": "camelCase"
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "bzz",
-            "style": "kebab-case"
-          }
-        ],
-        "@typescript-eslint/no-non-null-assertion": "off",
+        "@angular-eslint/directive-selector": "off",
+        "@angular-eslint/component-selector": "off",
         "@angular-eslint/no-input-rename": "off",
+        "@angular-eslint/no-output-rename": "off",
+        "@angular-eslint/no-outputs-metadata-property": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/member-ordering": "off"
       }
     },

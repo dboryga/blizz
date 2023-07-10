@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { CustomizerParam } from './customizer.routing-data';
 import {
   BlizzComponent,
@@ -13,17 +13,18 @@ import {
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import {
   createSidebarData,
-  getComponentSchema,
-  getElementsSchema,
   mapElements,
   mapStates,
   SidebarData,
   SidebarElements,
   SidebarProperty,
 } from './utils/sidebar-data';
-import { get, has, isEmpty, map, omit, remove, set, unset } from 'lodash';
+import { get, has, isEmpty, map, merge, omit, remove, set, unset } from 'lodash';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, filter, Observable, Subject } from 'rxjs';
+import { kebabToCamelCase } from '@blizz/core';
+import { DOCUMENT } from '@angular/common';
+import { ComponentsSchema } from '../../shared/utils/components-schema';
 
 export const CUSTOMIZER_CONFIG_LOCAL_STORAGE_TOKEN = 'customizerConfig';
 
@@ -36,8 +37,21 @@ export class DocCustomizerService implements OnDestroy {
   };
   readonly forceStateAttr = `force-state`;
 
+  get componentRouteParam() {
+    const keyFromRoute = this.route.snapshot.paramMap.get(CustomizerParam.Component);
+    if (!keyFromRoute) {
+      throw new Error(
+        '[DocCustomizerService] Cannot access customizer without component specified in the route',
+      );
+    }
+    return keyFromRoute;
+  }
+
   get componentKey() {
-    return this.route.snapshot.paramMap.get(CustomizerParam.Component) as ComponentKey;
+    return kebabToCamelCase(this.componentRouteParam) as ComponentKey;
+  }
+  get componentSelector() {
+    return `bzz-${this.componentRouteParam}`;
   }
 
   get variationKey() {
@@ -52,16 +66,16 @@ export class DocCustomizerService implements OnDestroy {
     return `customizer-preview-${this.componentKey}`;
   }
 
-  set previewComponent(value: BlizzComponent) {
-    if (value === this._previewComponent) return;
-    this._previewComponent = value;
+  set previewComponent(v: BlizzComponent) {
+    if (v === this._previewComponent) return;
+    this._previewComponent = v;
     this.updateVariationVisibility();
   }
   private _previewComponent?: BlizzComponent;
 
-  set previewElement(value: HTMLElement) {
-    if (value === this._previewElement) return;
-    this._previewElement = value;
+  set previewElement(v: HTMLElement) {
+    if (v === this._previewElement) return;
+    this._previewElement = v;
     this.updateStateVisibility();
   }
   private _previewElement?: HTMLElement;
@@ -91,7 +105,14 @@ export class DocCustomizerService implements OnDestroy {
   }
   private _config!: BlizzConfig;
 
+  public get initialConfigValue() {
+    return this._initialConfigValue;
+  }
   private _initialConfigValue!: BlizzConfigValue;
+
+  public get baseConfigValue() {
+    return this._baseConfigValue;
+  }
   private _baseConfigValue!: BlizzConfigValue;
 
   get sidebarData(): SidebarData | null {
@@ -133,6 +154,7 @@ export class DocCustomizerService implements OnDestroy {
     protected readonly router: Router,
     protected readonly route: ActivatedRoute,
     protected readonly blizzService: BlizzService,
+    @Inject(DOCUMENT) protected readonly document: Document,
   ) {
     this._setupConfigs();
     this.handleEvents();
@@ -160,12 +182,12 @@ export class DocCustomizerService implements OnDestroy {
   checkRoute() {
     if (
       this.variationKey &&
-      !map(this._sidebarData?.variations, 'key').includes(this.variationKey)
+      !map(this.sidebarData?.variations, 'key').includes(this.variationKey)
     ) {
       this.router.navigate(['variations'], { relativeTo: this.route });
     }
 
-    if (this.stateKey && !map(this._sidebarData?.states, 'key').includes(this.stateKey)) {
+    if (this.stateKey && !map(this.sidebarData?.states, 'key').includes(this.stateKey)) {
       this.router.navigate(['state'], { relativeTo: this.route });
     }
   }
@@ -206,13 +228,17 @@ export class DocCustomizerService implements OnDestroy {
 
   private _updateProperty(sidebarProp: SidebarProperty, value?: string) {
     const path = `components.${this.componentKey}.${sidebarProp.path}`;
-    value?.length && value !== sidebarProp.inheritedValue?.()
+    value?.length && value !== sidebarProp.inheritedValue()
       ? set(this._config, path, value)
       : unset(this._config, path);
-    this._purgeConfig(path);
+    this._purgeConfig(sidebarProp, path);
     this.updateLocalStorageConfig();
     this._updateLocalComponentCssVariable(sidebarProp, value);
+    if (this._previewComponent) {
+      merge(this._previewComponent.config, this.componentConfig);
+    }
     this._previewComponent?.changeDetector.detectChanges();
+
     this._detectChanges$.next();
   }
 
@@ -233,7 +259,8 @@ export class DocCustomizerService implements OnDestroy {
   renameVariation(key: string, newKey: string) {
     const clone = structuredClone(
       get(this._config, `components.${this.componentKey}.variations.${key}`),
-    );
+    ) as SidebarElements;
+    if (!clone) return;
     this._removeVariationFromConfig(key);
     this._setVariationInConfig(newKey, clone);
     this.updateLocalStorageConfig();
@@ -252,8 +279,8 @@ export class DocCustomizerService implements OnDestroy {
   }
 
   private _createVariationInSidebarData(key: string) {
-    const componentSchema = getComponentSchema(this.componentKey);
-    const elementsSchema = getElementsSchema(this.componentKey, componentSchema);
+    const componentSchema = ComponentsSchema.getComponentSchema(this.componentKey);
+    const elementsSchema = ComponentsSchema.getElementsSchema(componentSchema);
 
     const elements = mapElements(
       elementsSchema,
@@ -304,18 +331,16 @@ export class DocCustomizerService implements OnDestroy {
   private _generateLocalComponentCssVariables() {
     this._localStyleElement?.remove();
     this._localStyleElement = this.blizzService.createGlobalCssFromConfig(
-      {
-        ...this._initialConfigValue,
-        components: { [this.componentKey]: this.initialComponentConfigValue },
-      },
+      this._initialConfigValue,
       this.blizzServiceOpts,
     );
     this._detectChanges$.next();
   }
 
   private _updateLocalComponentCssVariable(sidebarProp: SidebarProperty, value?: string) {
-    const rules = this._localStyleElement?.sheet?.cssRules;
-    let selector = `#${this.previewId} bzz-${this.componentKey}`;
+    const sheet = this._localStyleElement?.sheet;
+    const rules = sheet?.cssRules;
+    let selector = `#${this.previewId} ${this.componentSelector}`;
     const { variationKey, stateKey } = sidebarProp;
 
     if (variationKey) {
@@ -329,21 +354,18 @@ export class DocCustomizerService implements OnDestroy {
     if (!rules || !sidebarProp.cssVariable) return;
     for (let i = 0; i < rules.length; i++) {
       const rule = rules[i] as CSSStyleRule;
-
       if (rule.selectorText === selector) {
-        if (value?.length) return rule.style.setProperty(sidebarProp.cssVariable, value);
-
-        const inheritedValue = sidebarProp.inheritedValue?.();
-        if (inheritedValue) return rule.style.setProperty(sidebarProp.cssVariable, inheritedValue);
-
-        return rule.style.removeProperty(sidebarProp.cssVariable);
+        return value?.length
+          ? rule.style.setProperty(sidebarProp.cssVariable, value)
+          : rule.style.removeProperty(sidebarProp.cssVariable);
       }
     }
 
-    this._localStyleElement?.sheet?.addRule(selector, `${sidebarProp.cssVariable}: ${value}`);
+    if (!value?.length) return;
+    sheet?.addRule(selector, `${sidebarProp.cssVariable}: ${value}`);
   }
 
-  private _purgeConfig(path: string) {
+  private _purgeConfig(sidebarProp: SidebarProperty, path: string) {
     const pathArr = path.split('.');
     let value = get(this._config, pathArr);
 
@@ -351,6 +373,7 @@ export class DocCustomizerService implements OnDestroy {
       unset(this._config, pathArr);
       pathArr.pop();
       value = get(this._config, pathArr);
+      console.log(value);
     }
   }
 

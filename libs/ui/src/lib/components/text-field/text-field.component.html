@@ -1,0 +1,9 @@
+<div class="bzz-text-field__label">
+  <ng-content select="label"></ng-content>
+</div>
+
+<div class="bzz-text-field__field" (click)="focus()">
+  <ng-content select="[bzzPrefix]"></ng-content>
+  <ng-content></ng-content>
+  <ng-content select="[bzzPrefix]"></ng-content>
+</div>

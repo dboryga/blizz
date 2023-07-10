@@ -9,10 +9,12 @@ import { CommonModule } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocCustomizerService } from '../../customizer.service';
 import { SidebarElements, SidebarProperty } from '../../utils/sidebar-data';
-import { BlizzExpandableModule, camelToTitleCase } from '@blizz/core';
+import { BlizzCdkExpandableModule, camelToTitleCase } from '@blizz/core';
 import { DocIconComponent } from '../../../../shared';
 import { FormsModule } from '@angular/forms';
-import { BlizzInputComponent } from '@blizz/ui';
+import { BlizzSelectComponent, BlizzTextFieldComponent, ComponentKey } from '@blizz/ui';
+import { objectified } from 'ts-objectify-type';
+import { keys } from 'lodash';
 
 @UntilDestroy()
 @Component({
@@ -23,15 +25,14 @@ import { BlizzInputComponent } from '@blizz/ui';
   standalone: true,
   imports: [
     CommonModule,
-    BlizzExpandableModule,
+    BlizzCdkExpandableModule,
     DocIconComponent,
     FormsModule,
-    BlizzInputComponent,
+    BlizzTextFieldComponent,
+    BlizzSelectComponent,
   ],
 })
 export class DocCustomizerElementsControlsComponent implements OnInit {
-  readonly camelToTitleCase = camelToTitleCase;
-
   @Input() elements?: SidebarElements | null;
 
   @Input() nested = false;
@@ -50,4 +51,31 @@ export class DocCustomizerElementsControlsComponent implements OnInit {
   protected updateProperty(sidebarProp: SidebarProperty, value: string) {
     this.service.updateProperty$.next({ sidebarProp, value });
   }
+
+  getUnionSelectOptions(prop: SidebarProperty): string[] {
+    if ('unionOf' in prop) {
+      return (
+        prop.unionOf?.reduce((arr: string[], member) => {
+          let value: string;
+          try {
+            value = JSON.parse(member.type) as string;
+          } catch (e) {
+            return arr;
+          }
+          return [...arr, value];
+        }, []) ?? []
+      );
+    }
+    return [];
+  }
+
+  getVariationRefSelectOptions(prop: SidebarProperty): string[] {
+    const componentConfigRef =
+      this.service.initialConfigValue.components?.[prop.elementKey as ComponentKey];
+    if (!componentConfigRef) return [];
+
+    return keys(componentConfigRef.variations);
+  }
+
+  protected readonly camelToTitleCase = camelToTitleCase;
 }

@@ -9,17 +9,23 @@ import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocIconComponent } from '../../../../shared';
-import { BlizzExpandableDirective, BlizzExpandableModule } from '@blizz/core';
-import { BlizzInputComponent } from '@blizz/ui';
+import {
+  BlizzCdkExpandableDirective,
+  BlizzCdkExpandableModule,
+  camelToKebabCase,
+  camelToTitleCase,
+} from '@blizz/core';
+import { BlizzTextFieldComponent } from '@blizz/ui';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { keys } from 'lodash';
-import { DocCustomizerElementsControlsComponent } from '../../components/elements-controls/elements-controls.component';
 import { debounceTime, filter, Subject } from 'rxjs';
+import { DocCustomizerElementsControlsComponent } from '../../components/elements-controls/elements-controls.component';
 import { DocExpansionToggleComponent } from '../../../../shared/components/expansion-toggle/expansion-toggle.component';
 
 @UntilDestroy()
 @Component({
+  selector: 'doc-customizer-variations',
   templateUrl: './variations.view.html',
   styleUrls: ['./variations.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -28,8 +34,8 @@ import { DocExpansionToggleComponent } from '../../../../shared/components/expan
   imports: [
     CommonModule,
     DocIconComponent,
-    BlizzExpandableModule,
-    BlizzInputComponent,
+    BlizzCdkExpandableModule,
+    BlizzTextFieldComponent,
     FormsModule,
     RouterModule,
     DocCustomizerElementsControlsComponent,
@@ -90,7 +96,7 @@ export class DocCustomizerVariationsView implements OnInit {
   }
 
   protected variationArrowClick(
-    expandableDirectiveRef: BlizzExpandableDirective,
+    expandableDirectiveRef: BlizzCdkExpandableDirective,
     event: MouseEvent,
   ) {
     if (expandableDirectiveRef.collapsed) return;
@@ -103,4 +109,7 @@ export class DocCustomizerVariationsView implements OnInit {
     this.service.renameVariation(key, newKey);
     this.selectVariation(newKey);
   }
+
+  protected readonly camelToKebabCase = camelToKebabCase;
+  protected readonly camelToTitleCase = camelToTitleCase;
 }

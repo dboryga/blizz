@@ -1,7 +1,8 @@
 <div
-  [bzzExpandableToggle]="expandableRef"
-  [bzzExpandableExpandSingle]="single"
-  [bzzExpandableClosable]="closable"
+  [bzzExpandableTrigger]="expandableRef"
+  [bzzExpandableTriggerExpandSingle]="single"
+  [bzzExpandableTriggerCanExpand]="canExpand"
+  [bzzExpandableTriggerCanCollapse]="canCollapse"
   (click)="toggleClick.emit($event)"
   class="btn-expansion-toggle"
 >

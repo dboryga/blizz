@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DocCustomizerService } from '../../customizer.service';
 
 @Component({
+  selector: 'doc-customizer-animations',
   templateUrl: './animations.view.html',
   styleUrls: ['./animations.view.scss'],
   encapsulation: ViewEncapsulation.Emulated,

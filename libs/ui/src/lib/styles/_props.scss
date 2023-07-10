@@ -1,68 +1,83 @@
-@mixin cursor($prefix: '') {
-  cursor: var(--#{$prefix}cursor);
+@mixin cursor($key: '', $default: inherit) {
+  cursor: var(--bzz-#{$key}_cursor, $default);
 }
 
-@mixin bgColor($prefix: '') {
-  background-color: var(--#{$prefix}bg-color);
+@mixin bgColor($key: '') {
+  background-color: var(--bzz-#{$key}_bg-color);
 }
 
-@mixin padding($prefix: '') {
-  padding: var(--#{$prefix}padding);
+@mixin padding($key: '') {
+  padding: var(--bzz-#{$key}_padding);
 }
 
-@mixin margin($prefix: '') {
-  margin: var(--#{$prefix}margin);
+@mixin margin($key: '') {
+  margin: var(--bzz-#{$key}_margin);
 }
 
-@mixin spacing($prefix: '') {
-  padding: var(--#{$prefix}padding);
-  margin: var(--#{$prefix}margin);
+@mixin gap($key: '') {
+  gap: var(--bzz-#{$key}_gap);
 }
 
-@mixin margin($prefix: '') {
-  margin: var(--#{$prefix}margin);
+@mixin spacing($key: '') {
+  @include padding($key);
+  @include margin($key);
 }
 
-@mixin width($prefix: '') {
-  min-width: var(--#{$prefix}width-min);
-  width: var(--#{$prefix}width-value);
-  max-width: var(--#{$prefix}width-max);
+@mixin flexSpacing($key: '') {
+  @include spacing($key);
+  @include gap($key);
 }
 
-@mixin height($prefix: '') {
-  min-height: var(--#{$prefix}height-min);
-  height: var(--#{$prefix}height-value);
-  max-height: var(--#{$prefix}height-max);
+@mixin width($key: '') {
+  min-width: var(--bzz-#{$key}_width-min);
+  width: var(--bzz-#{$key}_width-value);
+  max-width: var(--bzz-#{$key}_width-max);
 }
 
-@mixin text($prefix: '') {
-  color: var(--#{$prefix}text-color);
-  font-size: var(--#{$prefix}text-size);
-  font-family: var(--#{$prefix}text-font);
-  font-style: var(--#{$prefix}text-style);
-  font-weight: var(--#{$prefix}text-weight);
-  line-height: var(--#{$prefix}text-height);
-  text-transform: var(--#{$prefix}text-transform);
-  letter-spacing: var(--#{$prefix}text-letter-spacing);
-  word-spacing: var(--#{$prefix}text-word-spacing);
+@mixin height($key: '') {
+  min-height: var(--bzz-#{$key}_height-min);
+  height: var(--bzz-#{$key}_height-value);
+  max-height: var(--bzz-#{$key}_height-max);
 }
 
-@mixin border($prefix: '') {
-  border-radius: var(--#{$prefix}border-radius);
-  border-width: var(--#{$prefix}border-width, 0);
-  border-style: var(--#{$prefix}border-style, solid);
-  border-color: var(--#{$prefix}border-color);
+@mixin sizing($key: '') {
+  @include width($key);
+  @include height($key);
 }
 
-@mixin optimizedBorder($prefix: '') {
+@mixin text($key: '') {
+  color: var(--bzz-#{$key}_text-color);
+  font-size: var(--bzz-#{$key}_text-size);
+  font-family: var(--bzz-#{$key}_text-font);
+  font-style: var(--bzz-#{$key}_text-style);
+  font-weight: var(--bzz-#{$key}_text-weight);
+  line-height: var(--bzz-#{$key}_text-height);
+  text-transform: var(--bzz-#{$key}_text-transform);
+  letter-spacing: var(--bzz-#{$key}_text-letter-spacing);
+  word-spacing: var(--bzz-#{$key}_text-word-spacing);
+}
+
+@mixin border($key: '') {
+  border-radius: var(--bzz-#{$key}_border-radius);
+  border-width: var(--bzz-#{$key}_border-width, 0);
+  border-style: var(--bzz-#{$key}_border-style, solid);
+  border-color: var(--bzz-#{$key}_border-color);
+}
+
+@mixin shadow($key: '') {
+  box-shadow: var(--bzz-#{$key}_shadow);
+}
+
+@mixin optimizedBorder($key: '') {
   border: none;
-  box-shadow: inset 0 0 0 var(--#{$prefix}border-width) var(--#{$prefix}border-color);
+  box-shadow: inset 0 0 0 var(--bzz-#{$key}_border-width) var(--bzz-#{$key}_border-color), var(--bzz-#{$key}_shadow, 0 0 transparent);
 }
 
-@mixin transform($prefix: '') {
-  opacity: var(--#{$prefix}transform-opacity, 1);
-  translate: var(--#{$prefix}transform-translate, '0 0');
-  scale: var(--#{$prefix}transform-scale, '1');
-  rotate: var(--#{$prefix}transform-rotate, 'unset');
-  transform-origin: var(--#{$prefix}transform-origin);
+
+@mixin transform($key: '') {
+  opacity: var(--bzz-#{$key}_transform-opacity, 1);
+  translate: var(--bzz-#{$key}_transform-translate, '0 0');
+  scale: var(--bzz-#{$key}_transform-scale, '1');
+  rotate: var(--bzz-#{$key}_transform-rotate, 'unset');
+  transform-origin: var(--bzz-#{$key}_transform-origin);
 }

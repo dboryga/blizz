@@ -1,10 +1,10 @@
 <h2 class="hidden">Components</h2>
-<div class="relative flex h-full w-full">
+<div class="relative flex h-full w-full max-container">
 
   <doc-sidenav [links]="componentsLinks"></doc-sidenav>
 
-  <div class="grow h-full scrollable-y">
-    <div class="stack-container p-8" [@routerFade]="outlet.activatedRouteData">
+  <div class="grow h-full scrollable-y scrollbar-sm">
+    <div class="stack-container p-8 pb-24" [@routerFade]="outlet.activatedRouteData">
       <router-outlet #outlet="outlet"></router-outlet>
     </div>
   </div>

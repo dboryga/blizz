@@ -1,14 +1,19 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
-  Component, ElementRef, EventEmitter,
-  HostBinding, HostListener,
-  Input, Output,
-  ViewEncapsulation
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { getVariationConfig, injectComponentConfig } from '../../config';
-import { BlizzComponent } from '../../models/component.model';
 import { canOptimizeBorder } from '../../utils';
+import { BlizzComponent } from '../../models/component.model';
+import { getVariationConfig, injectComponentConfig } from '../../config';
 
 @Component({
   selector: 'bzz-chip',
@@ -20,18 +25,27 @@ import { canOptimizeBorder } from '../../utils';
   imports: [CommonModule],
 })
 export class BlizzChipComponent implements BlizzComponent {
-
   static instanceIdx = 0;
-  readonly componentName = 'chip';
-  readonly config = injectComponentConfig(this.componentName);
+  readonly componentKey = 'chip';
+  readonly config = injectComponentConfig(this.componentKey);
   readonly computedStyles = getComputedStyle(this.hostElementRef.nativeElement);
 
+  @Input()
   @HostBinding('id')
-  readonly id = `bzz-${this.componentName}-${BlizzChipComponent.instanceIdx++}` as const;
+  id = `bzz-${this.componentKey}-${BlizzChipComponent.instanceIdx++}`;
 
   @Input()
   @HostBinding('attr.variation')
   variation?: string | null;
+
+  get variationConfig() {
+    return getVariationConfig(this.config, this.variation);
+  }
+
+  constructor(
+    public readonly hostElementRef: ElementRef<HTMLElement>,
+    public readonly changeDetector: ChangeDetectorRef,
+  ) {}
 
   @Input()
   selectable = true;
@@ -93,15 +107,6 @@ export class BlizzChipComponent implements BlizzComponent {
   @HostBinding('class.--optimized-border')
   get optimizedBorder() {
     return canOptimizeBorder(this.computedStyles, '--border-width', '--border-style');
-  }
-
-  constructor(
-    public readonly hostElementRef: ElementRef<HTMLElement>,
-    public readonly changeDetector: ChangeDetectorRef,
-  ) {}
-
-  get variationConfig() {
-    return getVariationConfig(this.config, this.variation);
   }
 
   @HostListener('click')
