@@ -1,7 +1,6 @@
 import { BLIZZ_HOST_ELEMENT_KEY } from '../../../models';
 import { theme } from '../../../utils';
 import { BlizzConfigButton } from '../button-config.interface';
-import { color } from '@blizz/core';
 
 export const BUTTON_MATERIAL_CONFIG: Readonly<BlizzConfigButton> = {
   elements: {
