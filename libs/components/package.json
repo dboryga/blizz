@@ -1,10 +1,10 @@
 {
   "name": "@blizz-ui/components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "peerDependencies": {
     "@angular/common": ">16.1.0",
     "@angular/core": ">16.1.0",
-    "@blizz-ui/core": ">0.1.0",
+    "@blizz-ui/core": ">=0.1.0",
     "ts-essentials": "^9.3.2"
   },
   "dependencies": {
