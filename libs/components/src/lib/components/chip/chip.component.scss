@@ -1,0 +1,42 @@
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
+bzz-chip {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+
+  @include props.cursor('chip');
+  @include props.bgColor('chip');
+  @include props.flexSpacing('chip');
+  @include props.width('chip');
+  @include props.text('chip');
+  @include props.border('chip');
+  @include props.shadow('chip');
+  @include props.transform('chip');
+  @include transitions.transition;
+
+  [bzzPrefix] {
+    @include props.spacing('chip-prefix');
+    @include props.text('chip-prefix');
+    @include props.transform('chip-prefix');
+  }
+
+  [bzzSuffix] {
+    @include props.spacing('chip-suffix');
+    @include props.text('chip-suffix');
+    @include props.transform('chip-suffix');
+  }
+
+  &.--optimized-border {
+    @include props.optimizedBorder('chip');
+  }
+
+  &[state-disabled='true'] {
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    outline-offset: 4px;
+  }
+}

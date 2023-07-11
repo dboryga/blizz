@@ -1,4 +1,4 @@
-import { BlizzConfig } from '@blizz/ui';
+import { BlizzConfig } from '@blizz-ui/components';
 
 export const blizzConfig: BlizzConfig = {
   base: 'blizz',

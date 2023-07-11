@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import { DocIconComponent } from '../icon';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { BlizzCdkExpandableDirective, BlizzCdkExpandableModule } from '@blizz/core';
+import { BlizzCdkExpandableDirective, BlizzCdkExpandableModule } from '@blizz-ui/core';
 
 @UntilDestroy()
 @Component({

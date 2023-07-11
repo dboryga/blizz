@@ -12,10 +12,10 @@ import {
   BlizzIconButtonComponent,
   BlizzPredefinedConfig,
   BlizzTextFieldComponent,
-} from '@blizz/ui';
+} from '@blizz-ui/components';
 import { FormsModule } from '@angular/forms';
 import { DocIconComponent } from '../../../../shared';
-import { keys, values } from 'lodash';
+import { values } from 'lodash';
 
 @UntilDestroy()
 @Component({

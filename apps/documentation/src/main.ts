@@ -5,7 +5,7 @@ import { DocAppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTING } from './app/app.routing';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { BlizzModule } from '@blizz/ui';
+import { BlizzModule } from '@blizz-ui/components';
 import { blizzConfig } from './blizz.config';
 
 if (environment.production) {

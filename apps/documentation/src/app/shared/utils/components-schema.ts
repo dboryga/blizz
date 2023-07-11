@@ -1,4 +1,8 @@
-import { BLIZZ_HOST_ELEMENT_KEY, BlizzConfigComponentsDictionary, ComponentKey } from '@blizz/ui';
+import {
+  BLIZZ_HOST_ELEMENT_KEY,
+  BlizzConfigComponentsDictionary,
+  ComponentKey,
+} from '@blizz-ui/components';
 import { objectified, objectifyType } from 'ts-objectify-type';
 import { get } from 'lodash';
 

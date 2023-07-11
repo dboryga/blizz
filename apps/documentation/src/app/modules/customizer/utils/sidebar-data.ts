@@ -1,5 +1,5 @@
-import { camelToSentenceCase, firstLetterUpper } from '@blizz/core';
-import { BlizzConfigComponent, BlizzService, ComponentKey } from '@blizz/ui';
+import { camelToSentenceCase, firstLetterUpper } from '@blizz-ui/core';
+import { BlizzConfigComponent, BlizzService, ComponentKey } from '@blizz-ui/components';
 import { get, keys, omit } from 'lodash';
 import { objectified } from 'ts-objectify-type';
 import { PROPERTY_DISPLAY_NAME } from './display-names';

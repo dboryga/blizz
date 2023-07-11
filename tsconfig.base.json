@@ -20,9 +20,9 @@
       }
     ],
     "paths": {
-      "@blizz/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@blizz/core": ["libs/core/src/index.ts"],
-      "@blizz/ui": ["libs/ui/src/index.ts"]
+      "@blizz-ui/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@blizz-ui/core": ["libs/core/src/index.ts"],
+      "@blizz-ui/components": ["libs/components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

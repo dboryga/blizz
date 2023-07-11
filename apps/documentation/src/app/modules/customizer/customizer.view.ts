@@ -10,7 +10,7 @@ import {
   BlizzIconComponent,
   BlizzSelectComponent,
   BlizzTextFieldComponent,
-} from '@blizz/ui';
+} from '@blizz-ui/components';
 import { DocCustomizerService } from './customizer.service';
 import { DocCustomizerSidebarComponent } from './components/sidebar/sidebar.component';
 import { DocIconComponent } from '../../shared';

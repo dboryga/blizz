@@ -3,8 +3,8 @@ import { DocComponentCardComponent } from '../../../../shared';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ComponentsSchema } from '../../../../shared/utils/components-schema';
-import { BlizzChipComponent, ComponentKey } from '@blizz/ui';
-import { kebabToCamelCase } from '@blizz/core';
+import { BlizzChipComponent, ComponentKey } from '@blizz-ui/components';
+import { kebabToCamelCase } from '@blizz-ui/core';
 import { DefaultComponentPage } from '../../models/component-page.model';
 import { CUSTOM_STATE_DESCRIPTIONS, NATIVE_STATE_DESCRIPTIONS } from './state-descriptions';
 

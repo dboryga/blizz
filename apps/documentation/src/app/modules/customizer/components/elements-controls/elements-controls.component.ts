@@ -9,11 +9,10 @@ import { CommonModule } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocCustomizerService } from '../../customizer.service';
 import { SidebarElements, SidebarProperty } from '../../utils/sidebar-data';
-import { BlizzCdkExpandableModule, camelToTitleCase } from '@blizz/core';
+import { BlizzCdkExpandableModule, camelToTitleCase } from '@blizz-ui/core';
 import { DocIconComponent } from '../../../../shared';
 import { FormsModule } from '@angular/forms';
-import { BlizzSelectComponent, BlizzTextFieldComponent, ComponentKey } from '@blizz/ui';
-import { objectified } from 'ts-objectify-type';
+import { BlizzSelectComponent, BlizzTextFieldComponent, ComponentKey } from '@blizz-ui/components';
 import { keys } from 'lodash';
 
 @UntilDestroy()

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DocCustomizerService } from '../../customizer.service';
 import { DocIconComponent } from '../../../../shared';
-import { camelToTitleCase } from '@blizz/core';
+import { camelToTitleCase } from '@blizz-ui/core';
 
 @UntilDestroy()
 @Component({

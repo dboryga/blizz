@@ -1,4 +1,4 @@
-import { AnyNativeState } from '@blizz/ui';
+import { AnyNativeState } from '@blizz-ui/components';
 
 export const NATIVE_STATE_DESCRIPTIONS = {
   [AnyNativeState.Hover]: 'The element is currently being hovered over by the user.',

@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { Message } from '@blizz/api-interfaces';
+import { Message } from '@blizz-ui/api-interfaces';
 
 import { AppService } from './app.service';
 

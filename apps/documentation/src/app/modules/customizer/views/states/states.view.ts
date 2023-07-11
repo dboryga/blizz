@@ -12,10 +12,10 @@ import {
   BlizzCdkExpandableDirective,
   BlizzCdkExpandableModule,
   kebabToTitleCase,
-} from '@blizz/core';
+} from '@blizz-ui/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DocIconComponent } from '../../../../shared';
-import { BlizzTextFieldComponent } from '@blizz/ui';
+import { BlizzTextFieldComponent } from '@blizz-ui/components';
 import { FormsModule } from '@angular/forms';
 import { DocCustomizerElementsControlsComponent } from '../../components/elements-controls/elements-controls.component';
 import { DocExpansionToggleComponent } from '../../../../shared/components/expansion-toggle/expansion-toggle.component';

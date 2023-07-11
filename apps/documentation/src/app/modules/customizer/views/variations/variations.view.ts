@@ -14,8 +14,8 @@ import {
   BlizzCdkExpandableModule,
   camelToKebabCase,
   camelToTitleCase,
-} from '@blizz/core';
-import { BlizzTextFieldComponent } from '@blizz/ui';
+} from '@blizz-ui/core';
+import { BlizzTextFieldComponent } from '@blizz-ui/components';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { keys } from 'lodash';

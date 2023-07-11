@@ -9,7 +9,7 @@ import {
   BlizzService,
   BlizzServiceOptions,
   ComponentKey,
-} from '@blizz/ui';
+} from '@blizz-ui/components';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import {
   createSidebarData,
@@ -22,7 +22,7 @@ import {
 import { get, has, isEmpty, map, merge, omit, remove, set, unset } from 'lodash';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, filter, Observable, Subject } from 'rxjs';
-import { kebabToCamelCase } from '@blizz/core';
+import { kebabToCamelCase } from '@blizz-ui/core';
 import { DOCUMENT } from '@angular/common';
 import { ComponentsSchema } from '../../shared/utils/components-schema';
 

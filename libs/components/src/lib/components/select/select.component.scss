@@ -1,0 +1,169 @@
+@use '../../styles/props' as props;
+@use '../../styles/transitions' as transitions;
+
+bzz-select {
+  position: relative;
+  display: flex;
+  @include props.cursor('select');
+  @include props.bgColor('select');
+  @include props.spacing('select');
+  @include props.width('select');
+  @include props.text('select');
+  @include props.border('select');
+  @include props.shadow('select');
+  @include props.transform('select');
+  @include transitions.transition;
+
+  .bzz-select__label {
+    display: block;
+    @include props.cursor('select-label');
+    @include props.spacing('select-label');
+    @include props.text('select-label');
+    @include props.transform('select-label');
+  }
+
+  .bzz-select__field {
+    flex-grow: 1;
+    display: flex;
+    @include props.cursor('select-field');
+    @include props.bgColor('select-field');
+    @include props.flexSpacing('select-field');
+    @include props.text('select-field');
+    @include props.border('select-field');
+    @include props.shadow('select-field');
+    @include props.transform('select-field');
+  }
+
+  [bzzPrefix] {
+    @include props.spacing('select-prefix');
+    @include props.text('select-prefix');
+    @include props.transform('select-prefix');
+  }
+
+  [bzzSuffix] {
+    @include props.spacing('select-suffix');
+    @include props.text('select-suffix');
+    @include props.transform('select-suffix');
+  }
+
+  &.--optimized-field-border .bzz-select__field {
+    @include props.optimizedBorder('select-field');
+  }
+
+  select {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  select::placeholder {
+    @include props.text('select-placeholder');
+    @include props.transform('select-placeholder');
+    @include transitions.transition;
+  }
+
+  &[state-disabled='true'] {
+    pointer-events: none;
+  }
+
+  &.--optimized-border {
+    @include props.optimizedBorder('select');
+    @include transitions.transition;
+  }
+
+  &.--label-top {
+    flex-direction: column;
+  }
+  &.--label-bottom {
+    flex-direction: column-reverse;
+  }
+  &.--label-left {
+    flex-direction: row;
+  }
+  &.--label-right {
+    flex-direction: row-reverse;
+  }
+
+  &.--label-secondary-left .bzz-select__label,
+  &.--label-secondary-top .bzz-select__label {
+    align-self: start;
+  }
+
+  &.--label-secondary-center .bzz-select__label {
+    align-self: center;
+  }
+
+  &.--label-secondary-right .bzz-select__label,
+  &.--label-secondary-bottom .bzz-select__label {
+    align-self: end;
+  }
+
+  &.--label-floating {
+    .bzz-select__label {
+      align-self: center;
+      position: absolute;
+      display: flex;
+      align-items: center;
+
+      padding: var(--bzz-select-field_padding);
+      padding-top: 0;
+      padding-bottom: 0;
+      height: 100%;
+
+      font-size: var(--bzz-select-field_text-size);
+      line-height: var(--bzz-select-field_text-height);
+
+      border-color: transparent;
+      pointer-events: none;
+      @include transitions.transition(120ms, transitions.$ease-in);
+    }
+
+    label {
+      display: block;
+      transform-origin: left;
+      background: var(--floating-label-color, var(--bzz-select-field_bg-color));
+      background: var(
+        --floating-label-color,
+        linear-gradient(
+          0deg,
+          var(--bzz-select-field_bg-color) 0%,
+          var(--bzz-select-field_bg-color) 50%,
+          transparent 50%,
+          transparent 100%
+        )
+      );
+      padding: 0 var(--bzz-select-label_floating-border-gap, 2px);
+      margin: 0 calc(var(--bzz-select-label_floating-border-gap, 2px) * -1);
+      @include transitions.transition(120ms, transitions.$ease-in, scale);
+    }
+
+    select:not(.--label-floating-always)::placeholder {
+      visibility: hidden;
+    }
+
+    &[state-labelFloating='true'] .bzz-select__label {
+      @include transitions.transition(80ms, transitions.$ease-out);
+
+      label {
+        scale: var(--bzz-select-label_floating-scale);
+        @include transitions.transition(80ms, transitions.$ease-out, scale);
+      }
+
+      ~ .bzz-select__field select::placeholder {
+        visibility: visible;
+      }
+    }
+
+    &.--label-floating-always {
+      .bzz-select__label,
+      .bzz-select__label label,
+      select::placeholder {
+        transition: none;
+      }
+    }
+  }
+}
