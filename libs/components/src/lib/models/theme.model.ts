@@ -7,7 +7,7 @@ export const BlizzPredefinedTheme = {
 export type BlizzPredefinedTheme = ValueOf<typeof BlizzPredefinedTheme>;
 
 export type BlizzConfigTheme = BlizzTheme & {
-  base: BlizzPredefinedTheme;
+  base?: BlizzPredefinedTheme;
 };
 
 export const BlizzColorShadeKey = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;

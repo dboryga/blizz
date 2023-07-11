@@ -23,7 +23,9 @@ export const setupConfig = (config?: BlizzConfig): BlizzConfigValue => {
   const theme =
     typeof themeConfig === 'string'
       ? structuredClone(PREDEFINED_THEMES[themeConfig])
-      : _.merge(structuredClone(PREDEFINED_THEMES[themeConfig.base]), structuredClone(themeConfig));
+      : themeConfig.base
+      ? _.merge(structuredClone(PREDEFINED_THEMES[themeConfig.base]), structuredClone(themeConfig))
+      : themeConfig;
 
   const base = config?.base ?? DEFAULT_BLIZZ_CONFIG.base!;
   const components = _.merge(
