@@ -1,7 +1,9 @@
 @use 'styles/scrollbar' as scrollbar;
 @use 'styles/button' as button;
 @use 'styles/input' as input;
+@use 'styles/sidenav' as sidenav;
 @use 'styles/customizer-preview' as customizer-preview;
+@use 'styles/documentation-page' as documentation-page;
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@200;400');
@@ -67,7 +69,7 @@ svg {
 }
 
 .max-container {
-  max-width: 100rem;
+  max-width: 90rem;
   margin-left: auto;
   margin-right: auto;
 }

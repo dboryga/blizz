@@ -5,6 +5,18 @@ $scrollbar-width-sm: 0.25rem;
 .scrollable-y { overflow-y: auto; }
 .scrollable-x { overflow-x: auto; }
 
+::-webkit-scrollbar {
+  width: $scrollbar-width-default;
+
+  &-track {
+    @apply bg-slate-100;
+  }
+
+  &-thumb {
+    @apply bg-slate-300;
+  }
+}
+
 .scrollbar-sm {
   @supports (scrollbar-width: $scrollbar-width-sm) {
     scrollbar-width: $scrollbar-width-sm;

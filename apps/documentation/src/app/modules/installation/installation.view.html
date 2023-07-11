@@ -1,1 +1,321 @@
 <h2 class="hidden">Installation</h2>
+
+<div class="scrollable-y h-full documentation-page p-0">
+  <main class="max-container p-8 pb-24">
+
+    <section id="doc-installation-install-packages">
+      <h3>1. Install packages</h3>
+
+      <div>
+        <b>npm:</b>
+        <p>To install the library using npm, run the following command in your project directory:</p>
+
+        <pre class="my-1"><code>npm install @blizz-ui/core @blizz-ui/components</code></pre>
+        <p>This will download and install the required packages.</p>
+      </div>
+
+      <div>
+        <b>yarn:</b>
+        <p>If you prefer to use yarn, run the following command in your project directory:</p>
+        <pre class="my-1"><code>yarn add @blizz-ui/core @blizz-ui/components</code></pre>
+        <p>Yarn will fetch and install the necessary packages.</p>
+      </div>
+    </section>
+
+    <section id="doc-installation-import-module">
+      <h3>2. Import module</h3>
+
+      <p>
+        Regardless of whether you used npm or yarn for installation, the module import remains the same.
+        In your Angular project, import the <code>BlizzModule</code> from the <code>@blizz-ui/components</code> package.
+        Add the following import statement:
+      </p>
+
+      <pre><code>import &#123; BlizzModule &#125; from '@blizz-ui/components';</code></pre>
+
+      <p>
+        Then, include the module in the imports array of your app's main module using the <code>forRoot</code> method:
+      </p>
+
+      <pre><code>BlizzModule.forRoot()</code></pre>
+    </section>
+
+    <section id="doc-installation-customization">
+      <h3>3. Customization</h3>
+
+      <p>
+        If you want to customize the library, you can pass a config object as an argument to the <code>forRoot</code> method. To create a custom configuration, follow these steps:
+      </p>
+      <ol class="list-decimal list-inside">
+        <li>Create a new file in the 'src' folder of your Angular project, for example <code>blizz.config.ts</code>.</li>
+        <li>
+          Define a constant variable <code>blizzConfig</code> and assign it an object that implements the <code>BlizzConfig</code> interface.
+          This object should contain the desired customization options. For example:
+          <pre class="my-1"><code>import &#123; BlizzConfig &#125; from '@blizz-ui/components';
+
+export const blizzConfig: BlizzConfig = &#123;
+base: 'blizz',
+theme: 'crystal',
+components: &#123;&#125;
+&#125;;</code></pre>
+        </li>
+
+        <li>
+          In your app's main module, import the custom configuration file:
+          <pre class="my-1"><code>import &#123; blizzConfig &#125; from './blizz.config';</code></pre>
+        </li>
+
+        <li>
+          Pass the imported blizzConfig object as an argument to the forRoot method:
+          <pre class="my-1"><code>BlizzModule.forRoot(blizzConfig)</code></pre>
+        </li>
+      </ol>
+
+      <p>By following these steps, you can customize the library according to your requirements.</p>
+      <p>
+        Remember to import and use the components from the library in your Angular application as needed.
+        You can refer to the <a routerLink="/components">Components documentation</a> for detailed information on the available components and their usage.
+      </p>
+    </section>
+
+    <section id="doc-installation-config">
+      <h3>4. Config</h3>
+
+      <p>The <code>BlizzConfig</code> interface is used to define the configuration options for customizing the Blizz UI library.</p>
+
+      <div>
+        <h6 class="table-header">BlizzConfig</h6>
+        <table>
+          <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="font-mono">base</td>
+            <td class="font-mono">BlizzPredefinedConfig</td>
+            <td class="font-mono">'blizz'</td>
+            <td>
+              Represents the base configuration for the Blizz UI library.<br> Currently available predefined configs: <code>'blizz'</code>, <code>'material'</code>.
+            </td>
+          </tr>
+          <tr>
+            <td class="font-mono">theme</td>
+            <td class="font-mono">BlizzPredefinedTheme | BlizzConfigTheme</td>
+            <td class="font-mono">'crystal'</td>
+            <td>
+              Represents the theme configuration for the Blizz UI library. It can be a predefined theme or a custom theme.<br> Currently available predefined themes: <code>'crystal'</code>.
+            </td>
+          </tr>
+          <tr>
+            <td class="font-mono">components</td>
+            <td class="font-mono">BlizzConfigComponentsDictionary</td>
+            <td class="font-mono">-</td>
+            <td>
+              Represents the configuration options for individual components in the library. It is a dictionary that maps component keys to their respective configuration objects.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        The BlizzConfig interface allows you to customize various aspects of the Blizz UI library, including the base configuration, theme, and component-specific configurations.
+        By providing a custom configuration object implementing the BlizzConfig interface, you can tailor the library's appearance and behavior to suit your application's needs.
+      </p>
+
+      <p>
+        Note: The configuration objects for individual components, such as BlizzConfigChip, BlizzConfigTextField, BlizzConfigIcon, etc., define component-specific configuration options.
+        These options allow you to customize the styles, states, variations, and elements of each component.
+      </p>
+      <p>
+        Please refer to the <a routerLink="/components">Components documentation</a>for more detailed information on the available configuration options and their usage.
+      </p>
+
+      <section id="doc-installation-config-creating-custom-theme">
+        <h4>4.1. Creating Custom Theme</h4>
+
+        <p>The <code>BlizzConfigTheme</code> type represents the theme configuration for the Blizz UI library.
+        <p>The <code>BlizzPredefinedTheme</code> type defines the available predefined themes for the library. Currently, the only predefined theme is <code>'crystal'</code>.</p>
+        <p>
+          The <code>BlizzConfigTheme</code> type allows you to specify a predefined theme as the base theme for the library. Additionally, you can include any custom theme configurations that conform to the <code>BlizzTheme</code> type.
+          Custom theme can be any nested object where final value is string.
+          However, we recommend creating your custom themes with use of <code>BlizzThemeConfig</code> interface.
+          Thanks to this, there won't be need of manually specifying colors for every component, to make sure color exists in the theme.
+        </p>
+
+        <div>
+          <h6 class="table-header">BlizzThemeConfig</h6>
+          <table>
+            <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><code>white</code></td>
+              <td><code>string</code></td>
+              <td>Represents the color code for the "white" color in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>black</code></td>
+              <td><code>string</code></td>
+              <td>Represents the color code for the "black" color in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>neutral</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of neutral colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>primary</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of primary colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>secondary</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of secondary colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>tertiary</code></td>
+              <td><code>BlizzColorShade</code> (optional)</td>
+              <td>Represents the shades of tertiary colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>success</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of success colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>warning</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of warning colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>info</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of info colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>error</code></td>
+              <td><code>BlizzColorShade</code></td>
+              <td>Represents the shades of error colors in the theme palette.</td>
+            </tr>
+            <tr>
+              <td><code>text</code></td>
+              <td><code>string</code></td>
+              <td>Represents the default color code for text in the theme.</td>
+            </tr>
+            <tr>
+              <td><code>textOpposite</code></td>
+              <td><code>string</code> (optional)</td>
+              <td>Represents the opposite color code for text in the theme. This is an optional property.</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          The <code>BlizzColorShade</code> type represents the shades of a specific color in the Blizz UI theme palette. It is a dictionary that maps color shade keys (<code>BlizzColorShadeKey</code>) to their respective color codes (<code>string</code>).
+          The <code>BlizzColorShadeKey</code> type is an enumeration of possible shade keys:
+          <code>50</code> (usually lightest), <code>100</code>, <code>200</code>, <code>300</code>, <code>400</code>, <code>500</code>, <code>600</code>, <code>700</code>, <code>800</code>, <code>900</code>, <code>950</code> (usually darkest).
+          It provides a way to specify different shades of a color in the palette.
+          Each key maps to a specific color code representing the respective shade of the color.
+          <br>
+          Additionally you can specify optional <code>default</code> property, <code>500</code> is default if not specified.
+          It represents the default shade key for the color.
+          If specified, this shade key will be used as the default shade for the color.
+        </p>
+      </section>
+
+      <section id="doc-installation-config-using-theme-colors">
+        <h4>4.2. Using Theme Colors</h4>
+
+        <div>
+          <p>You can use theme colors directly in style files via css variables, for example if you want to use color <code>primary</code> and it's <code>600</code> shade, you can use:</p>
+          <pre class="my-1"><code>var(--bzz-theme_primary-600)</code></pre>
+          <p>All the theme color variables are prefixed with <code>--bzz-theme_</code>, and the value is flatten object separated with dashes (-).</p>
+        </div>
+
+        <div>
+          <p>If you want to use the <code>default</code> shade, the shade key can be skipped, so for example if you want to use the <code>default</code> shade of <code>primary</code> color, you can use:</p>
+          <pre class="my-1"><code>var(--bzz-theme_primary)</code></pre>
+        </div>
+      </section>
+
+      <section id="doc-installation-config-customizing-components">
+        <h4>4.3. Customizing Components</h4>
+
+        <p>The <code>BlizzConfigComponentsDictionary</code> type is a dictionary that holds the configuration options for individual components in the Blizz UI library. It maps component keys to their respective configuration objects.</p>
+        <p>Each key in the dictionary represents a specific component, while the associated value is the configuration object containing customization options and settings for that component. The configuration object for each component extends the <code>BlizzConfigComponent</code> interface.</p>
+        <p>The <code>BlizzConfigComponent</code> interface defines the structure for component-specific configuration options, including elements, states, and variations. It allows you to customize the styles, behavior, and other properties of each component.</p>
+
+        <div>
+          <h6 class="table-header">BlizzConfigComponent</h6>
+          <table>
+            <thead>
+            <tr>
+              <th>Property</th>
+              <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><code>elements</code></td>
+              <td>
+                Represents the configuration options for the elements within the component.
+                Each element has <code>styles</code> property, that includes all properties possible to customize the style of the element.
+              </td>
+            </tr>
+            <tr>
+              <td><code>states</code></td>
+              <td>
+                Represents the configuration options for the different states of the component's elements. Each state is dictionary of component elements.
+                States may be native html states such as: <code>hover</code> and <code>disabled</code>, or component specific custom states.
+                Specifying properties in a state overrides default state properties.
+              </td>
+            </tr>
+            <tr>
+              <td><code>variations</code></td>
+              <td>
+                Represents the configuration options for the variations of the component's elements and states.
+                Specifying properties in a variation overrides default variation properties.
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>To fully understand and utilize the available configuration options for each component, it is recommended to refer to the <a routerLink="/components">Components documentation</a>, which provide detailed explanations and usage guidelines.</p>
+      </section>
+
+      <section id="doc-installation-config-customizer">
+        <h4>4.4. Customizer</h4>
+        <p>The "Customizer" feature in the Blizz UI library is a powerful tool that enables users to generate component configurations easily using a user-friendly graphical user interface (GUI) similar to popular design tools like Figma.</p>
+        <p>With the "Customizer," users can visually modify various aspects of a component's configuration, such as elements styles, states, and variations, without needing to manually edit configuration file. The GUI provides an intuitive interface where users can interact with controls, sliders, color pickers, and other visual elements to customize the component's appearance and behavior.</p>
+        <p>
+          The feature simplifies the process of generating component configurations by offering a more visual and interactive approach.
+          Users can experiment with different settings, instantly preview the changes, and generate the corresponding configuration output based on their customizations.
+          It helps users can rapidly iterate and fine-tune the appearance of components to match their desired design or branding.
+          It enhances the flexibility and customization capabilities of the Blizz UI library, making it easier for developers and designers to create visually appealing and consistent user interfaces.
+        </p>
+        <p>
+          To access the "Customizer" feature, simply navigate to the documentation page of the desired component.
+          There, you will find a "Customize" button. Clicking on the button will open the "Customizer" interface.
+        </p>
+      </section>
+    </section>
+
+  </main>
+</div>
+
+
+

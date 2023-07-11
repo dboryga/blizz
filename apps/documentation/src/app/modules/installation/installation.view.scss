@@ -1,3 +1,19 @@
 :host {
-  @apply block;
+  @apply block h-full w-full overflow-hidden;
+}
+
+h3 {
+  @apply text-2xl font-bold;
+}
+
+h4 {
+  @apply text-xl font-bold;
+}
+
+section {
+  @apply mb-16 flex flex-col gap-4;
+}
+
+section > section {
+  @apply mt-8 mb-0;
 }
