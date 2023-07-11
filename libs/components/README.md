@@ -1,7 +1,3 @@
-# components
+# Blizz UI - Components
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test components` to execute the unit tests.
+Provides set of angular components for Blizz UI libraries. 
