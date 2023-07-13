@@ -1,7 +1,6 @@
 @use 'styles/scrollbar' as scrollbar;
 @use 'styles/button' as button;
 @use 'styles/input' as input;
-@use 'styles/sidenav' as sidenav;
 @use 'styles/customizer-preview' as customizer-preview;
 @use 'styles/documentation-page' as documentation-page;
 
@@ -34,13 +33,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (width < 1024px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (width < 440px) {
+  :root {
+    font-size: 12px;
+    --bzz-theme_text: black !important;
+  }
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   outline-color: var(--bzz-theme_primary-600);
 }
 
 body {
-  @apply fixed inset-0 text-dark font-primary;
+  @apply fixed inset-0 font-primary;
+  color: var(--bzz-theme_text);
 }
 
 embed {

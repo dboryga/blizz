@@ -1,20 +1,20 @@
 <header class="border-b w-full h-16 z-50">
-  <nav class="w-full h-full flex items-center px-8" [class.max-container]="!(isCustomizer$ | async)">
+  <nav class="w-full h-full flex items-center sm:px-8" [class.max-container]="!(isCustomizer$ | async)">
 
-    <a class="h-full py-4 pr-2" routerLink="/">
+    <a class="h-full py-4 pr-2 max-sm:hidden" routerLink="/">
       <embed class="h-full" src="/assets/svg/logo-text.svg" tabIndex="-1" />
     </a>
 
-    <div class="stack-container items-center">
+    <div class="stack-container items-center max-sm:w-full">
       <div
         *ngIf="(isCustomizer$ | async) === false; else customizerMenu"
-        class="h-full"
+        class="flex h-full max-sm:w-full"
         @fadeInOut
       >
-        <a routerLink="/installation" routerLinkActive #installationRla="routerLinkActive">
+        <a routerLink="/installation" routerLinkActive #installationRla="routerLinkActive" class="max-sm:w-full">
           <doc-tab [active]="installationRla.isActive">Installation</doc-tab>
         </a>
-        <a routerLink="/components" routerLinkActive #componentsRla="routerLinkActive">
+        <a routerLink="/components" routerLinkActive #componentsRla="routerLinkActive" class="max-sm:w-full">
           <doc-tab [active]="componentsRla.isActive">Components</doc-tab>
         </a>
 <!--        <a routerLink="/cdk" routerLinkActive #cdkRla="routerLinkActive">-->
@@ -35,10 +35,10 @@
     <div class="grow"></div>
 
 
-    <button class="btn-icon" type="button">
+    <button class="btn-icon max-md:hidden" type="button">
       <doc-icon>invert_colors</doc-icon>
     </button>
-    <a class="btn-icon" routerLink="/profile" routerLinkActive="active">
+    <a class="btn-icon max-md:hidden" routerLink="/profile" routerLinkActive="active">
       <doc-icon>account_circle</doc-icon>
     </a>
 

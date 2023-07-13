@@ -4,7 +4,6 @@ import { ModuleRoutesEnum } from '../../app.routing-data';
 import { CustomizerParam, CustomizerSettingsGroup } from './customizer.routing-data';
 import { DocCustomizerElementsView } from './views/elements/elements.view';
 import { DocCustomizerConfigView } from './views/config/config.view';
-import { DocCustomizerSnippetView } from './views/snippet/snippet.view';
 import { DocCustomizerVariationsView } from './views/variations/variations.view';
 import { DocCustomizerStatesView } from './views/states/states.view';
 import { DocCustomizerGeneralView } from './views/general/general.view';

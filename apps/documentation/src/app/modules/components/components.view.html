@@ -1,7 +1,7 @@
 <h2 class="hidden">Components</h2>
 <div class="relative flex h-full w-full max-container">
 
-  <doc-sidenav [links]="componentsLinks"></doc-sidenav>
+  <doc-sidenav [links]="componentsLinks" class="max-sm:hidden"></doc-sidenav>
 
   <div class="grow h-full scrollable-y scrollbar-sm">
     <div class="stack-container p-8 pb-24" [@routerFade]="outlet.activatedRouteData">

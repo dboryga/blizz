@@ -1,3 +1,11 @@
 :host {
   @apply flex flex-col min-h-full;
 }
+
+nav a {
+  @apply max-md:grow;
+
+  doc-tab {
+    @apply max-md:w-full max-sm:min-w-0 max-sm:px-0;
+  }
+}

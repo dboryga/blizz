@@ -1,4 +1,4 @@
 a:not(.btn-icon),
 doc-tab {
-  @apply h-full;
+  @apply h-full max-sm:w-full;
 }

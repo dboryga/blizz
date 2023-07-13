@@ -1,3 +1,5 @@
 :host {
-  @apply block h-full w-full overflow-y-hidden flex;
+  @apply
+    flex w-full overflow-y-auto
+    lg:h-full lg:overflow-y-hidden max-lg:flex-col-reverse;
 }
