@@ -1,6 +1,6 @@
 :host {
   @apply
     block h-full overflow-y-hidden
-    lg:grow max-lg:shrink-0 max-lg:h-[35vh];
+    lg:grow max-lg:shrink-0 max-lg:h-[35vh] max-lg:overflow-y-auto;
   background-color: #fbfbfb;
 }

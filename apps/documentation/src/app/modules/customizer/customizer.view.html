@@ -56,7 +56,7 @@
   </doc-customizer-preview>
 
   <doc-customizer-preview *ngSwitchCase="'expansionPanel'">
-    <div style="max-width: 40rem; width: 100%; height: 40rem">
+    <div class="lg:max-w-[40rem] w-full lg:h-[40rem]">
       <bzz-expansion-panel
         #previewElement
         doc-customizer
@@ -71,7 +71,7 @@
   </doc-customizer-preview>
 
   <doc-customizer-preview *ngSwitchCase="'accordion'">
-    <div style="max-width: 40rem; width: 100%; height: 50rem">
+    <div class="lg:max-w-[40rem] w-full lg:h-[50rem]">
       <bzz-accordion #previewElement doc-customizer>
         <bzz-expansion-panel doc-customizer>
           <bzz-expansion-panel-trigger doc-customizer>Panel 1</bzz-expansion-panel-trigger>
