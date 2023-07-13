@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "blizz-ui",
+    "public": "dist/apps/documentation",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
