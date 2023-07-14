@@ -13,6 +13,7 @@ import { BlizzExpansionPanelIndicatorComponent } from './expansion-panel-indicat
 import { BlizzCdkExpandableTriggerDirective } from '@blizz-ui/core';
 import { ExpansionPanelService } from '../expansion-panel.service';
 import { BlizzService } from '../../../blizz.service';
+import { BlizzIconButtonComponent } from '../../icon-button';
 
 @Component({
   selector: 'bzz-expansion-panel-trigger',
@@ -28,7 +29,9 @@ import { BlizzService } from '../../../blizz.service';
 
     <ng-template #defaultIndicator>
       <button
-        class="bzz-expansion-panel__default-indicator btn-icon arrow"
+        bzz-icon-button
+        class="bzz-expansion-panel__default-indicator"
+        [variation]="config?.elements?.defaultIndicator?.styles?.variation ?? null"
         [title]="service.expanded ? 'collapse' : 'expand'"
         [style.order]="indicatorStyles && indicatorStyles.position === 'start' ? '-1' : '1'"
         (click)="indicatorClick.emit($event)"
@@ -39,7 +42,7 @@ import { BlizzService } from '../../../blizz.service';
   `,
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlizzIconComponent, CommonModule],
+  imports: [BlizzIconComponent, CommonModule, BlizzIconButtonComponent],
   hostDirectives: [
     {
       directive: BlizzCdkExpandableTriggerDirective,
