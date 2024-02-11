@@ -380,7 +380,6 @@ export class DocCustomizerService implements OnDestroy {
       unset(this._config, pathArr);
       pathArr.pop();
       value = get(this._config, pathArr);
-      console.log(value);
     }
   }
 
