@@ -15,6 +15,7 @@
           name="variation-name"
           class="invisible-input text-base grow mr-1 ml-[-0.25rem]"
           [class.cursor-pointer]="variationExpandable.collapsed"
+          [class.pointer-events-none]="variationExpandable.collapsed"
           [disabled]="variationExpandable.collapsed"
           [(ngModel)]="variation.key"
           (ngModelChange)="renameVariation$.next({ key: variation.key, newKey: $event })"
