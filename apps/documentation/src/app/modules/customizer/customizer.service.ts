@@ -51,7 +51,7 @@ export class DocCustomizerService implements OnDestroy {
     return kebabToCamelCase(this.componentRouteParam) as ComponentKey;
   }
   get componentSelector() {
-    return `bzz-${this.componentRouteParam}`;
+    return BlizzService.getSelector(this.componentRouteParam as ComponentKey);
   }
 
   get variationKey() {
@@ -135,7 +135,6 @@ export class DocCustomizerService implements OnDestroy {
   private readonly _detectChanges$ = new Subject<void>();
 
   get componentConfig() {
-    console.log(this._config?.components?.[this.componentKey]);
     return this._config?.components?.[this.componentKey];
   }
 

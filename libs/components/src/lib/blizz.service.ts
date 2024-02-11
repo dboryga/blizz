@@ -91,15 +91,17 @@ export class BlizzService {
     );
   }
 
+  static getSelector(key: ComponentKey): string {
+    const componentSelector = `bzz-${camelToKebabCase(key)}`;
+    return attributeSelectors.includes(key) ? `[${componentSelector}]` : componentSelector;
+  }
+
   static getComponentCssRules(
     key: ComponentKey,
     config: BlizzConfigComponent,
     opts?: BlizzServiceOptions,
   ): string {
-    const componentSelector = `bzz-${camelToKebabCase(key)}`;
-    const selector = attributeSelectors.includes(key)
-      ? `[${componentSelector}]`
-      : componentSelector;
+    const selector = this.getSelector(key);
     const base = BlizzService.getComponentElementsCssRules(key, selector, config.elements, opts);
     const states = BlizzService.getComponentStatesCssRules(key, selector, config.states, opts);
     const variations = BlizzService.getComponentVariationsCssRules(
