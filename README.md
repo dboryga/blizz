@@ -3,7 +3,7 @@
 # Blizz
 
 Angular UI library with design-program-like Customizer.  
-Stay tuned, development In Progress...
+Development in progress...
 
 
 # Nx
