@@ -1,12 +1,9 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
   Directive,
   ElementRef,
   EventEmitter,
   HostBinding,
-  inject,
   Input,
   OnDestroy,
   Output,
@@ -14,7 +11,6 @@ import {
 import { KeyofBase } from 'ts-essentials/dist/key-of-base';
 import { BlizzCdkExpandableTriggerDirective } from './expandable-trigger.directive';
 import { BlizzExpandableGroupService } from './expandable-group.service';
-import { CommonModule } from '@angular/common';
 
 @Directive({
   selector: '[bzzExpandable]',

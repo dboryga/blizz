@@ -20,7 +20,7 @@
     </div>
 
     <div bzzExpandable #expandable="bzzExpandable">
-      <div class="pt-2" [class.py-4]="!nested">
+      <div *ngIf="expandable.expanded" class="pt-2" [class.py-4]="!nested">
         <div class="mb-4" *ngFor="let prop of element.value">
 
           <ng-container *ngIf="!prop.children?.length; else nestedProps">
