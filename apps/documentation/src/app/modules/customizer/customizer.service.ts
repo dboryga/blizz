@@ -232,7 +232,7 @@ export class DocCustomizerService implements OnDestroy {
     value?.length && value !== sidebarProp.inheritedValue()
       ? set(this._config, path, value)
       : unset(this._config, path);
-    this._purgeConfig(sidebarProp, path);
+    this._purgeConfig(path);
     this.updateLocalStorageConfig();
     this._updateLocalComponentCssVariable(sidebarProp, value);
     if (this._previewComponent) {
@@ -372,7 +372,7 @@ export class DocCustomizerService implements OnDestroy {
     sheet?.addRule(selector, `${sidebarProp.cssVariable}: ${value}`);
   }
 
-  private _purgeConfig(sidebarProp: SidebarProperty, path: string) {
+  private _purgeConfig(path: string) {
     const pathArr = path.split('.');
     let value = get(this._config, pathArr);
 
