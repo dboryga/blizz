@@ -51,7 +51,7 @@ export class DocCustomizerService implements OnDestroy {
     return kebabToCamelCase(this.componentRouteParam) as ComponentKey;
   }
   get componentSelector() {
-    return `bzz-${this.componentRouteParam}`;
+    return BlizzService.getSelector(this.componentRouteParam as ComponentKey);
   }
 
   get variationKey() {
@@ -120,6 +120,7 @@ export class DocCustomizerService implements OnDestroy {
   }
   private _sidebarData!: SidebarData | null;
 
+  protected _defaultStyleElement?: HTMLStyleElement;
   protected _localStyleElement?: HTMLStyleElement;
 
   readonly updateProperty$ = new Subject<{
@@ -231,7 +232,7 @@ export class DocCustomizerService implements OnDestroy {
     value?.length && value !== sidebarProp.inheritedValue()
       ? set(this._config, path, value)
       : unset(this._config, path);
-    this._purgeConfig(sidebarProp, path);
+    this._purgeConfig(path);
     this.updateLocalStorageConfig();
     this._updateLocalComponentCssVariable(sidebarProp, value);
     if (this._previewComponent) {
@@ -329,11 +330,17 @@ export class DocCustomizerService implements OnDestroy {
   }
 
   private _generateLocalComponentCssVariables() {
+    this._defaultStyleElement?.remove();
     this._localStyleElement?.remove();
-    this._localStyleElement = this.blizzService.createGlobalCssFromConfig(
+    this._defaultStyleElement = this.blizzService.createGlobalCssFromConfig(
       this._initialConfigValue,
       this.blizzServiceOpts,
     );
+
+    this._localStyleElement = this.document.createElement('style');
+    const headElement = this.document.getElementsByTagName('head')[0];
+    headElement.appendChild(this._localStyleElement);
+
     this._detectChanges$.next();
   }
 
@@ -365,7 +372,7 @@ export class DocCustomizerService implements OnDestroy {
     sheet?.addRule(selector, `${sidebarProp.cssVariable}: ${value}`);
   }
 
-  private _purgeConfig(sidebarProp: SidebarProperty, path: string) {
+  private _purgeConfig(path: string) {
     const pathArr = path.split('.');
     let value = get(this._config, pathArr);
 
@@ -373,7 +380,6 @@ export class DocCustomizerService implements OnDestroy {
       unset(this._config, pathArr);
       pathArr.pop();
       value = get(this._config, pathArr);
-      console.log(value);
     }
   }
 

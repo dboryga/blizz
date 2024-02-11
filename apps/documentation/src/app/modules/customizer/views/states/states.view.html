@@ -9,7 +9,7 @@
         [expandableRef]="expandable"
         [label]="kebabToTitleCase(state.key)"
         [single]="true"
-        [canCollapse]="false"
+        [canCollapse]="true"
         (toggleClick)="expandable.collapsed && router.navigate(['./'], { relativeTo: this.route })"
       ></doc-expansion-toggle>
 
