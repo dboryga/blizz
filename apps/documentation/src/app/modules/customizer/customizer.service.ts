@@ -120,6 +120,7 @@ export class DocCustomizerService implements OnDestroy {
   }
   private _sidebarData!: SidebarData | null;
 
+  protected _defaultStyleElement?: HTMLStyleElement;
   protected _localStyleElement?: HTMLStyleElement;
 
   readonly updateProperty$ = new Subject<{
@@ -134,6 +135,7 @@ export class DocCustomizerService implements OnDestroy {
   private readonly _detectChanges$ = new Subject<void>();
 
   get componentConfig() {
+    console.log(this._config?.components?.[this.componentKey]);
     return this._config?.components?.[this.componentKey];
   }
 
@@ -329,11 +331,17 @@ export class DocCustomizerService implements OnDestroy {
   }
 
   private _generateLocalComponentCssVariables() {
+    this._defaultStyleElement?.remove();
     this._localStyleElement?.remove();
-    this._localStyleElement = this.blizzService.createGlobalCssFromConfig(
+    this._defaultStyleElement = this.blizzService.createGlobalCssFromConfig(
       this._initialConfigValue,
       this.blizzServiceOpts,
     );
+
+    this._localStyleElement = this.document.createElement('style');
+    const headElement = this.document.getElementsByTagName('head')[0];
+    headElement.appendChild(this._localStyleElement);
+
     this._detectChanges$.next();
   }
 
