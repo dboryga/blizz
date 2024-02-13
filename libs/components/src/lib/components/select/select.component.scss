@@ -143,6 +143,7 @@ bzz-select {
 
     select:not(.--label-floating-always)::placeholder {
       visibility: hidden;
+      opacity: 0;
     }
 
     &[state-labelFloating='true'] .bzz-select__label {
@@ -155,6 +156,7 @@ bzz-select {
 
       ~ .bzz-select__field select::placeholder {
         visibility: visible;
+        opacity: 1;
       }
     }
 

@@ -148,6 +148,7 @@ bzz-text-field {
 
     .bzz-text-field__control:not(.--label-floating-always)::placeholder {
       visibility: hidden;
+      opacity: 0;
     }
 
     &[state-labelFloating='true'] .bzz-text-field__label {
@@ -160,6 +161,7 @@ bzz-text-field {
 
       ~ .bzz-text-field__field .bzz-text-field__control::placeholder {
         visibility: visible;
+        opacity: 1;
       }
     }
 
